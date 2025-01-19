@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  This bbl file is created by econ.bst ver.2.1
+%  The latest econ.bst is available at
+%  <http://shirotakeda.org/home/tex/econ-bst.html>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{xxx}
+
+\harvarditem[Riley, Lambert and Abo-Zaid]{Riley, Lambert and
+  Abo-Zaid}{2010}{riley2010ipdma}
+\textbf{Riley, Richard~D, Paul~C Lambert, and Ghada Abo-Zaid.} 2010.
+  ``Meta-analysis of individual participant data: rationale, conduct, and
+  reporting.'' {\it BMJ} 340\hspace{0.2ex}.
+  \href{http://dx.doi.org/10.1136/bmj.c221}{[Link]}
+
+\harvarditem[Yang et~al.]{Yang, Cheng, Liu, Zhang, Ma, Zhou, Lu and
+  Wu}{2024}{yang2024pcos}
+\textbf{Yang, Yanan, Jiale Cheng, Chongyuan Liu, Xiaopo Zhang, Ning Ma, Zhi
+  Zhou, Weiying Lu, and Chongming Wu.} 2024. ``Gut microbiota in women with
+  polycystic ovary syndrome: an individual based analysis of publicly available
+  data.'' {\it eClinicalMedicine} 77\hspace{0.2ex}.
+  \href{http://dx.doi.org/10.1016/j.eclinm.2024.102884}{[Link]}
+
+\end{thebibliography}

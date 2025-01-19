@@ -1,0 +1,87 @@
+% !TEX TS-program = xelatex
+% !BIB TS-program = bibtex
+\documentclass[12pt,letterpaper]{article}
+\usepackage{style/dsc180reportstyle} % import dsc180reportstyle.sty
+\usepackage{wasysym}
+\newcommand{\ind}{\perp\!\!\!\!\perp}
+\SetKwComment{Comment}{/* }{ */}
+
+\def\multimapboth{\kern2pt\hbox{$\circ$}\kern-1pt\hbox{$-$}\kern-1pt\hbox{$\circ$}\kern2pt}
+\def\circrightarrow{\kern2pt\hbox{$\circ$}\kern-1.5pt\hbox{$\to$}\kern2pt}
+\def\circleftarrow{\kern2pt\hbox{$\leftarrow$}\kern-1.5pt\hbox{$\circ$}\kern2pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Title and Authors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Causal Discovery in Gut Microbes for PCOS}
+
+\author{Mariana Paco Mendivil \\
+  {\tt mpacomendivil@ucsd.edu} \\\And
+  Candus Shi \\
+  {\tt c6shi@ucsd.edu} \\\And
+  Nicole Zhang \\
+  {\tt nwzhang@ucsd.edu} \\\And
+  Biwei Huang \\
+  {\tt bih007@ucsd.edu} \\\And
+  Jelena Bradic \\
+  {\tt jbradic@ucsd.edu}}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Abstract and Links
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{abstract}
+    \textcolor{black}{
+    The human gut microbiome has become a significant factor in the understanding of metabolic health...}
+\end{abstract}
+
+\begin{center}
+
+Code: \url{https://github.com/nzhang20/Causal-Discovery-for-Biomedical-Applications}
+\end{center}
+
+\maketoc
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Main Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+\subsection{Literature Review}
+
+\subsection{Data}
+To answer our research question, we used data from an individual participant data (IPD) meta analysis and systematic review conducted by \citep{yang2024pcos}. This means the dataset is an aggregation of the 14 studies that were included in the systematic review, but at the individual level. This is different from a meta analysis which analyzes aggregated data or statistics from multiple different studies. Each row of this PCOS dataset represents one sample of gut microbe abundance measurements as well as the sample's study's region, the sample's classification as a PCOS patient or a healthy control (HC), and if they were a PCOS patient, whether they had low (LT) or high (HT) testosterone levels. This granularity gives us more data and statistical power behind our results rather than using just one PCOS study. Although IPD meta analyses have these advantages as well as advantages over regular aggregated meta analyses, there are some glaring issues that must be addressed before we work with this dataset as is. In particular, the dataset is clustered because it consists of participants from different studies where each study had their own unique recruitment and sampling methods. Thus, we must account for clustering while running all analyses on this large aggregated dataset \citep{riley2010ipdma}. Two ways to do this in a typical meta analysis is via a fixed-effect model or a random-effects model \citep{dettori2022fixedrandomeffect}. The choice of one over the other depends on the situation at hand, and since our PCOS dataset is comprised of 11 studies from China, 1 study from Poland, 1 study from Austria, and 1 study from Russia, the appropriate model appears to be a random effects model as there are many other areas of the world that we are interested in. (Not sure if any of this makes sense in the realm of causal discovery, but will leave here for now). 
+
+\section{Methods}
+
+\section{Results}
+
+\section{Discussion}
+
+\section{Conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Reference / Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\makereference
+
+\bibliography{reference}
+\bibliographystyle{style/dsc180bibstyle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\makeappendix
+
+\end{document}
