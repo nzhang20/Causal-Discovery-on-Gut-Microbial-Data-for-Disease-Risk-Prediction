@@ -1,25 +1,103 @@
 name: capstone
 channels:
+  - conda-forge
   - defaults
 dependencies:
+  - _r-mutex=1.0.1=anacondar_1
+  - bwidget=1.10.1=h694c41f_0
   - bzip2=1.0.8=h6c40b1e_6
-  - ca-certificates=2024.11.26=hecd8cb5_0
-  - expat=2.6.3=h6d0c2b6_0
-  - libcxx=14.0.6=h9765a3e_0
+  - c-ares=1.34.4=hf13058a_0
+  - ca-certificates=2024.12.14=h8857fd0_0
+  - cairo=1.18.2=h950ec3b_1
+  - cctools_osx-64=1010.6=hadbd6bd_2
+  - clang=19.1.7=default_h576c50e_0
+  - clang-19=19.1.7=default_h3571c67_0
+  - clang_impl_osx-64=19.1.7=hc73cdc9_23
+  - clang_osx-64=19.1.7=h7e5c614_23
+  - clangxx=19.1.7=default_heb2e8d1_0
+  - clangxx_impl_osx-64=19.1.7=hb295874_23
+  - clangxx_osx-64=19.1.7=h7e5c614_23
+  - compiler-rt=19.1.7=h52031e2_0
+  - compiler-rt_osx-64=19.1.7=hc6f8467_0
+  - curl=8.11.1=h5dec5d8_0
+  - font-ttf-dejavu-sans-mono=2.37=hab24e00_0
+  - font-ttf-inconsolata=3.000=h77eed37_0
+  - font-ttf-source-code-pro=2.038=h77eed37_0
+  - font-ttf-ubuntu=0.83=h77eed37_3
+  - fontconfig=2.15.0=h37eeddb_1
+  - fonts-conda-ecosystem=1=0
+  - fonts-conda-forge=1=0
+  - freetype=2.12.1=h60636b9_2
+  - fribidi=1.0.10=hbcb3906_0
+  - gfortran_impl_osx-64=13.2.0=h7643cbd_1
+  - gfortran_osx-64=13.2.0=h18f7dce_1
+  - gmp=6.3.0=hf036a51_2
+  - graphite2=1.3.13=h73e2aa4_1003
+  - gsl=2.7=h93259b0_0
+  - harfbuzz=10.2.0=h5b25545_0
+  - icu=75.1=h120a0e1_0
+  - isl=0.25=hb486fe8_0
+  - krb5=1.21.3=h37d8d59_0
+  - ld64_osx-64=951.9=h9d2de3d_2
+  - lerc=4.0.0=hb486fe8_0
+  - libasprintf=0.22.5=hdfe23c8_3
+  - libblas=3.9.0=26_osx64_openblas
+  - libcblas=3.9.0=26_osx64_openblas
+  - libclang-cpp19.1=19.1.7=default_h3571c67_0
+  - libcurl=8.11.1=h5dec5d8_0
+  - libcxx=19.1.7=hf95d169_0
+  - libcxx-devel=19.1.7=h7c275be_0
+  - libdeflate=1.23=he65b83e_0
+  - libedit=3.1.20240808=pl5321ha958ccf_0
+  - libev=4.33=h10d778d_2
+  - libexpat=2.6.4=h240833e_0
   - libffi=3.4.4=hecd8cb5_1
+  - libgettextpo=0.22.5=hdfe23c8_3
+  - libgfortran=5.0.0=13_2_0_h97931a8_3
+  - libgfortran-devel_osx-64=13.2.0=h80d4556_3
+  - libgfortran5=13.2.0=h2873a65_3
+  - libglib=2.82.2=h5c976ab_1
+  - libiconv=1.17=hd75f5a5_2
+  - libintl=0.22.5=hdfe23c8_3
+  - libjpeg-turbo=3.0.0=h0dc2134_1
+  - liblapack=3.9.0=26_osx64_openblas
+  - libllvm19=19.1.7=hc29ff6c_0
+  - liblzma=5.6.3=hd471939_1
   - libmpdec=4.0.0=h46256e1_0
-  - ncurses=6.4=hcec6c5f_0
-  - openssl=3.0.15=h46256e1_0
+  - libnghttp2=1.64.0=hc7306c3_0
+  - libopenblas=0.3.28=openmp_hbf64a52_1
+  - libpng=1.6.45=h3c4a55f_0
+  - libsqlite=3.48.0=hdb6dae5_0
+  - libssh2=1.11.1=h3dc7d44_0
+  - libtiff=4.7.0=hb77a491_3
+  - libwebp-base=1.5.0=h6cf52b4_0
+  - libxml2=2.13.5=hebb159f_1
+  - libzlib=1.3.1=hd23fc13_2
+  - llvm-openmp=19.1.7=ha54dae1_0
+  - llvm-tools=19.1.7=h3fe3016_0
+  - llvm-tools-19=19.1.7=he90a8e3_0
+  - make=4.4.1=h00291cd_2
+  - mpc=1.3.1=h9d8efa1_1
+  - mpfr=4.2.1=haed47dc_3
+  - ncurses=6.5=h0622a9a_2
+  - openssl=3.4.0=hc426f3f_1
+  - pango=1.56.0=hf94f63b_0
+  - pcre2=10.44=h7634a1b_2
   - pip=24.2=py313hecd8cb5_0
-  - python=3.13.0=h1ec50cd_100_cp313
+  - pixman=0.44.2=h1fd1274_0
+  - python=3.13.1=h2334245_105_cp313
   - python_abi=3.13=0_cp313
+  - r-base=4.4.2=h1f3f453_2
   - readline=8.2=hca72f7f_0
   - setuptools=75.1.0=py313hecd8cb5_0
-  - sqlite=3.45.3=h6c40b1e_0
-  - tk=8.6.14=h4d00af3_0
+  - sigtool=0.1.3=h88f4db0_0
+  - tapi=1300.6.5=h390ca13_0
+  - tk=8.6.13=h1abcd95_1
+  - tktable=2.10=hba9d6f1_6
   - wheel=0.44.0=py313hecd8cb5_0
   - xz=5.4.6=h6c40b1e_1
-  - zlib=1.2.13=h4b97444_1
+  - zlib=1.3.1=hd23fc13_2
+  - zstd=1.5.6=h915ae27_0
   - pip:
       - anyio==4.8.0
       - appnope==0.1.4
