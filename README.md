@@ -1,8 +1,12 @@
 # Causal Discovery on Gut Microbial Data for Disease Risk Prediction
 
-Over the last few years, science has gained profound understanding of the importance of the gut microbiome to human health. However, most of these studies are purely associational, and as we all have learned "association is not causation". Thus, we are interested in tackling this causality question in the realm of gut microbiome research using causal discovery techniques such as constraint based causal graph search algorithms to understand 1) the differences in microbial interactions between a diseased cohort and a healthy control cohort, and 2) the specific microbes that are directly linked to disease status. Although we may claim to discover the causal structure of the gut microbiome for these two scenarios, conventionally, causality is established through randomized controlled trials. These can be costly and time-intensive, but we hope that our project can help aid in narrowing down the specific microbes to test for when conducting these wet-lab experiments. 
+Over the last few years, the scientific community has gained profound understanding of the importance of the gut microbiome to human health. However, most of these studies are purely associational, and as we all have learned "association is not causation". Thus, we are interested in tackling this causality question in the realm of gut microbiome research using causal discovery techniques such as constraint based causal graph search algorithms to understand 
+1) the differences in microbial interactions between a diseased cohort and a healthy control cohort, and
+2) the specific microbes that are directly linked to disease status.
 
-The difficult thing about doing research on the gut microbiome is that every healthy microbiome can look very different! The only (current) hallmark of a healthy microbiome is a diverse and balanced microbiome. So, to aid in precision medicine, we also build a prediction model to predict one's risk for disease given a certain microbiome. 
+Although we may claim to discover the causal structure of the gut microbiome for these two scenarios, conventionally, causality is established through randomized controlled trials. These can be costly and time-intensive, but we hope that our project can help aid in narrowing down the specific microbes to test for when conducting these wet-lab experiments. 
+
+The difficult thing about doing research on the gut microbiome is that every healthy microbiome can look very different! The only (current) hallmark of a healthy microbiome is a diverse and balanced microbiome. To aid in precision medicine, we also build a prediction model to predict one's risk for disease given a certain microbiome. 
 
 ## File Descriptions
 
