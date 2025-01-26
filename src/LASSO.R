@@ -1,4 +1,4 @@
-# install.packages(c("glmnet", "dplyr", "data.table"))
+install.packages(c("glmnet", "dplyr", "data.table"), repos="http://cran.us.r-project.org")
 library(glmnet)
 library(dplyr)
 library(data.table)
@@ -11,12 +11,13 @@ Y <- data$group
 fit <- glmnet(X, Y)
 
 # cross validation
-set.seed(1)
-cv.fit <- cv.glmnet(as.matrix(X), Y, family="binomial")
-plot(cv.fit)
-best_lambda <- cv.fit$lambda.min
+# set.seed(1)
+# cv.fit <- cv.glmnet(as.matrix(X), Y, family="binomial")
+# plot(cv.fit)
+# best_lambda <- cv.fit$lambda.min
 
 # try with the recommended training set (100 random PCOS, 100 random PCOS)
+set.seed(1)
 data_train <- rbind(sample_n(data[which(data$group == 0),], 100), sample_n(data[which(data$group == 1),], 100))
 X_train <- select(data_train, -c(X, group))
 Y_train <- data_train$group
@@ -30,14 +31,14 @@ coef_train <- coef_train[coef_train[,1] != 0,] # shrank to 49 features
 coef_train
 
 # FEATURE SHRINKING ATTEMPT #2: SURE SCREENING
-sis <- sapply(X, function(x) cor(x, Y, method="spearman"))
-sis <- sort(abs(sis), decreasing=T)
-hist(sis, breaks=20)
-sis_theoretical_threshold <- sqrt(log(1128)/948)
-sis <- sis[sis > sis_theoretical_threshold]
+# sis <- sapply(X, function(x) cor(x, Y, method="spearman"))
+# sis <- sort(abs(sis), decreasing=T)
+# hist(sis, breaks=20)
+# sis_theoretical_threshold <- sqrt(log(1128)/948)
+# sis <- sis[sis > sis_theoretical_threshold]
 
 ##### RESULTS & COMMENTARY
 # Since Logistic Regression LASSO yielded 49 features 
 # and sure screening via Spearman correlations yielded (theoretically) 57 features, 
 # we will go ahead and run our algorithms via the logistic regression LASSO pruned features.
-fwrite(as.list(coef_train), file="LASSO_covariates.txt")
+fwrite(as.list(coef_train), file="src/LASSO_covariates.txt")
