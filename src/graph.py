@@ -14,6 +14,10 @@ from causallearn.search.ConstraintBased.PC import pc
 from causallearn.search.ConstraintBased.FCI import fci
 from causallearn.search.ScoreBased.GES import ges
 from causallearn.search.ConstraintBased.CDNOD import cdnod
+
+from causallearn.utils.PCUtils import SkeletonDiscovery, UCSepset, Meek
+from causallearn.utils.PCUtils.BackgroundKnowledge import BackgroundKnowledge
+from causallearn.utils.PCUtils.BackgroundKnowledgeOrientUtils import orient_by_background_knowledge
 from causallearn.utils.GraphUtils import GraphUtils
 from causallearn.utils.cit import CIT
 from scipy.stats import spearmanr
@@ -74,7 +78,28 @@ def run_cdnod(data, fp):
 
     :return: the causallearn object, CausalGraph
     '''
-    cg = cdnod(data.iloc[:, 1:].values, data[['group']].values) # 'group' must be the first column
+    # cg = cdnod(data.iloc[:, 1:].values, data[['group']].values) # 'group' must be the first column
+    data_aug = np.concatenate((data.iloc[:, 1:].values, data[['group']].values), axis=1)
+    indep_test = CIT(data_aug, 'fisherz')
+    cg_1 = SkeletonDiscovery.skeleton_discovery(data_aug, 0.05, indep_test, stable=True)
+
+    c_indx_id = data_aug.shape[1] - 1
+    for i in cg_1.G.get_adjacent_nodes(cg_1.G.nodes[c_indx_id]):
+        cg_1.G.add_directed_edge(cg_1.G.nodes[c_indx_id], i)
+
+    if 'region' in data.columns:
+        nodes = cg_1.G.get_nodes()
+        bk = BackgroundKnowledge() \
+            .add_forbidden_by_node(nodes[0], nodes[data.shape[1] - 1])
+
+        for i in cg_1.G.get_adjacent_nodes(cg_1.G.nodes[0]):
+            cg_1.G.add_directed_edge(cg_1.G.nodes[0], i)
+
+        orient_by_background_knowledge(cg_1, bk)
+
+    cg_2 = UCSepset.uc_sepset(cg_1, 2)
+    cg = Meek.meek(cg_2)
+            
     pyd = GraphUtils.to_pydot(cg.G, labels=list(data.columns[1:]) + [data.columns[0]])
     pyd.write_png(f"graphs/{fp}.png")
 

@@ -16,9 +16,9 @@ fit <- glmnet(X, Y)
 # plot(cv.fit)
 # best_lambda <- cv.fit$lambda.min
 
-# try with the recommended training set (400 random PCOS, 400 random PCOS)
+# try with a balanced training set (435 HC, 435 random PCOS)
 set.seed(1)
-data_train <- rbind(sample_n(data[which(data$group == 0),], 100), sample_n(data[which(data$group == 1),], 100))
+data_train <- rbind(sample_n(data[which(data$group == 0),], 435), sample_n(data[which(data$group == 1),], 435))
 X_train <- select(data_train, -c(X, group))
 Y_train <- data_train$group
 
