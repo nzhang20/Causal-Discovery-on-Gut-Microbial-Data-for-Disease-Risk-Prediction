@@ -74,6 +74,8 @@ To replicate our results, run:
 - `python run.py graph`: Runs the causal discovery algorithms and generates results in the form of causal graphs.
 - `python run.py clean`: Removes all generated files (e.g., the clean dataset, plots, and graphs).
 
+Note: In order to run SparCC, you will need to clone the following repository, https://github.com/dlegor/SparCC. It must be located in the same directory that this repository (https://github.com/nzhang20/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction) is located in.
+
 Asked ChatGPT
 
 but also add the other info in our  report pls

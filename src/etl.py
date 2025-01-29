@@ -31,7 +31,56 @@ def clean_data(raw_fp):
     for col in pcosyang2024.columns[2:]:
         pcosyang2024[col] = pcosyang2024[col].astype(float)
 
+    # study assigned by order presented in paper and self-matching sample size numbers & region
+    study_site = {
+        1: [0, 19+24],
+        2: [19+24, 19+24+48+73],
+        3: [19+24+48+73, 19+24+48+73+12+14],
+        4: [19+24+48+73+12+14, 19+24+48+73+12+14+12],
+        5: [19+24+48+73+12+14+12, 19+24+48+73+12+14+12+20+20],
+        6: [19+24+48+73+12+14+12+20+20, 19+24+48+73+12+14+12+20+20+131+68],
+        7: [19+24+48+73+12+14+12+20+20+131+68, 19+24+48+73+12+14+12+20+20+131+68+41+47],
+        8: [19+24+48+73+12+14+12+20+20+131+68+41+47, 19+24+48+73+12+14+12+20+20+131+68+41+47+24+24],
+        9: [19+24+48+73+12+14+12+20+20+131+68+41+47+24+24, 19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98],
+        10: [19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98, 19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20],
+        11: [19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20, 19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20+37+45],
+        12: [19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20+37+45, 19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20+37+45+15+18],
+        13: [19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20+37+45+15+18, 19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20+37+45+15+18+15+33],
+        14: [19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20+37+45+15+18+15+33, 19+24+48+73+12+14+12+20+20+131+68+41+47+24+24+36+98+20+20+37+45+15+18+15+33+17+17]
+    }
+
+    pcosyang2024['study_site'] = np.full(pcosyang2024.shape[0], 0)
+    for i in range(1, 15):
+        pcosyang2024.iloc[study_site[i][0]:study_site[i][1], -1] = i
+
     return pcosyang2024
+
+
+def filter_rare_OTUs(data, k=1):
+    '''
+    Filters the dataset for rare OTUs based on a chosen threshold. 
+
+    :param: data: clean dataset, only containing abundance values
+    :param: k: rare OTU abundance threshold (in percentage), default = 1%
+
+    :return: a pandas DataFrame
+    '''
+    rare_OTUs = data.columns[(data <= k).sum() == data.shape[0]]
+    filter_rare = data.drop(columns=rare_OTUs)
+    return filter_rare
+
+
+def split_data(df):
+    '''
+    Returns two dataframes where each corresponds to each cohort: healthy controls (HC) or PCOS patients (PCOS).
+
+    :param: df: clean & filtered dataset, located in `data/filter_rare.csv`
+
+    :return: a pandas DataFrame for HC, a pandas DataFrame for PCOS
+    '''
+    hc = df[df['group'] == 0].drop(columns = ['group'])
+    pcos = df[df['group'] == 1].drop(columns = ['group'])
+    return hc, pcos
 
 
 def run_lasso(rscript_fp):
@@ -72,20 +121,21 @@ def prune_data(clean, LASSO_fp):
     return pcos_short
 
 
-def sparcc_to_adj(sparcc_fp, genus_lst):
+def sparcc_to_adj(data_sparcc, genus_lst):
     '''
     Returns the adjacency matrix of the significant correlations found between microbe pairs using SparCC. 
 
-    :param: sparcc_fp: filepath to the SparCC results for a cohort (HC or PCOS)
+    :param: sparcc_fp: pandas DataFrame of the SparCC results for a cohort (HC or PCOS)
     :param: genus_lst: list of genera corresponding to the dimensions of the adjacency matrix 
 
     :return: numpy adjacency matrix
     '''
-    sparcc_sig = pd.read_csv(sparcc_fp)
+    sparcc_sig = data_sparcc.copy()
 
     adj_mat = np.zeros((len(genus_lst), len(genus_lst)))
 
     for i, genus_A in enumerate(genus_lst):
+        print(genus_A)
         for j, genus_B in enumerate(genus_lst):
             if any((sparcc_sig['genus_A'] == genus_A) & (sparcc_sig['genus_B'] == genus_B)):
                 adj_mat[i, j] = 1

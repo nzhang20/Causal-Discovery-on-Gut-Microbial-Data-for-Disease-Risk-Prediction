@@ -4,11 +4,11 @@ library(dplyr)
 library(data.table)
 
 # FEATURE SHRINKING ATTEMPT #1: LOGISTIC LASSO
-data <- read.csv("data/clean.csv")
+data <- read.csv("data/filter_rare.csv")
 X <- select(data, -c(X, group))
 Y <- data$group
 
-fit <- glmnet(X, Y)
+# fit <- glmnet(X, Y)
 
 # cross validation
 # set.seed(1)
@@ -29,7 +29,7 @@ dev.off()
 best_lambda_train <- cv.fit_train$lambda.min
 
 coef_train <- coef(cv.fit_train, s = "lambda.min")
-coef_train <- coef_train[coef_train[,1] != 0,] # shrank to 48 features
+coef_train <- coef_train[coef_train[,1] != 0,] 
 coef_train
 
 # FEATURE SHRINKING ATTEMPT #2: SURE SCREENING
@@ -40,6 +40,7 @@ coef_train
 # sis <- sis[sis > sis_theoretical_threshold]
 
 ##### RESULTS & COMMENTARY
+# TODO: fix commentary
 # Since Logistic Regression LASSO yielded 48 features 
 # and sure screening via Spearman correlations yielded (theoretically) 57 features, 
 # we will go ahead and run our algorithms via the logistic regression LASSO pruned features.
