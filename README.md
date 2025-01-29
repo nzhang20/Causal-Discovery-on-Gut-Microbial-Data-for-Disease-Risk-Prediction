@@ -55,6 +55,9 @@ To address research question 1), we develop our own causal discovery algorithm t
 
 To address research question 2), we implement Constraint-based causal Discovery from heterogeneous/Nonstationary Data (CD-NOD), where our domain index is the disease status.
 
+### SparCC
+To reduce the number of edges from a complete graph, we implement SparCC to find significant correlations between pairs of microbes. The `SparCC` folder comes directly from the https://github.com/dlegor/SparCC/tree/master repository, cloned on January 29th 2025. There are a few tweaks to allow for running the method from the top directory. 
+
 ---
 
 ## Usage
@@ -74,7 +77,6 @@ To replicate our results, run:
 - `python run.py graph`: Runs the causal discovery algorithms and generates results in the form of causal graphs.
 - `python run.py clean`: Removes all generated files (e.g., the clean dataset, plots, and graphs).
 
-Note: In order to run SparCC, you will need to clone the following repository, https://github.com/dlegor/SparCC. It must be located in the same directory that this repository (https://github.com/nzhang20/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction) is located in.
 
 Asked ChatGPT
 
