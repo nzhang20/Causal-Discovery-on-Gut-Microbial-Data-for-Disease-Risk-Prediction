@@ -19,18 +19,19 @@ from IPython.display import Image, display
 from src.etl import *
 from src.eda import *
 from src.graph import *
+from src.sparsify import *
 
 
 def main(targets):
+    with open("src/data-params.json") as fh:
+            data_params = json.load(fh)
+        
     if 'data' in targets:
         # clean data
         data = clean_data('data/raw/pcosyang2024.xlsx')
         data.to_csv('data/clean.csv')
 
         # filter rare OTUs
-        with open("config/data-params.json") as fh:
-            data_params = json.load(fh)
-
         non_microbes = ['group', 'region', 'study_site']
         covariates = data[non_microbes]
         gut_16s = data.drop(columns=non_microbes)
@@ -54,48 +55,70 @@ def main(targets):
         hc = pd.read_csv('data/hc.csv', index_col=0)
         pcos = pd.read_csv('data/pcos.csv', index_col=0)
 
-        # 1a) SparCC + our algorithm
-        # try Graphical LASSO
-        # run SparCC on pruned (by Graphical LASSO) or full dataset
-        # run our algorithm
+        check_1a = input('Would you like to generate graphs for the microbe-microbe networks? (Y/N): ')
+        if check_1a.lower() == 'y':
+            
+            # 1a) SparCC or Graphical LASSO + our algorithm
+            if data_params['sparse_microbe_microbe'].lower() == 'sparcc':
+                print('--- Step 1. Running SparCC ---')
+                run_sparcc()
+                print('--- Finished Step 1 ---')
 
-        # print('--- Step 1. Running SparCC ---')
-        # run_sparcc()
-        # print('--- Finished Step 1 ---')
+                print('--- Step 2. Obtain statistically significant pairs ---')
+                data_sparse_hc = get_sig_cor_pairs_sparcc('data/sparcc_hc.csv', 'data/sparcc_hc_pvals_one_sided.csv', 'data/hc.csv')
+                data_sparse_pcos = get_sig_cor_pairs_sparcc('data/sparcc_pcos.csv', 'data/sparcc_pcos_pvals_one_sided.csv', 'data/pcos.csv')
+                print('--- Finished Step 2 ---')
 
-        # print('--- Step 2. Obtain statistically significant pairs ---')
-        # data_sparcc_hc = get_sig_cor_pairs('src/hc_sparcc.csv', 'src/hc_pvals_one_sided.csv', 'data/hc.csv')
-        # data_sparcc_pcos = get_sig_cor_pairs('src/pcos_sparcc.csv', 'src/pcos_pvals_one_sided.csv', 'data/pcos.csv')
-        # print('--- Finished Step 2 ---')
+                sparse_method = 'SparCC'
+                sparse_method_fp = 'sparcc'
 
-        # print('--- Step 3. Converting SparCC results to adjacency matrices ---')
-        # print('--- HC ---')
-        # sparcc_hc_adj = sparcc_to_adj(data_sparcc_hc, list(hc.columns))
-        # print('--- PCOS ---')
-        # sparcc_pcos_adj = sparcc_to_adj(data_sparcc_pcos, list(pcos.columns))
-        # print('--- Finished Step 3 ---')
+            if data_params['sparse_microbe_microbe'].lower().replace(' ', '') == 'graphicallasso':
+                print('--- Step 1. Running Graphical LASSO ---')
+                run_glasso('src/GLASSO.R')
+                print('--- Finished Step 1 ---')
 
-        # print('--- Step 4. Graphing adjacency matrices ---')
-        # graph_networkx(sparcc_hc_adj, list(hc.columns), 'sparcc_hc')
-        # graph_networkx(sparcc_pcos_adj, list(pcos.columns), 'sparcc_pcos')
-        # print('--- Finished Step 4 ---')
-        
-        # print('--- Step 5. Running our algorithm ---')
-        # print('--- HC ---')
-        # sparcc_hc_ouralg = run_ouralg(sparcc_hc_adj, hc, list(hc.columns), fisherz)
-        # print('--- PCOS ---')
-        # sparcc_pcos_ouralg = run_ouralg(sparcc_pcos_adj, pcos, list(pcos.columns), fisherz)
-        # print('--- Finished Step 5 ---')
+                print('--- Step 2. Obtain statistically significant pairs ---')
+                data_sparse_hc, data_sparse_pcos, keep_nodes_hc, keep_nodes_pcos = get_sig_cor_pairs_glasso('data/glasso_hc.csv', 
+                                                                                                            'data/glasso_pcos.csv', 
+                                                                                                             list(hc.columns))
+                print('--- Finished Step 2 ---')
 
-        # print('--- Step 6. Graphing resulting adjacency matrices ---')
-        # graph_networkx(sparcc_hc_ouralg, list(hc.columns), 'sparcc_hc_ouralg')
-        # graph_networkx(sparcc_pcos_ouralg, list(pcos.columns), 'sparcc_pcos_ouralg')
-        # print('--- Finished Step 6 ---')
+                hc = hc[keep_nodes_hc]
+                pcos = pcos[keep_nodes_pcos]
 
-        # 1b) Logistic LASSO + CD-NOD
-        run_lasso('src/LASSO.R')
-        data_loglasso = prune_data(data, 'src/LASSO_covariates.txt')
-        run_cdnod(data_loglasso, 'cdnod')
+                sparse_method = 'Graphical LASSO'
+                sparse_method_fp = 'glasso'
+
+            print(f'--- Step 3. Converting {sparse_method} results to adjacency matrices ---')
+            print('--- HC ---')
+            hc_adj = sparse_to_adj(data_sparse_hc, list(hc.columns))
+            print('--- PCOS ---')
+            pcos_adj = sparse_to_adj(data_sparse_pcos, list(pcos.columns))
+            print('--- Finished Step 3 ---')
+    
+            print('--- Step 4. Graphing adjacency matrices ---')
+            graph_networkx(hc_adj, list(hc.columns), f'{sparse_method_fp}_hc')
+            graph_networkx(pcos_adj, list(pcos.columns), f'{sparse_method_fp}_pcos')
+            print('--- Finished Step 4 ---')
+            
+            print('--- Step 5. Running our algorithm ---')
+            print('--- HC ---')
+            hc_ouralg = run_ouralg(hc_adj, hc, list(hc.columns), fisherz)
+            print('--- PCOS ---')
+            pcos_ouralg = run_ouralg(pcos_adj, pcos, list(pcos.columns), fisherz)
+            print('--- Finished Step 5 ---')
+    
+            print('--- Step 6. Graphing resulting adjacency matrices ---')
+            graph_networkx(hc_ouralg, list(hc.columns), f'{sparse_method_fp}_hc_ouralg')
+            graph_networkx(pcos_ouralg, list(pcos.columns), f'{sparse_method_fp}_pcos_ouralg')
+            print('--- Finished Step 6 ---')
+
+        check_1b = input('Would you like to generate graphs for the microbe-disease network? (Y/N): ')
+        if check_1b.lower() == 'y':
+            # 1b) Logistic LASSO + CD-NOD
+            run_lasso('src/LASSO.R')
+            data_loglasso = prune_lasso(data, 'data/lasso_covariates.txt')
+            run_cdnod(data_loglasso, 'cdnod')
 
     if 'predict' in targets:
         print('prediction TBD')

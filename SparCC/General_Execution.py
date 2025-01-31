@@ -10,7 +10,7 @@ import typer
 
 def main(
     configuration_file: str = typer.Option('SparCC/configuration.yml', help="Configuration File"),
-    name : str = typer.Option('experiment_sparCC', help="Log Name"),
+    name : str = typer.Option('SparCC/experiment_sparCC', help="Log Name"),
     data_input: str = typer.Option('example/fake_data.txt', help="Path file input"),
     method: str= typer.Option('sparcc', help=""),
     n_iteractions: int = typer.Option(2, "--niteractions", "-nit", help=""),   

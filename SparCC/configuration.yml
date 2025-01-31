@@ -3,7 +3,7 @@ data_input: 'data/pcos.T.csv'
 log_transform: true
 method: 'sparcc'
 n_iteractions: 20
-name: 'pcos_sparCC'
+name: '1a_sparcc'
 name_output_file: 'sparcc_test_version_kambucha'
 normalization: 'dirichlet'
 num_simulate_data: 100
