@@ -128,7 +128,7 @@ def main(
     #move log
     if Path(save_corr_file).parent.is_dir():
         output=Path(save_corr_file).parent/f'SparCC/{name}.log'
-        source=Path(f'{name}.log')
+        source=Path(f'SparCC/{name}.log')
         shutil.move(source,output)
 
 
