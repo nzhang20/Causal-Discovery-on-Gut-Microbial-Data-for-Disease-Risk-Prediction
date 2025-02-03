@@ -1,5 +1,5 @@
 ---
-data_input: 'data/pcos.T.csv'
+data_input: 'data/t2d/IR.T.csv'
 log_transform: true
 method: 'sparcc'
 n_iteractions: 20
@@ -7,10 +7,10 @@ name: '1a_sparcc'
 name_output_file: 'sparcc_test_version_kambucha'
 normalization: 'dirichlet'
 num_simulate_data: 100
-outfile_pvals: 'src/pcos_pvals_one_sided.csv'
-outpath: 'src/pvals/'
+outfile_pvals: 'data/t2d/sparcc_IR_pvals_one_sided.csv'
+outpath: 'data/t2d/pvals/'
 perm_template: 'permutation_#.csv'
-save_corr_file: 'src/pcos_sparcc.csv'
+save_corr_file: 'data/t2d/sparcc_IR.csv'
 save_cov_file:
 threshold: 0.1
 type_pvalues: 'one_sided'

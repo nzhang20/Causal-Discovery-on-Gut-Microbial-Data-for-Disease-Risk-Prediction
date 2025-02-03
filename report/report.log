@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  19 JAN 2025 14:02
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  2 FEB 2025 13:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1296,28 +1296,42 @@ LaTeX Font Info:    Font shape `TU/FiraCode(0)/m/n' will be
 ] [2
 
 ]
-(./report.bbl) [3
+
+Package natbib Warning: Citation `dettori2022fixedrandomeffect' on page 3 undef
+ined on input line 84.
+
+[3] [4] (./report.bbl) [5
 
 ]
 \tf@thm=\write5
 \openout5 = `report.thm'.
 
- [1
+
+
+Package natbib Warning: There were undefined citations.
+
+[1
 
 ] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 985282EA004489BED0E6866C959B7102;691.
+
+Package rerunfilecheck Warning: File `report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report.out':
+(rerunfilecheck)             Before: 985282EA004489BED0E6866C959B7102;691
+(rerunfilecheck)             After:  036E6CBDEC8C91BEF166EA4DB407520B;786.
  ) 
 Here is how much of TeX's memory you used:
  23840 strings out of 476683
  492970 string characters out of 5804048
- 1853018 words of memory out of 5000000
+ 1858018 words of memory out of 5000000
  43701 multiletter control sequences out of 15000+600000
  530612 words of font info for 106 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,8n,102p,934b,773s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,8n,102p,2396b,775s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (4 pages).
+Output written on report.pdf (6 pages).

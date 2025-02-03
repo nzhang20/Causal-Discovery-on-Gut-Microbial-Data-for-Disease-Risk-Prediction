@@ -11,19 +11,23 @@ import ruamel.yaml
 ##### MICROBE-MICROBE NETWORK METHODS ######
 
 
-def run_sparcc():
+def run_sparcc(disease, group0, group1):
     '''
     Run SparCC on pairs of microbes for each cohort. Dataframe must be in the format, microbes (rows) x samples (columns). 
+
+    :param: disease: disease of interest ('pcos' or 't2d')
+    :param: group0: name of the healthy cohort
+    :param: group1: name of the diseased cohort
     '''
     # check that the SparCC folder exists 
     assert os.path.isdir('SparCC')
 
     sparcc_vars = ['data_input', 'n_iteractions', 'x_iteractions', 'save_corr_file', 'num_simulate_data', 'outpath', 'outfile_pvals']
-    sparcc_hc_vals = ['data/hc.T.csv', 20, 10, 'data/sparcc_hc.csv', 100, 'data/pvals/', 'data/sparcc_hc_pvals_one_sided.csv']
-    sparcc_pcos_vals = ['data/pcos.T.csv', 20, 10, 'data/sparcc_pcos.csv', 100, 'data/pvals/', 'data/sparcc_pcos_pvals_one_sided.csv']
+    sparcc_healthy_vals = [f'data/{disease}/{group0}.T.csv', 20, 10, f'data/{disease}/sparcc_{group0}.csv', 100, f'data/{disease}/pvals/', f'data/{disease}/sparcc_{group0}_pvals_one_sided.csv']
+    sparcc_diseased_vals = [f'data/{disease}/{group1}.T.csv', 20, 10, f'data/{disease}/sparcc_{group1}.csv', 100, f'data/{disease}/pvals/', f'data/{disease}/sparcc_{group1}_pvals_one_sided.csv']
 
-    hc_change = dict(zip(sparcc_vars, sparcc_hc_vals))
-    pcos_change = dict(zip(sparcc_vars, sparcc_pcos_vals))
+    healthy_change = dict(zip(sparcc_vars, sparcc_healthy_vals))
+    diseased_change = dict(zip(sparcc_vars, sparcc_diseased_vals))
 
     yaml = ruamel.yaml.YAML()
     yaml.preserve_quotes = True
@@ -32,8 +36,7 @@ def run_sparcc():
     with open('SparCC/configuration.yml', 'r') as stream:
         content = yaml.load(stream)
         
-    # content.update(hc_change)
-    for key, value in hc_change.items():
+    for key, value in healthy_change.items():
         content[key] = value
 
     with open('SparCC/configuration.yml', 'w') as stream:
@@ -45,8 +48,7 @@ def run_sparcc():
     with open('SparCC/configuration.yml', 'r') as stream:
         content = yaml.load(stream)
         
-    # content.update(pcos_change)
-    for key, value in pcos_change.items():
+    for key, value in diseased_change.items():
         content[key] = value
 
     with open('SparCC/configuration.yml', 'w') as stream:
@@ -196,25 +198,16 @@ def prune_lasso(clean, LASSO_fp):
     '''
     Returns a pruned version of the clean dataset, based on the LASSO covariates in LASSO_fp. 
 
-    :param: clean: clean dataset
+    :param: clean: pandas DataFrame of the clean dataset, where the first three columns correspond to the cohort and covariates
     :param: LASSO_fp: filepath to the LASSO covariates txt file
 
     :return: pandas DataFrame of the pruned dataset
     '''
     LASSO_covariates = pd.read_csv(LASSO_fp)
 
-    # manually fix the '.' to '-' conversion done when reading table into R
-    LASSO_ogcol = []
-    for col in LASSO_covariates.columns:
-        if '.' in col: # having fully checked all original columns, this condition suffices
-            LASSO_ogcol.append(col.replace('.', '-'))
-        else:
-            LASSO_ogcol.append(col)
-
     # prune
-    pcos_clean = clean.copy()
-    pcos_short = pcos_clean[['group'] + LASSO_ogcol[1:]] # the first LASSO ogcol is the intercept
+    clean_short = clean[list(clean.columns[:3]) + list(LASSO_covariates.columns[1:])] # the first LASSO ogcol is the intercept
 
-    print('The pruned dataset has the following dimensions: ', pcos_short.shape)
+    print('The pruned dataset has the following dimensions: ', clean_short.shape)
 
-    return pcos_short
+    return clean_short

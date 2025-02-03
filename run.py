@@ -25,35 +25,70 @@ from src.sparsify import *
 def main(targets):
     with open("src/data-params.json") as fh:
             data_params = json.load(fh)
+
+    disease = data_params['disease']
+    if disease == 'pcos':
+        non_microbes = ['group', 'region', 'study_site']
+        group0 = 'hc'
+        group1 = 'pcos'
+        cov1 = ['Europe', 'Asia']
+        cov2 = list(range(1, 15))
+    if disease == 't2d':
+        non_microbes = ['IRIS', 'Gender', 'Ethnicity']
+        group0 = 'IS'
+        group1 = 'IR'
+        cov1 = ['Male', 'Female']
+        cov2 = ['C', 'A', 'B', 'H']
         
     if 'data' in targets:
+        # make directory for disease
+        if not os.path.exists(f'data/{disease}'): os.mkdir(f'data/{disease}')
         # clean data
-        data = clean_data('data/raw/pcosyang2024.xlsx')
-        data.to_csv('data/clean.csv')
+        if disease == 'pcos':
+            data = clean_data_pcos('data/raw/pcosyang2024.xlsx')
+
+        if disease == 't2d':
+            data = clean_data_t2d('data/raw/S1_Subjects.csv', 'data/raw/S3_SampleList.csv', 'data/raw/gut_16s_abundance.txt')
+            
+        data.to_csv(f'data/{disease}/clean.csv')
 
         # filter rare OTUs
-        non_microbes = ['group', 'region', 'study_site']
         covariates = data[non_microbes]
         gut_16s = data.drop(columns=non_microbes)
         filter_rare = filter_rare_OTUs(gut_16s, data_params['rare_OTU_threshold'])
         filter_rare = pd.concat([covariates, filter_rare], axis=1)
-        filter_rare.to_csv('data/filter_rare.csv')
+        filter_rare.to_csv(f'data/{disease}/filter_rare.csv')
         
         # split for easier access, transpose for SparCC input
-        hc, pcos = split_data(filter_rare)
-        hc.to_csv('data/hc.csv')
-        hc.T.to_csv('data/hc.T.csv')
-        pcos.to_csv('data/pcos.csv')
-        pcos.T.to_csv('data/pcos.T.csv')
+        healthy, diseased = split_data(filter_rare, non_microbes[0])
+        healthy.to_csv(f'data/{disease}/{group0}.csv')
+        healthy.T.to_csv(f'data/{disease}/{group0}.T.csv')
+        diseased.to_csv(f'data/{disease}/{group1}.csv')
+        diseased.T.to_csv(f'data/{disease}/{group1}.T.csv')
 
     if 'eda' in targets:
+        # make directory for disease
+        if not os.path.exists(f'plots/{disease}'): os.mkdir(f'plots/{disease}')
+        if not os.path.exists(f'plots/{disease}/linearity'): os.mkdir(f'plots/{disease}/linearity')
+        if not os.path.exists(f'plots/{disease}/normality'): os.mkdir(f'plots/{disease}/normality')
+        
         # generate plots
-        print('hi')
+        filter_rare = pd.read_csv(f'data/{disease}/filter_rare.csv', index_col=0)
+        indiv_per_cohort(filter_rare, disease, non_microbes[0], [group0.upper(), group1.upper()])
+        indiv_per_cohort_cov(filter_rare, disease, non_microbes[0], non_microbes[1], [group0.upper(), group1.upper()], cov1)
+        indiv_per_cohort_cov(filter_rare, disease, non_microbes[0], non_microbes[2], [group0.upper(), group1.upper()], cov2)
+
+        # genera only
+        gut_16s = filter_rare.drop(columns = non_microbes)
+        ok_linearity = input(f'Would you like to generate {len(list(itertools.combinations(gut_16s.columns, 2)))} scatter plots to check for linearity in {len(gut_16s.columns)} variables? (This may take a while.) \n(Y/N): ')
+        if ok_linearity.lower() == 'y': check_linearity(gut_16s, disease)
+        check_normality(gut_16s, disease)
+        plot_corr_heatmap(gut_16s, disease)
 
     if 'graph' in targets:
-        data = pd.read_csv('data/filter_rare.csv', index_col=0)
-        hc = pd.read_csv('data/hc.csv', index_col=0)
-        pcos = pd.read_csv('data/pcos.csv', index_col=0)
+        data = pd.read_csv(f'data/{disease}/filter_rare.csv', index_col=0)
+        healthy = pd.read_csv(f'data/{disease}/{group0}.csv', index_col=0)
+        diseased = pd.read_csv(f'data/{disease}/{group1}.csv', index_col=0)
 
         check_1a = input('Would you like to generate graphs for the microbe-microbe networks? (Y/N): ')
         if check_1a.lower() == 'y':
@@ -61,12 +96,12 @@ def main(targets):
             # 1a) SparCC or Graphical LASSO + our algorithm
             if data_params['sparse_microbe_microbe'].lower() == 'sparcc':
                 print('--- Step 1. Running SparCC ---')
-                run_sparcc()
+                run_sparcc(disease, group0, group1)
                 print('--- Finished Step 1 ---')
 
                 print('--- Step 2. Obtain statistically significant pairs ---')
-                data_sparse_hc = get_sig_cor_pairs_sparcc('data/sparcc_hc.csv', 'data/sparcc_hc_pvals_one_sided.csv', 'data/hc.csv')
-                data_sparse_pcos = get_sig_cor_pairs_sparcc('data/sparcc_pcos.csv', 'data/sparcc_pcos_pvals_one_sided.csv', 'data/pcos.csv')
+                data_sparse_healthy = get_sig_cor_pairs_sparcc(f'data/{disease}/sparcc_{group0}.csv', f'data/{disease}/sparcc_{group0}_pvals_one_sided.csv', f'data/{disease}/{group0}.csv')
+                data_sparse_diseased = get_sig_cor_pairs_sparcc(f'data/{disease}/sparcc_{group1}.csv', f'data/{disease}/sparcc_{group1}_pvals_one_sided.csv', f'data/{disease}/{group1}.csv')
                 print('--- Finished Step 2 ---')
 
                 sparse_method = 'SparCC'
@@ -78,58 +113,65 @@ def main(targets):
                 print('--- Finished Step 1 ---')
 
                 print('--- Step 2. Obtain statistically significant pairs ---')
-                data_sparse_hc, data_sparse_pcos, keep_nodes_hc, keep_nodes_pcos = get_sig_cor_pairs_glasso('data/glasso_hc.csv', 
-                                                                                                            'data/glasso_pcos.csv', 
-                                                                                                             list(hc.columns))
+                data_sparse_healthy, data_sparse_diseased, keep_nodes_healthy, keep_nodes_diseased = get_sig_cor_pairs_glasso(f'data/{disease}/glasso_{group0}.csv', f'data/{disease}/glasso_{group1}.csv', list(healthy.columns))
                 print('--- Finished Step 2 ---')
 
-                hc = hc[keep_nodes_hc]
-                pcos = pcos[keep_nodes_pcos]
+                healthy = healthy[keep_nodes_healthy]
+                diseased = diseased[keep_nodes_diseased]
 
                 sparse_method = 'Graphical LASSO'
                 sparse_method_fp = 'glasso'
 
             print(f'--- Step 3. Converting {sparse_method} results to adjacency matrices ---')
-            print('--- HC ---')
-            hc_adj = sparse_to_adj(data_sparse_hc, list(hc.columns))
-            print('--- PCOS ---')
-            pcos_adj = sparse_to_adj(data_sparse_pcos, list(pcos.columns))
+            print(f'--- {group0.upper()} ---')
+            healthy_adj = sparse_to_adj(data_sparse_healthy, list(healthy.columns))
+            print(f'--- {group1.upper()} ---')
+            diseased_adj = sparse_to_adj(data_sparse_diseased, list(diseased.columns))
             print('--- Finished Step 3 ---')
-    
+
+            # make directory for graph
+            if not os.path.exists(f'graphs/{disease}'): os.mkdir(f'graphs/{disease}')
+                
             print('--- Step 4. Graphing adjacency matrices ---')
-            graph_networkx(hc_adj, list(hc.columns), f'{sparse_method_fp}_hc')
-            graph_networkx(pcos_adj, list(pcos.columns), f'{sparse_method_fp}_pcos')
+            graph_networkx(healthy_adj, list(healthy.columns), f'{disease}/{sparse_method_fp}_{group0}')
+            graph_networkx(diseased_adj, list(diseased.columns), f'{disease}/{sparse_method_fp}_{group1}')
             print('--- Finished Step 4 ---')
             
             print('--- Step 5. Running our algorithm ---')
-            print('--- HC ---')
-            hc_ouralg = run_ouralg(hc_adj, hc, list(hc.columns), fisherz)
-            print('--- PCOS ---')
-            pcos_ouralg = run_ouralg(pcos_adj, pcos, list(pcos.columns), fisherz)
+            print(f'--- {group0.upper()} ---')
+            healthy_ouralg = run_ouralg(healthy_adj, healthy, list(healthy.columns), fisherz)
+            print(f'--- {group1.upper()} ---')
+            diseased_ouralg = run_ouralg(diseased_adj, diseased, list(diseased.columns), fisherz)
             print('--- Finished Step 5 ---')
     
             print('--- Step 6. Graphing resulting adjacency matrices ---')
-            graph_networkx(hc_ouralg, list(hc.columns), f'{sparse_method_fp}_hc_ouralg')
-            graph_networkx(pcos_ouralg, list(pcos.columns), f'{sparse_method_fp}_pcos_ouralg')
+            graph_networkx(healthy_ouralg, list(healthy.columns), f'{disease}/{sparse_method_fp}_{group0}_ouralg')
+            graph_networkx(diseased_ouralg, list(diseased.columns), f'{disease}/{sparse_method_fp}_{group1}_ouralg')
             print('--- Finished Step 6 ---')
 
         check_1b = input('Would you like to generate graphs for the microbe-disease network? (Y/N): ')
         if check_1b.lower() == 'y':
+            # make directory for graph
+            if not os.path.exists(f'graphs/{disease}'): os.mkdir(f'graphs/{disease}')
+                
             # 1b) Logistic LASSO + CD-NOD
             run_lasso('src/LASSO.R')
-            data_loglasso = prune_lasso(data, 'data/lasso_covariates.txt')
-            run_cdnod(data_loglasso, 'cdnod')
+            data_loglasso = prune_lasso(data, f'data/{disease}/lasso_covariates.txt')
+            run_cdnod(data_loglasso, disease, f'{disease}/cdnod')
 
     if 'predict' in targets:
         print('prediction TBD')
 
     if 'clean' in targets:
-        for f in glob.glob('data/*.csv'):
-            os.remove(f)
-        for f in glob.glob('plots/*.png'):
-            os.remove(f)
-        for f in glob.glob('graphs/*.png'):
-            os.remove(f)
+        data_files = glob.glob(f'data/{disease}/*')
+        plots_files = glob.glob(f'plots/{disease}/*')
+        graphs_files = glob.glob(f'graphs/{disease}/*')
+        for f in data_files + plots_files + graphs_files:
+            if os.path.isdir(f): 
+                for f1 in glob.glob(f'{f}/*'): 
+                    os.remove(f1)
+                os.rmdir(f)
+            else: os.remove(f)
 
 if __name__ == '__main__':
     targets = sys.argv[1:]

@@ -10,9 +10,6 @@ import matplotlib as mpl
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import pydot
 
-# from causallearn.search.ConstraintBased.PC import pc
-# from causallearn.search.ConstraintBased.FCI import fci
-# from causallearn.search.ScoreBased.GES import ges
 from causallearn.search.ConstraintBased.CDNOD import cdnod
 
 from causallearn.utils.PCUtils import SkeletonDiscovery, UCSepset, Meek
@@ -26,75 +23,67 @@ import itertools
 import networkx as nx
 
 
-def run_cdnod(data, fp):
+def run_cdnod(data, disease, fp):
     '''
     Runs the CD-NOD causal discovery algorithm on the clean dataset to obtain the microbe-disease network. 
-    Also, prints the names of the microbes that are directly linked to the 'group' (disease status) node. 
+    Also, prints the names of the microbes that are directly linked to the cohort (disease status) node. 
 
-    :param: data: clean dataset (must contain the 'group' node corresponding to disease status)
+    :param: data: pandas DataFrame of the LASSO-pruned features, must contain the three covariates in the first three columns
+    :param: disease: disease of interest
     :param: fp: filepath of resulting causal graph
 
     :return: the causallearn object, CausalGraph
     '''
-    # cg = cdnod(data.iloc[:, 1:].values, data[['group']].values) # 'group' must be the first column
-
-    # read in full clean dataframe for 'study_site' variable
-    full_clean = pd.read_csv('data/clean.csv')
-
-    # implement CD-NOD with a tweak to adjust for 'region' variable and 'study_site'
-    data_aug = np.concatenate((data.iloc[:, 1:].values, full_clean[['study_site']].values, data[['group']].values), axis=1)
+    # implement CD-NOD with two c_indx variables
+    data_aug = data.to_numpy()
     indep_test = CIT(data_aug, 'fisherz')
     cg_1 = SkeletonDiscovery.skeleton_discovery(data_aug, 0.05, indep_test, stable=True)
 
-    if 'region' in data.columns:
+    # for T2D, remove edges between 'Gender' and 'Ethnicity'
+    if 'Gender' in data.columns:
         nodes = cg_1.G.get_nodes()
-        
-        # 'region' and 'group' cannot be connected
         bk = BackgroundKnowledge() \
-            .add_forbidden_by_node(nodes[0], nodes[data_aug.shape[1] - 1]) 
+            .add_forbidden_by_node(nodes[1], nodes[2]) \
+            .add_forbidden_by_node(nodes[2], nodes[1])
 
-        # all edges from 'region' must be pointing away
-        for i in cg_1.G.get_adjacent_nodes(cg_1.G.nodes[0]):
-            cg_1.G.add_directed_edge(cg_1.G.nodes[0], i)
+        cg_1 = SkeletonDiscovery.skeleton_discovery(data_aug, 0.05, indep_test, stable=True, background_knowledge=bk)
 
-        orient_by_background_knowledge(cg_1, bk)
+    # c1 = first covariate
+    c1_indx_id = 1
+    for i in cg_1.G.get_adjacent_nodes(cg_1.G.nodes[c1_indx_id]):
+        cg_1.G.add_directed_edge(cg_1.G.nodes[c1_indx_id], i)
 
-    # # c_1 = 'group'
-    # c_indx_id = data_aug.shape[1] - 1
-    # for i in cg_1.G.get_adjacent_nodes(cg_1.G.nodes[c_indx_id]):
-    #     cg_1.G.add_directed_edge(cg_1.G.nodes[c_indx_id], i)
-
-    # c_2 = 'study_site'
-    c2_indx_id = data_aug.shape[1] - 2
+    # c2 = second covariate
+    c2_indx_id = 2
     for i in cg_1.G.get_adjacent_nodes(cg_1.G.nodes[c2_indx_id]):
         cg_1.G.add_directed_edge(cg_1.G.nodes[c2_indx_id], i)
 
     cg_2 = UCSepset.uc_sepset(cg_1, 2)
     cg = Meek.meek(cg_2)
-            
-    pyd = GraphUtils.to_pydot(cg.G, labels=list(data.columns[1:]) + ['study_site'] + [data.columns[0]])
+    
+    pyd = GraphUtils.to_pydot(cg.G, labels=list(data.columns))
     pyd.write_png(f"graphs/{fp}.png")
 
-    # due to limited visibility on the graph, print the microbes that are directly linked to 'group'
-    adj_nodes = []
-    for node in cg.G.get_adjacent_nodes(cg.G.get_node(f'X{data_aug.shape[1]}')):
-        adj_nodes.append(int(node.get_name().replace('X', '')))
-
-    data_aug_col = np.array(list(data.columns) + ['study_site'] + [data.columns[0]])
-
-    print('The following genera are directly linked to the \'group\' node: \n', '\n'.join(list(data_aug_col[adj_nodes])))
-
-    adj_nodes = []
-    for node in cg.G.get_adjacent_nodes(cg.G.get_node(f'X{data_aug.shape[1] - 1}')):
-        adj_nodes.append(int(node.get_name().replace('X', '')))
-
-    print('The following genera are directly linked to the \'study_site\' node: \n', '\n'.join(list(data_aug_col[adj_nodes])))
-
+    # due to limited visibility on the graph, print the microbes that are directly linked to the cohort and covariate nodes
     adj_nodes = []
     for node in cg.G.get_adjacent_nodes(cg.G.get_node('X1')):
         adj_nodes.append(int(node.get_name().replace('X', '')))
 
-    print('The following genera are directly linked to the \'region\' node: \n', '\n'.join(list(data_aug_col[adj_nodes])))
+    data_aug_col = np.array(['placeholder'] + list(data.columns))
+
+    print(f'The following genera are directly linked to the \'{data.columns[0]}\' node: \n', '\n'.join(list(data_aug_col[adj_nodes])))
+
+    adj_nodes = []
+    for node in cg.G.get_adjacent_nodes(cg.G.get_node('X2')):
+        adj_nodes.append(int(node.get_name().replace('X', '')))
+
+    print(f'The following genera are directly linked to the \'{data.columns[1]}\' node: \n', '\n'.join(list(data_aug_col[adj_nodes])))
+
+    adj_nodes = []
+    for node in cg.G.get_adjacent_nodes(cg.G.get_node('X3')):
+        adj_nodes.append(int(node.get_name().replace('X', '')))
+
+    print(f'The following genera are directly linked to the \'{data.columns[2]}\' node: \n', '\n'.join(list(data_aug_col[adj_nodes])))
 
     return cg.G
 

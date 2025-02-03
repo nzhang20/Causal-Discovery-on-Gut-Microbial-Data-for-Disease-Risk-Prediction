@@ -7,9 +7,53 @@ import numpy as np
 import os
 
 
-def clean_data(raw_fp):
+def clean_data_t2d(subject_fp, sample_fp, gut_fp):
     '''
-    Returns a clean dataset.
+    Returns a clean dataset for the T2D study.
+
+    :param: subject_fp: filepath to the subject dataset
+    :param: sample_fp: filepath to the sample info dataset
+    :param: gut_fp: filepath to the gut abundance dataset
+
+    :return: pandas DataFrame of the clean dataset
+    '''
+    subjects = pd.read_csv(subject_fp)
+    samples = pd.read_csv(sample_fp)
+    gut_16s = pd.read_csv(gut_fp, sep='\t')
+
+    # filter out subjects who had an unknown "disease" (IR/IS) status
+    subjects_IRIS_known = subjects[subjects['IRIS'] != 'Unknown'][['IRIS', 'Gender', 'Ethnicity', 'SubjectID']]
+
+    # filter out samples that were not on a "Healthy" visit
+    samples_healthy = samples[(samples['Gut_16S'] == 1) & (samples['CL4'] == 'Healthy')][['SubjectID', 'SampleID']]
+
+    # only get genera, transform into percentages
+    genera = []
+    for col in gut_16s.columns:
+        if 'genus_' in col:
+            genera.append(col)
+    gut_16s_genera = gut_16s[genera] * 100
+    gut_16s_genera = pd.concat([gut_16s[['SampleID']], gut_16s_genera], axis=1)
+    
+
+    # merge three dataframes
+    merged_df = pd.merge(gut_16s_genera, samples_healthy, on='SampleID', how='inner')
+    merged_df = pd.merge(subjects_IRIS_known, merged_df, on='SubjectID', how='inner')
+
+    # remove 'SubjectID' and 'SampleID'
+    merged_df = merged_df.drop(columns=['SubjectID', 'SampleID'])
+
+    # convert categories to numbers 
+    merged_df['IRIS'] = merged_df['IRIS'].map({'IS': 0, 'IR': 1, 'Unknown': 2})
+    merged_df['Gender'] = merged_df['Gender'].map({'M': 0, 'F': 1})
+    merged_df['Ethnicity'] = merged_df['Ethnicity'].map({'C': 0, 'A': 1, 'B': 2, 'H': 3, 'unknown': 4})
+    
+    return merged_df
+
+
+def clean_data_pcos(raw_fp):
+    '''
+    Returns a clean dataset for the PCOS study.
 
     :param: raw_fp: filepath to the raw dataset
 
@@ -70,14 +114,15 @@ def filter_rare_OTUs(data, k=1):
     return filter_rare
 
 
-def split_data(df):
+def split_data(df, cohort_col):
     '''
-    Returns two dataframes where each corresponds to each cohort: healthy controls (HC) or PCOS patients (PCOS).
+    Returns two dataframes where each corresponds to each cohort: healthy or diseased patients.
 
-    :param: df: clean & filtered dataset, located in `data/filter_rare.csv`
+    :param: df: clean & filtered dataset, located in `data/{disease}/filter_rare.csv`
+    :param: cohort_col: column name corresponding to the cohort in df
 
-    :return: a pandas DataFrame for HC, a pandas DataFrame for PCOS
+    :return: a pandas DataFrame for healthy patients, a pandas DataFrame for diseased patients
     '''
-    hc = df[df['group'] == 0].drop(columns = ['group'])
-    pcos = df[df['group'] == 1].drop(columns = ['group'])
-    return hc, pcos
+    healthy = df[df[cohort_col] == 0].drop(columns = [cohort_col])
+    diseased = df[df[cohort_col] == 1].drop(columns = [cohort_col])
+    return healthy, diseased

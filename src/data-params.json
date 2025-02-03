@@ -1,5 +1,5 @@
 {
-	"disease": "pcos",
+	"disease": "t2d",
 	"rare_OTU_threshold": 1,
-	"sparse_microbe_microbe": "graphical lasso"
+	"sparse_microbe_microbe": "sparcc"
 }
