@@ -77,7 +77,3 @@ To replicate our results, run:
 - `python run.py graph`: Runs the causal discovery algorithms and generates results in the form of causal graphs.
 - `python run.py clean`: Removes all generated files (e.g., the clean dataset, plots, and graphs).
 
-
-Asked ChatGPT
-
-but also add the other info in our  report pls
