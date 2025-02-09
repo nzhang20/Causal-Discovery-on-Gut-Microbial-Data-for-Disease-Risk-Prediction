@@ -8,47 +8,58 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: reference.bib
+Warning--entry type for "who2025pcos" isn't style-file defined
+--line 11 of file reference.bib
+Warning--entry type for "adat2d" isn't style-file defined
+--line 147 of file reference.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 2 entries,
+Warning--you've exceeded 500, the entry-string-size, for entry zhou2019t2d
+while executing--line 3295 of file style/dsc180bibstyle.bst
+*Please notify the bibstyle designer*
+Warning--you've exceeded 500, the entry-string-size, for entry qin2012mgwast2d
+while executing--line 3295 of file style/dsc180bibstyle.bst
+*Please notify the bibstyle designer*
+You've used 16 entries,
             6528 wiz_defined-function locations,
-            1255 strings with 9806 characters,
-and the built_in function-call counts, 2349 in all, are:
-= -- 356
-> -- 147
-< -- 4
-+ -- 52
-- -- 50
-* -- 172
-:= -- 333
+            1355 strings with 15165 characters,
+and the built_in function-call counts, 24696 in all, are:
+= -- 3315
+> -- 2046
+< -- 40
++ -- 738
+- -- 718
+* -- 2116
+:= -- 3639
 add.period$ -- 0
-call.type$ -- 2
-change.case$ -- 22
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 36
-empty$ -- 81
-format.name$ -- 52
-if$ -- 566
+call.type$ -- 16
+change.case$ -- 251
+chr.to.int$ -- 16
+cite$ -- 16
+duplicate$ -- 360
+empty$ -- 784
+format.name$ -- 736
+if$ -- 5751
 int.to.chr$ -- 0
 int.to.str$ -- 0
 missing$ -- 0
-newline$ -- 15
-num.names$ -- 14
-pop$ -- 30
+newline$ -- 57
+num.names$ -- 110
+pop$ -- 341
 preamble$ -- 1
-purify$ -- 22
+purify$ -- 251
 quote$ -- 0
-skip$ -- 163
+skip$ -- 1379
 stack$ -- 0
-substring$ -- 136
-swap$ -- 0
-text.length$ -- 8
+substring$ -- 1270
+swap$ -- 76
+text.length$ -- 40
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 34
+type$ -- 272
 warning$ -- 0
-while$ -- 10
+while$ -- 100
 width$ -- 0
-write$ -- 39
+write$ -- 257
+(There were 4 warnings)

@@ -6,12 +6,114 @@
 
 \begin{thebibliography}{xxx}
 
-\harvarditem[Riley, Lambert and Abo-Zaid]{Riley, Lambert and
-  Abo-Zaid}{2010}{riley2010ipdma}
-\textbf{Riley, Richard~D, Paul~C Lambert, and Ghada Abo-Zaid.} 2010.
-  ``Meta-analysis of individual participant data: rationale, conduct, and
-  reporting.'' {\it BMJ} 340\hspace{0.2ex}.
-  \href{http://dx.doi.org/10.1136/bmj.c221}{[Link]}
+\harvarditem[ADA]{ADA}{2025}{adat2d}
+\textbf{ADA.} 2025. ``Understanding Type 2 Diabetes.''
+  \href{https://diabetes.org/about-diabetes/type-2}{[Link]}
+
+\harvarditem[Baars et~al.]{Baars, Fondevila, Meijnikman and
+  Nieuwdorp}{2024}{baars2024gutt2d}
+\textbf{Baars, Daniel~P., Marcos~F. Fondevila, Abraham~S. Meijnikman, and Max
+  Nieuwdorp.} 2024. ``The central role of the gut microbiota in the
+  pathophysiology and management of type 2 diabetes.'' {\it Cell Host \&
+  Microbe} 32\hspace{0.2ex}(8):  1280--1300.
+  \href{http://dx.doi.org/10.1016/j.chom.2024.07.017}{[Link]}
+
+\harvarditem[Colombo and Maathuis]{Colombo and
+  Maathuis}{2014}{colombo2014pcstable}
+\textbf{Colombo, Diego, and Marloes~H Maathuis.} 2014. ``Order-Independent
+  Constraint-Based Causal Structure Learning.'' {\it Journal of Machine
+  Learning Research} 15\hspace{0.2ex}.
+  \href{https://www.jmlr.org/papers/volume15/colombo14a/colombo14a.pdf}{[Link]}
+
+\harvarditem[Friedman, Hastie and Tibshirani]{Friedman, Hastie and
+  Tibshirani}{2008}{friedman2007glasso}
+\textbf{Friedman, Jerome, Trevor Hastie, and Robert Tibshirani.} 2008. ``Sparse
+  inverse covariance estimation with the graphical lasso.'' {\it Biostatistics}
+  9\hspace{0.2ex}(3):  432--441.
+  \href{https://doi.org/10.1093/biostatistics/kxm045}{[Link]}
+
+\harvarditem[Friedman and Alm]{Friedman and Alm}{2012}{friedman2012sparcc}
+\textbf{Friedman, Jonathan, and Eric~J Alm.} 2012. ``Inferring Correlation
+  Networks from Genomic Survey Data.'' {\it PLoS Comput Biol}
+  8\hspace{0.2ex}(9).
+  \href{https://doi.org/10.1371/journal.pcbi.1002687}{[Link]}
+
+\harvarditem[Glymour, Zhang and Spirtes]{Glymour, Zhang and
+  Spirtes}{2019}{glymour2019review}
+\textbf{Glymour, Clark, Kun Zhang, and Peter Spirtes.} 2019. ``Review of Causal
+  Discovery Methods Based on Graphical Models.'' {\it Frontiers in Genetics}
+  10\hspace{0.2ex}. \href{https://doi.org/10.3389/fgene.2019.00524}{[Link]}
+
+\harvarditem[Huang et~al.]{Huang, Zhang, Zhang, Ramsey, Sanchez-Romero, Glymour
+  and Sch{\"o}lkopf}{2019}{huang2019cdnod}
+\textbf{Huang, Biwei, Kun Zhang, Jiji Zhang, Joseph~D Ramsey, Ruben
+  Sanchez-Romero, Clark Glymour, and Bernhard Sch{\"o}lkopf.} 2019. ``Causal
+  Discovery from Heterogeneous/Nonstationary Data with Independent Changes.''
+  {\it CoRR} abs/1903.01672\hspace{0.2ex}.
+  \href{http://arxiv.org/abs/1903.01672}{[Link]}
+
+\harvarditem[Mehta et~al.]{Mehta, Brancati, Sulkowski, Strathdee, Szklo and
+  Thomas}{2000}{mehta2000hcvt2d}
+\textbf{Mehta, Shruti~H., Frederick~L. Brancati, Mark~S. Sulkowski,
+  Steffanie~A. Strathdee, Moyses Szklo, and David~L. Thomas.} 2000.
+  ``Prevalence of Type 2 Diabetes Mellitus among Persons with Hepatitis C Virus
+  Infection in the United States.'' {\it Annals of Internal Medicine}
+  133\hspace{0.2ex}(8):  592--599.
+  \href{http://dx.doi.org/10.7326/0003-4819-133-8-200010170-00009}{[Link]}
+
+\harvarditem[Pearl, Glymour and Jewell]{Pearl, Glymour and
+  Jewell}{2016}{pearl2016primer}
+\textbf{Pearl, Judea, Madelyn Glymour, and Nicholas~P Jewell.} 2016.  {\it
+  Causal Inference in Statistics---A Primer}. John Wiley \& Sons Ltd
+
+\harvarditem[Qin et~al.]{Qin, Li, Cai, Li, Zhu, Zhang, Liang, Zhang, Guan,
+  Shen, Peng, Zhang, Jie, Wu, Qin, Xue, Li, Han, Lu, Wu, Dai, Sun, Li, Tang,
+  Zhong, Li, Chen, Xu, Wang, Feng, Gong, Yu, Zhang, Zhang, Hansen, Sanchez,
+  Raes, Falony, Okuda, Almeida, LeChatelier, Renault, Pons, Batto, Zhang, Chen,
+  Yang, Zheng, Li, Yang, Wang, Ehrlich, Nielsen, Pedersen, Kristiansen and
+  Wang}{2012}{qin2012mgwast2d}
+\textbf{Qin, Junjie, Yingrui Li, Zhiming Cai, Shenghui Li, Jianfeng Zhu, Fan
+  Zhang, Suisha Liang, Wenwei Zhang, Yuanlin Guan, Dongqian Shen, Yangqing
+  Peng, Dongya Zhang, Zhuye Jie, Wenxian Wu, Youwen Qin, Wenbin Xue, Junhua Li,
+  Lingchuan Han, Donghui Lu, Peixian Wu, Yali Dai, Xiaojuan Sun, Zesong Li,
+  Aifa Tang, Shilong Zhong, Xiaoping Li, Weineng Chen, Ran Xu, Mingbang Wang,
+  Qiang Feng, Meihua Gong, Jing Yu, Yanyan Zhang, Ming Zhang, Torben Hansen,
+  Gaston Sanchez, Jeroen Raes, Gwen Falony, Shujiro Okuda, Mathieu Almeida,
+  Emmanuelle LeChatelier, Pierre Renault, Nicolas Pons, Jean-Michel Batto,
+  Zhaoxi Zhang, Hua Chen, Ruifu Yang, Weimou Zheng, Songgang Li, Huanming Yang,
+  Jian Wang, S.~Dusko Ehrlich, Rasmus Nielsen, Oluf Pedersen, Karsten
+  Kristiansen, and Jun Wang.} 2012. ``A metagenome-wide association study of
+  gut microbiota in type 2 diabetes.'' {\it Nature} 490\hspace{0.2ex}(7418):
+  55--60. \href{http://dx.doi.org/10.1038/nature11450}{[Link]}
+
+\harvarditem[Sazal et~al.]{Sazal, Stebliankin, Mathee, Yoo and
+  Narasimhan}{2021}{sazal2021causalgut}
+\textbf{Sazal, Musfiqur, Vitalii Stebliankin, Kalai Mathee, Changwon Yoo, and
+  Giri Narasimhan.} 2021. ``Causal effects in microbiomes using interventional
+  calculus.'' {\it Scientific Reports} 11\hspace{0.2ex}(1), p. 5724.
+  \href{http://dx.doi.org/10.1038/s41598-021-84905-3}{[Link]}
+
+\harvarditem[Tab{\'a}k et~al.]{Tab{\'a}k, Herder, Rathmann, Brunner and
+  Kivim{\"a}ki}{2012}{tabak2012prediabetes}
+\textbf{Tab{\'a}k, Adam~G, Christian Herder, Wolfgang Rathmann, Eric~J Brunner,
+  and Mika Kivim{\"a}ki.} 2012. ``Prediabetes: a high-risk state for diabetes
+  development.'' {\it The Lancet} 379\hspace{0.2ex}(9833):  2279--2290.
+  \href{http://dx.doi.org/10.1016/S0140-6736(12)60283-9}{[Link]}
+
+\harvarditem[Weiss et~al.]{Weiss, Treuren, Lozupone, Faust, Friedman, Deng,
+  Xia, Xu, Ursell, Alm, Birmingham, Cram, Fuhrman, Raes, Sun, Zhou and
+  Knight}{2016}{weiss2016correlationbenchmark}
+\textbf{Weiss, Sophie, Will~Van Treuren, Catherine Lozupone, Karoline Faust,
+  Jonathan Friedman, Ye~Deng, Li~Charlie Xia, Zhenjiang~Zech Xu, Luke Ursell,
+  Eric~J Alm, Amanda Birmingham, Jacob~A Cram, Jed~A Fuhrman, Jeroen Raes,
+  Fengzhu Sun, Jizhong Zhou, and Rob Knight.} 2016. ``Correlation detection
+  strategies in microbial data sets vary widely in sensitivity and precision.''
+  {\it The ISME Journal} 10\hspace{0.2ex}(7):  1669--1681.
+  \href{https://doi.org/10.1038/ismej.2015.235}{[Link]}
+
+\harvarditem[WHO]{WHO}{2025}{who2025pcos}
+\textbf{WHO.} 2025. ``Polycystic ovary syndrome.''
+  \href{https://www.who.int/news-room/fact-sheets/detail/polycystic-ovary-syndrome}{[Link]}
 
 \harvarditem[Yang et~al.]{Yang, Cheng, Liu, Zhang, Ma, Zhou, Lu and
   Wu}{2024}{yang2024pcos}
@@ -20,5 +122,27 @@
   polycystic ovary syndrome: an individual based analysis of publicly available
   data.'' {\it eClinicalMedicine} 77\hspace{0.2ex}.
   \href{http://dx.doi.org/10.1016/j.eclinm.2024.102884}{[Link]}
+
+\harvarditem[Zhou et~al.]{Zhou, Sailani, Contrepois, Zhou, Ahadi, Leopold,
+  Zhang, Rao, Avina, Mishra, Johnson, Lee-McMullen, Chen, Metwally, Tran,
+  Nguyen, Zhou, Albright, Hong, Petersen, Bautista, Hanson, Chen, Spakowicz,
+  Bahmani, Salins, Leopold, Ashland, Dagan-Rosenfeld, Rego, Limcaoco, Colbert,
+  Allister, Perelman, Craig, Wei, Chaib, Hornburg, Dunn, Liang, Rose, Kukurba,
+  Piening, Rost, Tse, McLaughlin, Sodergren, Weinstock and
+  Snyder}{2019}{zhou2019t2d}
+\textbf{Zhou, Wenyu, M.~Reza Sailani, K{\'e}vin Contrepois, Yanjiao Zhou, Sara
+  Ahadi, Shana~R. Leopold, Martin~J. Zhang, Varsha Rao, Monika Avina, Tejaswini
+  Mishra, Jethro Johnson, Brittany Lee-McMullen, Songjie Chen, Ahmed~A.
+  Metwally, Thi Dong~Binh Tran, Hoan Nguyen, Xin Zhou, Brandon Albright,
+  Bo-Young Hong, Lauren Petersen, Eddy Bautista, Blake Hanson, Lei Chen, Daniel
+  Spakowicz, Amir Bahmani, Denis Salins, Benjamin Leopold, Melanie Ashland,
+  Orit Dagan-Rosenfeld, Shannon Rego, Patricia Limcaoco, Elizabeth Colbert,
+  Candice Allister, Dalia Perelman, Colleen Craig, Eric Wei, Hassan Chaib,
+  Daniel Hornburg, Jessilyn Dunn, Liang Liang, Sophia Miryam
+  Sch{\"u}ssler-Fiorenza Rose, Kim Kukurba, Brian Piening, Hannes Rost, David
+  Tse, Tracey McLaughlin, Erica Sodergren, George~M. Weinstock, and Michael
+  Snyder.} 2019. ``Longitudinal multi-omics of host--microbe dynamics in
+  prediabetes.'' {\it Nature} 569\hspace{0.2ex}(7758):  663--671.
+  \href{http://dx.doi.org/10.1038/s41586-019-1236-x}{[Link]}
 
 \end{thebibliography}
