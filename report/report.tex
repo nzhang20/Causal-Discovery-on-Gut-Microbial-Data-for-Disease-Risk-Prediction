@@ -41,8 +41,7 @@
 \end{abstract}
 
 \begin{center}
-
-Code: \url{https://github.com/nzhang20/Causal-Discovery-for-Biomedical-Applications}
+Code: \url{https://github.com/nzhang20/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction}
 \end{center}
 
 \maketoc
@@ -172,6 +171,25 @@ The main issue with the PC is the series of conditional independence tests condu
 One pitfall of our algorithm is that it assumes that the correlations found using SparCC or graphical lasso are a superset of the set of all causal relations. This may not be the case due to a well-known phenomenon called Simpson’s paradox, which essentially demonstrates that a statistical association in the data for an entire population may be reversed in every sub-population, e.g. when new information or variable is conditioned for \citep{pearl2016primer}. In other words, there may be certain causal relationships that are not statistically correlated due to a lack of information. However, this is not so far-fetched as the other well-established algorithms we use assume Faithfulness and solely rely on conditional independencies found in the data (and d-separation rules) to identify all casual relations. \newline
 
 \textbf{CD-NOD}
+
+CD-NOD is a variant of the PC algorithm developed by \citep{huang2019cdnod} that accounts for distribution shifts in the data. This may occur with heterogeneous data or time series data. In other words, it assumes that the data contain some domain or time index (c\_indx) that are a surrogate to characterize latent change factors. In terms of the algorithm, this means that all edges connected to the c\_indx variables must be pointing away because changes in the c\_indx variables affect the rest of the causal graph. 
+
+Briefly, the CD-NOD steps are:
+\begin{enumerate}
+    \item Start with a complete undirected graph
+    \item Detect changing causal modules using the domain/time index (c\_indx)
+    \item Causal skeleton discovery
+    \item Find v-structures
+    \item Orientation propagation via Meek rules
+\end{enumerate}
+
+A more detailed algorithm is outlined in the Appendix \citep{huang2019cdnod}. 
+
+In addition to the Causal Markov condition and Faithfulness assumption, CD-NOD assumes pseudo causal sufficiency.
+
+\textit {Pseudo Causal Sufficiency}. We assume that the confounders, if any, can be written as functions of the domain index or smooth functions of time. It follows that in each domain or at each time instance, the values of these confounders are fixed. 
+
+Given the use and application of CD-NOD on nonstationary data, more extensive longitudinal datasets similar to the T2D dataset can more confidently establish the temporality and causality problem present in most gut microbiome research. CD-NOD is implemented using the causal-learn package: \url{https://github.com/py-why/causal-learn}, with the study site and region variable as the c\_indx variables, with a required edge added from study site to region. 
 
 \subsection{Variational Autoencoder}
 
