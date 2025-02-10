@@ -6,11 +6,16 @@
 \contentsline {section}{\numberline {2}Methods}{7}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Data Preprocessing}{7}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Feature Selection and Sure Screening}{7}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Causal Discovery Algorithms}{8}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Variational Autoencoder}{8}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Results}{8}{section.3}%
-\contentsline {section}{\numberline {4}Discussion}{8}{section.4}%
-\contentsline {section}{\numberline {5}Conclusion}{8}{section.5}%
-\contentsline {section}{References}{9}{section*.1}%
+\contentsline {subsection}{\numberline {2.3}Causal Discovery Algorithms}{9}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Variational Autoencoder}{12}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Results}{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}EDA}{12}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{12}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{12}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}VAE Model}{12}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Discussion}{12}{section.4}%
+\contentsline {section}{\numberline {5}Conclusion}{12}{section.5}%
+\contentsline {section}{References}{13}{section*.1}%
 \contentsline {section}{Appendices}{A1}{section*.3}%
 \etoc@startlocaltoc {2}
+\contentsline {subsection}{\numberline {A.1}Algorithms}{A2}{subsection.A.1}%

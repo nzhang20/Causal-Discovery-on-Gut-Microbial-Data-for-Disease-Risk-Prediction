@@ -112,23 +112,78 @@ Based on the suggestions provided by \citep{weiss2016correlationbenchmark} on di
 Given the high-dimensional nature of the PCOS dataset, we experimented with different feature selection and sure screening methods to reduce the feature space before running causal discovery algorithms to reduce the multiple testing burden on the causal discovery algorithms. The two tasks at hand call for different methods. For the microbe-microbe interaction network, since the algorithms start with a complete graph, we used SparCC and graphical lasso separately, to reduce the number of edges between pairs of microbes and removed nodes that were disconnected from any other node. For the microbe-disease interaction network, we used logistic lasso regression to remove features that did not contribute to the prediction of disease status. \newline
 
 \textbf{SparCC}
-xxx
+
+SparCC is a method developed by \citep{friedman2012sparcc} to estimate correlations from compositional data, which are data that contain relative values such that each row adds up to the same value. In the case of gut microbiome data, 16s sequencing data will provide estimates of the relative abundance of microbes within a sample, meaning each sample’s values adds up to 100\%. Compositional data can produce spurious correlations because for any sample, each relative value are dependent on the values of the other features. This means each pair of features will “tend to have negative correlation regardless of the true correlation” and are not representative of the underlying mechanisms and relationships of the microbiome. \citep{weiss2016correlationbenchmark} also demonstrate that standard correlation techniques like Spearman and Pearson’s correlations perform poorly on their own when applied to compositional data. They suggest that these two correlation metrics can be paired with other methods like random matrix theory (RMT) and SparCC to improve their accuracy. 
+
+SparCC is a method that makes two assumptions: (i) the number of different components/OTUs is large, and (ii) the true correlation network is sparse. First, it takes the log-ratio transformation of two OTUs $$y_{ij} = \log \frac{x_i}{x_j} = \log x_i - \log x_j$$ where $x_i$ is the relative abundance of $\text{OTU}_i$, to compute correlations based on true abundances of OTUs (rather than the relative), to establish independence between $y_{ij}$ and which OTUs are included in the analysis, and to allow $y_{ij}$ to be any real number. Namely, SparCC can compute correlations based on the true abundances of OTUs by using the following result from \citep{aitchison1982compositional}, $$t_{ij} \coloneq \text{Var}\left(\log \frac{x_i}{x_j}\right) = \text{Var} (y_{ij})$$ where the variance is taken across all samples. A large $t_{ij}$ indicates there are samples with uncorrelated OTUs, and a $t_{ij} = 0$ means the OTUs are perfectly correlated. $t_{ij}$ can be written in terms of the true correlation: 
+\begin{align*}
+	t_{ij} &\coloneq \text{Var}\left(\log \frac{x_i}{x_j}\right) = \text{Var}\left(\log \frac{w_i}{w_j}\right) = \text{Var} (\log w_i - \log w_j) \\
+	&= \text{Var} (\log w_i) + \text{Var} (\log w_j) - 2 \text{Cov}(\log w_i, \log w_j) \\
+	&\coloneq \omega_i^2 + \omega_j^2 - 2 \rho_{ij}\omega_i\omega_j
+\end{align*}
+where $w_i, w_j$ are the true abundances of $\text{OTU}_i$ and $\text{OTU}_j$. Finally, given a sparse true correlation matrix, SparCC can approximate $\rho_{ij}$ as follows, $$\rho_{ij} = \frac{\omega_i^2 + \omega_j^2 - t_{ij}}{2\omega_i\omega_j}$$ Each of these components can be estimated via approximations outlined by \citep{friedman2012sparcc}, as the details are not relevant for our purpose. The important part of SparCC is that it uses an iterative procedure to estimate $\rho_{ij}$. Thus, the maximal number of iterations, the number of exclusion iterations, and the threshold can be specified.
+
+We run SparCC in Python using the package: \url{https://github.com/dlegor/SparCC}, and the same parameters used by \citep{friedman2012sparcc, zhou2019t2d} of 20 iterations, 10 exclusion iterations, and a threshold of 0.1. P-values are obtained from 100 bootstraps. \newline
 
 \textbf{Graphical Lasso}
 
+An alternative to SparCC to reduce the edges in the microbe-microbe network is to apply the lasso penalty on the inverse covariance matrix. This method, graphical lasso, was developed by \citep{friedman2007glasso} and assumes that the data are multivariate normal with mean $\mu$ and a covariance matrix $\Sigma$. The inverse covariance matrix, $\Theta \coloneq \Sigma^{-1}$ is also known as the precision matrix where if $\Sigma_{ij}^{-1} = 0$, then variables $i$ and $j$ are conditionally independent given all of the other variables. The lasso component comes in when each variable is modeled by all other variables as predictors and applies the lasso penalty to obtain the coefficients of the predictors. Then, each row of $\Theta$ can be filled in by the covariates of this lasso model for each variable. 
+
+This estimand is not novel, but \citep{friedman2007glasso} propose that their graphical lasso algorithm can estimate the precision matrix in a more simple and fast way than previous algorithms using pathwise coordinate descent. Again, the exact details are not relevant to our project, but it is important to highlight the distributional assumption of multivariate normality. This is most often not the case for gut microbiome data and may be assessed by checking the normality of the marginal distributions through qqplots. If the data do not satisfy this assumption for the precision matrix, (Gaussian represents second-order relationships, which is a pairwise Markov graph…).
+
+Graphical lasso is implemented in R using the glasso package with a regularization parameter of 2 to reduce runtime. Graphical lasso with grid search on the regularization parameter can also be implemented to find a more optimal value. \newline
+
 \textbf{Logistic Lasso Regression}
+
+This is simply a logistic regression model penalized with the lasso penalty (the $\ell$-1 norm). We use a logistic regression model because the outcome variable of interest is disease status which is a binary variable. K-fold cross-validation logistic lasso regression is implemented in R using the glmnet package with the cv.glmnet function, 10 folds, and alpha = 1 for the lasso penalty.
 
 \subsection{Causal Discovery Algorithms}
 
-After removing edges and features, we proceed with the causal discovery algorithms. For the microbe-microbe interaction network, we perform a series of conditional independence tests for all pairs of microbes that have an edge between them, conditioned on sets of size 1 and 2. Then, we orient the edges as much as possible using Meek’s rules. For the microbe-disease interaction network, we apply CD-NOD using the study site and region as the heterogeneity index. 
+After removing edges and features, we proceed with the causal discovery algorithms. For the microbe-microbe interaction network, we perform a series of conditional independence tests for all pairs of microbes that have an edge between them, conditioned on sets of size 1 and 2. Then, we orient the edges as much as possible using Meek’s rules. For the microbe-disease interaction network, we apply CD-NOD using the study site and region as the heterogeneity index. \newline
+
+\textbf{PC algorithm}
+
+In order to introduce our algorithm, we first must explain the PC algorithm. PC is one of the oldest and widely-used general-purpose causal discovery algorithms in the current literature \citep{glymour2019review}. At a high level, PC is a constraint-based search algorithm that starts with a complete graph, and constrained by the unconditional and conditional independencies found in the data, removes edges between two variables. Then, PC will orient as many of the edges as it can based on preserving v-structures and Meek’s rules based on directed graph theory. PC may not be able to orient all of the edges, leaving some undirected edges. This sort of output is known as a completed partially directed acyclic graph (CPDAG) which is a DAG with a mixture of directed and undirected edges. The CPDAG is a representation of the Markov Equivalence Class (MEC), a collection of all DAGs that are Markov equivalent, i.e. graphs with the same d-separation properties and implying the same conditional independence relations. 
+
+Briefly, the PC steps are: 
+\begin{enumerate}
+    \item Start with a complete undirected graph
+    \item Causal skeleton discovery
+    \item Find v-structures
+    \item Orientation propagation via Meek rules
+\end{enumerate}
+
+A more detailed algorithm is outlined in the Appendix \citep{spirtes2000causation}. 
+
+PC assumes iid data for consistency, no latent confounders, the Causal Markov condition, and the Faithfulness assumption. 
+
+\textit{Causal Markov condition}. Every variable $X$ in the set of variables $\textbf{V}$ is independent of its non-descendants given its parents. 
+
+\textit{Faithfulness assumption}. The only independencies among the variables $\textbf{V}$ are those entailed by the Causal Markov Condition.
+
+The Causal Markov condition and Faithfulness assumption together give us necessary and sufficient conditions for learning the causal graph from conditional independencies. 
+
+PC works with all data types as long as the conditional independence tests used are appropriate for the empirical distribution of the data. For example, our dataset includes all continuous variables (normalized abundances of gut microbes), but our EDA shows us that they are not linear nor Gaussian. Thus, we ought to use non-parametric conditional independence tests, such as KCI. However, non-parametric estimators do not perform well in high-dimensions with low sample sizes. Due to this tradeoff between distribution assumptions and statistical power limitations, we must carefully consider whether to use a linear parametric test like Fisher-Z or a nonparametric test like KCI. But, in more general cases, PC’s greatest limitation is arguably the assumption that there are no latent confounders. \newline
 
 \textbf{Our algorithm}
+
+The main issue with the PC is the series of conditional independence tests conducted on a fixed threshold of $\alpha = 0.05$. Due to the number of features in our dataset, the number of conditional independence tests conducted can be quite large and also impact algorithm complexity. This brings into the conversation a multiple-testing issue that is not being corrected. We attempt to minimize the prevalence of this issue with our own variation on the constraint-based search algorithm. To correct for this statistical shortcoming, we reduce the number of tests done by taking advantage of the correlational findings from the preceding feature reduction and sure screening step. The remaining steps of PC regarding direction orientation remain the same. 
+
+One pitfall of our algorithm is that it assumes that the correlations found using SparCC or graphical lasso are a superset of the set of all causal relations. This may not be the case due to a well-known phenomenon called Simpson’s paradox, which essentially demonstrates that a statistical association in the data for an entire population may be reversed in every sub-population, e.g. when new information or variable is conditioned for \citep{pearl2016primer}. In other words, there may be certain causal relationships that are not statistically correlated due to a lack of information. However, this is not so far-fetched as the other well-established algorithms we use assume Faithfulness and solely rely on conditional independencies found in the data (and d-separation rules) to identify all casual relations. \newline
 
 \textbf{CD-NOD}
 
 \subsection{Variational Autoencoder}
 
 \section{Results}
+
+\subsection{EDA}
+
+\subsection{Microbe-Microbe Interaction Network}
+
+\subsection{Microbe-Disease Interaction Network}
+
+\subsection{VAE Model}
 
 \section{Discussion}
 
@@ -152,6 +207,71 @@ After removing edges and features, we proceed with the causal discovery algorith
 \makeappendix
 
 Please see a copy of our \href{https://drive.google.com/file/d/1fEGpmoSULPbpG6bcopPBKdlyF6gG_Gv_/view?usp=sharing}{project proposal}. 
+
+\subsection{Algorithms}
+
+\begin{algorithm}[H]
+\caption{PC}
+\label{alg:pc}
+\DontPrintSemicolon
+\LinesNumbered
+\KwIn{Data, $\mathbf D$}
+\KwOut{CPDAG, $G$}
+$G \gets \text{the complete undirected graph over $\mathbf D$}$\;
+$\textbf{Sepset}(A, B) = \textbf{Sepset}(B, A) \gets \emptyset \quad \text{(the d-separation set of $A$ and $B$ $\forall A, B \in G$)}$\;
+\tcp{Causal skeleton discovery}
+\For{$(A, B)$ adjacent pairs in $G$} {
+    $n \gets 0$\;
+    \While{$\exists$ a set $C$ in $G$ adjacent to $A$ or $B$ s.t. $|C| = n$}{
+        \If{$A \ind B | C$} {
+            $\text{remove the edge between $A$ and $B$}$\;
+            $\text{record $C$ in \textbf{Sepset}$(A, B)$ and \textbf{Sepset}$(B, A)$}$\;
+            \textbf{break}
+        }
+        $n \gets n + 1$\;
+    }
+}
+\tcp{Find v-structures}
+\For{$(A, B, C)$ triple in $G$ s.t. $A - B - C$}{
+    \If{$B \notin \textbf{Sepset}(A, C)$}{
+        $\text{orient the edges $A \to B \leftarrow C$}$\;
+    }
+}
+\tcp{Orientation propagation via Meek rules}
+\While{there are edges to orient} {
+    \If{$A \to B$, and $B$ and $C$ are adjacent, and $A$ and $C$ are not adjacent, and there is no arrowhead at $B$} {
+        $\text{orient the edge $B - C$ as $B \to C$}$\;
+    }
+    \If{$\exists$ a directed path from $A$ to $B$, and an edge between $A$ and $B$}{
+        $\text{orient the edge $A - B$ as $A \to B$}$\;
+    }
+}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Our Algorithm}
+\label{alg:ouralg}
+\DontPrintSemicolon
+\LinesNumbered
+\KwIn{initial adjacency matrix, $A$}
+\KwOut{updated adjacency matrix, $A$}
+\tcp{Remove conditional independencies of conditioning set size 1}
+\For{$(A_i, A_j)$ pairs where $A_{ij} = 1$} {
+    \For{$A_k \neq A_i, A_j$} {
+        \If{$A_i \ind A_j | A_k$} {
+            $A_{ij}, A_{ji} \gets 0$\;
+        }
+    }
+}
+\tcp{Remove conditional independencies of conditioning set size 2}
+\For{$(A_i, A_j)$ pairs where $A_{ij} = 1$} {
+    \For{$A_k, A_l \neq A_i, A_j$ and $A_k \neq A_l$} {
+        \If{$A_i \ind A_j | \{A_k, A_l\}$} {
+            $A_{ij}, A_{ji} \gets 0$\;
+        }
+    }
+}
+\end{algorithm}
 
 \clearpage
 \textbf{Contributions}

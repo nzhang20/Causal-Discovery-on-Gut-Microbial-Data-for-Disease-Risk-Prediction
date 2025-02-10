@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  9 FEB 2025 13:50
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  9 FEB 2025 16:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1311,36 +1311,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
 
-[7] [8] (./report.bbl
-Underfull \hbox (badness 3396) in paragraph at lines 92--95
+[7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
+
+ []
+
+[9]
+
+Package natbib Warning: Citation `spirtes2000causation' on page 10 undefined on
+ input line 156.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 172--173
+
+ []
+
+[11] [12] (./report.bbl
+Underfull \hbox (badness 3396) in paragraph at lines 98--101
 []\TU/XCharter(0)/b/n/12 Sazal, Musfiqur, Vitalii Stebliankin, Kalai Mathee, Ch
 angwon Yoo, and Giri
  []
 
-[9
+[13
 
-]) [10] [1
+]) [14] [1
 
-]
+] [2] [3]
 \tf@thm=\write5
 \openout5 = `report.thm'.
 
- [2
+
+
+Package natbib Warning: There were undefined citations.
+
+[4
 
 ] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 985282EA004489BED0E6866C959B7102;691.
+(rerunfilecheck)             Checksum: 7AB983E1AFD45A55049D533EF0E6DE66;822.
  ) 
 Here is how much of TeX's memory you used:
- 23882 strings out of 476683
- 493987 string characters out of 5804048
+ 23920 strings out of 476683
+ 495124 string characters out of 5804048
  1861018 words of memory out of 5000000
- 43743 multiletter control sequences out of 15000+600000
- 530612 words of font info for 106 fonts, out of 8000000 for 9000
+ 43771 multiletter control sequences out of 15000+600000
+ 535855 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,8n,102p,1889b,916s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,22n,102p,1889b,916s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (12 pages).
+Output written on report.pdf (18 pages).
