@@ -78,24 +78,16 @@
 \begin{column}{\colwidth}
 
   \begin{block}{Background}
-
-    Some block contents, followed by a diagram, followed by a dummy paragraph.
-
-   % \begin{figure}
-   %   \centering
-   %   \begin{tikzpicture}[scale=6]
-   %     \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
-   %     \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
-   %       -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
-   %   \end{tikzpicture}
-   %   \caption{A figure caption.}
-   % \end{figure}
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies
-    eget libero ac ullamcorper. Integer et euismod ante. Aenean vestibulum
-    lobortis augue, ut lobortis turpis rhoncus sed. Proin feugiat nibh a
-    lacinia dignissim. Proin scelerisque, risus eget tempor fermentum, ex
-    turpis condimentum urna, quis malesuada sapien arcu eu purus.
+    \begin{itemize}
+      \item \textbf{Association vs. Causation}
+      \text{}
+      \item \textbf{Causal Discovery Algorithms in Gut Microbiome Studies}
+      Previous research has explored causal discovery in gut microbiome studies, notably using algorithms like PC-stable to construct causal networks \\
+      and implement do-calculus for estimating microbe-microbe and microbe-outcome causal effects. More recent advancements include CD-NOD, \\
+      specifically designed for heterogeneous data, which is particularly valuable for gut microbiome research where samples often come from different studies. \\
+      These algorithms aim to identify true causal relationships by performing conditional independence tests and orienting edges using established rules, while accounting \\
+      for the unique challenges of microbiome data analysis.
+    \end{itemize}
 
   \end{block}
 
@@ -104,7 +96,7 @@
     \begin{enumerate}
       \item \textbf{microbe-microbe} How do the microbe-microbe interaction networks between the healthy and diseased participants differ?
       \item \textbf{microbe-disease} What microbes have a causal relationship to disease status?
-      \item \textbf{prediction}Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? \\
+      \item \textbf{prediction} Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? \\
       How do they differ with the microbes learned in question 2?
     \end{enumerate}
     %Eget augue porta, bibendum venenatis tortor.
