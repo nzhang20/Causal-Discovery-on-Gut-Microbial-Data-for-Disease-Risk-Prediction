@@ -10,7 +10,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[size=custom,width=120,height=72,scale=1.0]{beamerposter}
+\usepackage[size=custom,width=48,height=36,scale=0.4]{beamerposter}
 \usetheme{gemini}
 \usecolortheme{gemini}
 \usepackage{graphicx}
@@ -37,11 +37,15 @@
 % Title
 % ====================
 
-\title{Causal Discovery on Gut Microbial Data for Disease Risk Prediction}
+\title{\raggedright Causal Discovery on Gut Microbial Data for Disease Risk Prediction}
 
-\author{Mariana Paco Mendivil \inst{1} \and Candus Shi \inst{2} \and Nicole Zhang \inst{2}}
+\author{Mariana Paco Mendivil \inst{1} \and Candus Shi \inst{2} \and Nicole Zhang \inst{3}}
+ 
+\institute[shortinst]{\inst{1} mpacomendivil@ucsd.edu \samelineand \inst{2} c6shi@ucsd.edu \inst{3} nwzhang@ucsd.edu}
 
-\institute[shortinst]{\inst{1} Some Institute \samelineand \inst{2} Another Institute}
+% \author{\vspace{1cm} \hspace{1cm} \raggedright Mariana Paco Mendivil \and Candus Shi \and Nicole Zhang }
+
+% \institute {\hspace{1.6cm} \raggedright mpacomendivil@ucsd.edu \samelineand \hspace{1.2cm} c6shi@ucsd.edu \hspace{1cm} nwzhang@ucsd.edu}
 
 % ====================
 % Footer (optional)
@@ -58,7 +62,7 @@
 % ====================
 
 % use this to include logos on the left and/or right side of the header:
-% \logoright{\includegraphics[height=7cm]{logo1.pdf}}
+\logoright{\includegraphics[height=3cm]{hdsi-blue-gold.png}}
 % \logoleft{\includegraphics[height=7cm]{logo2.pdf}}
 
 % ====================
@@ -73,7 +77,7 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{A block title}
+  \begin{block}{Background}
 
     Some block contents, followed by a diagram, followed by a dummy paragraph.
 
@@ -95,22 +99,18 @@
 
   \end{block}
 
-  \begin{block}{A block containing a list}
+  \begin{block}{Research Questions}
 
-    Nam vulputate nunc felis, non condimentum lacus porta ultrices. Nullam sed
-    sagittis metus. Etiam consectetur gravida urna quis suscipit.
-
-    \begin{itemize}
-      \item \textbf{Mauris tempor} risus nulla, sed ornare
-      \item \textbf{Libero tincidunt} a duis congue vitae
-      \item \textbf{Dui ac pretium} morbi justo neque, ullamcorper
-    \end{itemize}
-
-    Eget augue porta, bibendum venenatis tortor.
-
+    \begin{enumerate}
+      \item \textbf{microbe-microbe} How do the microbe-microbe interaction networks between the healthy and diseased participants differ?
+      \item \textbf{microbe-disease} What microbes have a causal relationship to disease status?
+      \item \textbf{prediction}Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? \\
+      How do they differ with the microbes learned in question 2?
+    \end{enumerate}
+    %Eget augue porta, bibendum venenatis tortor.
   \end{block}
 
-  \begin{alertblock}{A highlighted block}
+  \begin{alertblock}{Data Collection}
 
     This block catches your eye, so \textbf{important stuff} should probably go
     here.
@@ -141,7 +141,7 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{A block containing an enumerated list}
+  \begin{block}{Methods}
 
     Vivamus congue volutpat elit non semper. Praesent molestie nec erat ac
     interdum. In quis suscipit erat. \textbf{Phasellus mauris felis, molestie
@@ -233,7 +233,7 @@
 
 \begin{column}{\colwidth}
 
-  \begin{exampleblock}{A highlighted block containing some math}
+  \begin{exampleblock}{Results}
 
     A different kind of highlighted block.
 
@@ -261,7 +261,7 @@
 
   \end{exampleblock}
 
-  \begin{block}{Nullam vel erat at velit convallis laoreet}
+  \begin{block}{Conclusion/Future Work}
 
     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
     inceptos himenaeos. Phasellus libero enim, gravida sed erat sit amet,
