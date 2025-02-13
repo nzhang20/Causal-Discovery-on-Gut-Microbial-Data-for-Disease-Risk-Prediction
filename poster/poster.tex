@@ -37,11 +37,11 @@
 % Title
 % ====================
 
-\title{\raggedright Causal Discovery on Gut Microbial Data for Disease Risk Prediction}
+\title{\centering Causal Discovery on Gut Microbial Data for Disease Risk Prediction}
 
-\author{Mariana Paco Mendivil \inst{1} \and Candus Shi \inst{2} \and Nicole Zhang \inst{3}}
+\author{Mariana Paco Mendivil \inst{1} \and Candus Shi \inst{2} \and Nicole Zhang \inst{3} \and Mentor: Dr. Biwei Huang \inst{4} \and Mentor: Dr. Jelena Bradic \inst{5}}
  
-\institute[shortinst]{\inst{1} mpacomendivil@ucsd.edu \samelineand \inst{2} c6shi@ucsd.edu \inst{3} nwzhang@ucsd.edu}
+\institute[shortinst]{\inst{1} mpacomendivil@ucsd.edu \samelineand \inst{2} c6shi@ucsd.edu \samelineand \inst{3} nwzhang@ucsd.edu \samelineand \inst{4} bih007@ucsd.edu \samelineand \inst{5} jbradic@ucsd.edu}
 
 % \author{\vspace{1cm} \hspace{1cm} \raggedright Mariana Paco Mendivil \and Candus Shi \and Nicole Zhang }
 
@@ -52,9 +52,7 @@
 % ====================
 
 \footercontent{
-  \href{https://www.example.com}{https://www.example.com} \hfill
-  ABC Conference 2025, New York --- XYZ-1234 \hfill
-  \href{mailto:alyssa.p.hacker@example.com}{alyssa.p.hacker@example.com}}
+  Please visit our website at \href{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/}{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/}}
 % (can be left out to remove footer)
 
 % ====================
@@ -62,7 +60,7 @@
 % ====================
 
 % use this to include logos on the left and/or right side of the header:
-\logoright{\includegraphics[height=3cm]{hdsi-blue-gold.png}}
+\logoright{\includegraphics[height=1.5cm]{hdsi-white.png}}
 % \logoleft{\includegraphics[height=7cm]{logo2.pdf}}
 
 % ====================
@@ -94,37 +92,31 @@
   \begin{block}{Research Questions}
 
     \begin{enumerate}
-      \item \textbf{microbe-microbe} How do the microbe-microbe interaction networks between the healthy and diseased participants differ?
-      \item \textbf{microbe-disease} What microbes have a causal relationship to disease status?
-      \item \textbf{prediction} Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? \\
+      \item \textbf{Microbe-Microbe:} How do the microbe-microbe interaction networks between the healthy and diseased participants differ?
+      \item \textbf{Microbe-Disease:} What microbes have a causal relationship to disease status?
+      \item \textbf{Prediction:} Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? \\
       How do they differ with the microbes learned in question 2?
     \end{enumerate}
     %Eget augue porta, bibendum venenatis tortor.
   \end{block}
 
-  \begin{alertblock}{Data Collection}
+  \begin{block}{Data}
 
-    This block catches your eye, so \textbf{important stuff} should probably go
-    here.
-
-    Curabitur eu libero vehicula, cursus est fringilla, luctus est. Morbi
-    consectetur mauris quam, at finibus elit auctor ac. Aliquam erat volutpat.
-    Aenean at nisl ut ex ullamcorper eleifend et eu augue. Aenean quis velit
-    tristique odio convallis ultrices a ac odio.
-
+    To answer the questions above, we apply our framework to gut microbial data that investigated T2D and 
+    an individual participant data meta-analysis dataset that investigated PCOS. 
+    
     \begin{itemize}
-      \item \textbf{Fusce dapibus tellus} vel tellus semper finibus. In
-        consequat, nibh sed mattis luctus, augue diam fermentum lectus.
-      \item \textbf{In euismod erat metus} non ex. Vestibulum luctus augue in
-        mi condimentum, at sollicitudin lorem viverra.
-      \item \textbf{Suspendisse vulputate} mauris vel placerat consectetur.
-        Mauris semper, purus ac hendrerit molestie, elit mi dignissim odio, in
-        suscipit felis sapien vel ex.
+      \item \textbf{T2D:} For T2D, we use the NIH Human Microbiome Project (HMP2) dataset, filtered on healthy samples and individuals with a known insulin resistance or insulin sensitivity status.
+      \item \textbf{PCOS:} For PCOS, we use a dataset aggregated from 14 different clinical studies. (elaborate)
     \end{itemize}
 
-    Aenean tincidunt risus eros, at gravida lorem sagittis vel. Vestibulum ante
-    ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-
+  \end{block}
+  
+  \begin{alertblock}{Causal Discovery}
+  
+  	Causal discovery is all about recovering the true causal structure of system given observed data. One way to model this causal structure is through a graph One of the oldest and most widely-used general-purpose causal discovery algorithms
+	is PC. 
+  
   \end{alertblock}
 
 \end{column}
@@ -135,28 +127,28 @@
 
   \begin{block}{Methods}
 
-    Vivamus congue volutpat elit non semper. Praesent molestie nec erat ac
-    interdum. In quis suscipit erat. \textbf{Phasellus mauris felis, molestie
-    ac pharetra quis}, tempus nec ante. Donec finibus ante vel purus mollis
-    fermentum. Sed felis mi, pharetra eget nibh a, feugiat eleifend dolor. Nam
-    mollis condimentum purus quis sodales. Nullam eu felis eu nulla eleifend
-    bibendum nec eu lorem. Vivamus felis velit, volutpat ut facilisis ac,
-    commodo in metus.
+   In this study, we use causal discovery algorithms and compare them with 
+   predictive modeling to explore the causal relationships between the 
+   gut microbiome and two diseases: T2D and PCOS. Due to the high-dimensionality
+   of the data and small sample sizes, we first select features through sparse
+   estimation methods and sure-screening to reduce the number of microbes. 
 
     \begin{enumerate}
-      \item \textbf{Morbi mauris purus}, egestas at vehicula et, convallis
-        accumsan orci. Orci varius natoque penatibus et magnis dis parturient
-        montes, nascetur ridiculus mus.
-      \item \textbf{Cras vehicula blandit urna ut maximus}. Aliquam blandit nec
-        massa ac sollicitudin. Curabitur cursus, metus nec imperdiet bibendum,
-        velit lectus faucibus dolor, quis gravida metus mauris gravida turpis.
-      \item \textbf{Vestibulum et massa diam}. Phasellus fermentum augue non
-        nulla accumsan, non rhoncus lectus condimentum.
+      \item \textbf{Filter out rare OTUs}. Remove microbes where all samples have less than 1\%
+      relative abundance. 
+      \item \textbf{Feature selection and sure screening}. For the microbe-microbe network, we use two 
+      methods, SparCC and graphical lasso to reduce the number of edges between pairs of microbes.
+      For the microbe-disease network, we use logistic lasso regression to reduce the number of 
+      features that are not helpful in predicting disease. 
+      \item \textbf{Causal discovery algorithms}. For the microbe-microbe network, we implement
+      PC-stable with a max depth of 2. For the microbe-outcome network, we implement CD-NOD
+      where the covariates correspond to the heterogeneity index. 
+      \item \textbf{Variational autoencoder}. xxx. 
     \end{enumerate}
 
   \end{block}
 
-  \begin{block}{Fusce aliquam magna velit}
+  \begin{block}{T2D}
 
     Et rutrum ex euismod vel. Pellentesque ultricies, velit in fermentum
     vestibulum, lectus nisi pretium nibh, sit amet aliquam lectus augue vel
@@ -184,7 +176,7 @@
 
   \end{block}
 
-  \begin{block}{Nam cursus consequat egestas}
+  \begin{block}{PCOS}
 
     Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
     lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
