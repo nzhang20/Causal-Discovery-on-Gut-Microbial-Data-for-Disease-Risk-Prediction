@@ -1,6 +1,5 @@
 % Gemini theme
 % https://github.com/anishathalye/gemini
-% !TEX TS-program = lualatex
 
 \documentclass[final]{beamer}
 
@@ -106,18 +105,33 @@
     an individual participant data meta-analysis dataset that investigated PCOS. 
     
     \begin{itemize}
-      \item \textbf{T2D:} For T2D, we use the NIH Human Microbiome Project (HMP2) dataset, filtered on healthy samples and individuals with a known insulin resistance or insulin sensitivity status.
-      \item \textbf{PCOS:} For PCOS, we use a dataset aggregated from 14 different clinical studies. (elaborate)
+      \item \textbf{T2D:} For T2D, we use the NIH Human Microbiome Project (HMP2) dataset, filtered to healthy visits with 16S sequencing. Includes 153 insulin-sensitive (IS) and 178 insulin-resistant (IR) samples.
+      \item \textbf{PCOS:} For PCOS, we use a dataset aggregated from 14 different clinical studies across Asia and Europe, filtered to individual-level samples with 16S sequencing. Includes 435 healthy controls (HC) and 513 PCOS patients.
     \end{itemize}
 
   \end{block}
   
-  \begin{alertblock}{Causal Discovery}
-  
-  	Causal discovery is all about recovering the true causal structure of system given observed data. One way to model this causal structure is through a graph One of the oldest and most widely-used general-purpose causal discovery algorithms
-	is PC. 
-  
-  \end{alertblock}
+	  \begin{alertblock}{Causal Discovery}
+	  
+	  	Causal discovery is all about recovering the true causal structure of system given observed data. One way to model this causal structure is through a graph One of the oldest and most widely-used general-purpose causal discovery algorithms
+		is PC. It follows these key steps:
+		\begin{enumerate}
+		    \item \textbf{Start with a fully connected graph} (every variable connected to every other).
+		    \item \textbf{Remove edges} based on statistical independence tests.
+		    \item \textbf{Identify v-structures} (patterns like $X \to Y \leftarrow Z$) to infer causal directions.
+		    \item \textbf{Apply Meek’s rules} to orient additional edges while preserving consistency.
+		\end{enumerate}
+
+	The result is a \textbf{CPDAG (Completed Partially Directed Acyclic Graph)}, which represents a set of causal structures consistent with the observed data.
+
+	\textbf{\underline{Why Use PC?}}
+			\begin{itemize}
+			    \item Works for different data types (as long as independence tests match the data distribution).
+			    \item Efficient for large datasets.
+			    \item Assumes \textbf{no hidden confounders}, \textbf{causal Markov condition}, and \textbf{faithfulness}.
+			\end{itemize}
+	  
+	  \end{alertblock}
 
 \end{column}
 
@@ -217,7 +231,7 @@
 
 \begin{column}{\colwidth}
 
-  \begin{exampleblock}{Results}
+  \begin{exampleblock}{Variational Autoencoder}
 
     A different kind of highlighted block.
 
