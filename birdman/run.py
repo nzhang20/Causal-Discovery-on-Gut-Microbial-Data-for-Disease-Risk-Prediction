@@ -19,7 +19,7 @@ metadata = pd.read_csv(
 )
 
 prevalence = table.to_dataframe().clip(upper=1).sum(axis=1)
-features_to_keep = prevalence[prevalence >= 5].index.tolist()
+features_to_keep = prevalence[prevalence >= 20].index.tolist()
 table_filt = table.filter(features_to_keep, axis="observation")
 
 short_meta = metadata.loc[table.to_dataframe().columns]
