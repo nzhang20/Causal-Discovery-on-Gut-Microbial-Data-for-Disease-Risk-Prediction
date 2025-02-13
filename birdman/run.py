@@ -11,7 +11,7 @@ from birdman import NegativeBinomial
 # cmdstanpy.install_cmdstan()
 
 fpath = "metadata_2024Feb02.tsv"
-table = biom.load_table("feature-table.biom")
+table = biom.load_table("../data/sam/genus-table-exported/feature-table.biom")
 metadata = pd.read_csv(
     fpath,
     sep="\t",
