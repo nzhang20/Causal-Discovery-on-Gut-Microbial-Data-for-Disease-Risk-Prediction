@@ -18,18 +18,27 @@ metadata = pd.read_csv(
     index_col=0
 )
 
-prevalence = table.to_dataframe().clip(upper=1).sum(axis=1)
-features_to_keep = prevalence[prevalence >= 20].index.tolist()
-table_filt = table.filter(features_to_keep, axis="observation")
+diabetes_cat = ['T2D', 'Obesity/T2D', 'Type II Diabetes', 'Type 2 diabetes', 'Type_II_Diabetes']
+short_meta = metadata[(metadata['Disease'] == 'Healthy') | (metadata['Disease'].isin(diabetes_cat))]
+short_meta['T2D'] = short_meta['Disease'].apply(lambda x: 'Healthy' if x == 'Healthy' else 'T2D')
+short_meta = short_meta.loc[short_meta.index.intersection(table.to_dataframe().columns)]
+short_table = table.filter(short_meta.index.tolist())
+prevalence = short_table.to_dataframe().clip(upper=1).sum(axis=1)
+features_to_keep = prevalence[prevalence >= 5].index.tolist()
+short_table_filt = short_table.filter(features_to_keep, axis='observation')
 
-short_meta = metadata.loc[table.to_dataframe().columns]
-short_meta = short_meta[(short_meta['Disease_Type'] == 'Healthy') | (short_meta['Disease_Type'] == 'Metabolic')]
-table_filt = table_filt.filter(short_meta.index.tolist())
+# prevalence = table.to_dataframe().clip(upper=1).sum(axis=1)
+# features_to_keep = prevalence[prevalence >= 20].index.tolist()
+# table_filt = table.filter(features_to_keep, axis="observation")
+
+# short_meta = metadata.loc[table.to_dataframe().columns]
+# short_meta = short_meta[(short_meta['Disease_Type'] == 'Healthy') | (short_meta['Disease_Type'] == 'Metabolic')]
+# table_filt = table_filt.filter(short_meta.index.tolist())
 
 nb = NegativeBinomial(
-    table=table_filt,
-    formula="Disease_Type",
-    metadata=metadata,
+    table=short_table_filt,
+    formula="T2D",
+    metadata=short_meta,
 )
 
 print('Starting model compilation')
@@ -133,15 +142,19 @@ ax = viz.plot_parameter_estimates(
     coords={"covariate": covariate},
 )
 
-plt.savefig("ranks.pdf")
+plt.savefig("T2D_ranks.pdf")
 
 param_means = inference.posterior['beta_var'].sel(
     **{'covariate': covariate}
     ).mean(['chain', 'draw'])
+param_stds = inference.posterior['beta_var'].sel(
+    **{'covariate': covariate}
+    ).std(['chain', 'draw'])
 sort_indices = param_means.argsort().data
 param_means = param_means.data[sort_indices]
+param_stds = param_stds.data[sort_indices]
 param_labels = inference.posterior['feature'].data[sort_indices]
 
-differential_results = pd.DataFrame({'feature': param_labels, 'mean clr': param_means})
-differential_results.to_csv('differential_results.csv')
+differential_results = pd.DataFrame({'feature': param_labels, 'mean clr': param_means, 'std clr': param_stds})
+differential_results.to_csv('T2D_differential_results.csv')
 
