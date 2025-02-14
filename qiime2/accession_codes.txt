@@ -1,0 +1,7 @@
+#Instructions to get accession codes in a sra-explorer.csv
+#Use WebScraper.io from Google extensions
+#Click on Create new sitemap -> Import Sitemap, copy & paste the following:
+{"_id":"sra-explorer","startUrl":["https://sra-explorer.info/"],"selectors":[{"id":"accession","parentSelectors":["_root"],"type":"SelectorText","selector":"a.ng-binding","multiple":true,"regex":""}]}
+#To scrape, add 9000 to the delay settings
+#Click scrape: quickly paste the project ID in the Search bar like PRXXXXXX
+#Download .csv file, proceed with .sh script to download data as fastq.
