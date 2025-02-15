@@ -51,7 +51,7 @@
 % ====================
 
 \footercontent{
-  Please visit our website at \href{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/}{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/}}
+  Please visit our website at \href{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/}{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/} or at the above QR code.}
 % (can be left out to remove footer)
 
 % ====================
@@ -76,14 +76,9 @@
 
   \begin{block}{Background}
     \begin{itemize}
-      \item \textbf{Association vs. Causation}
-      \text{}
-      \item \textbf{Causal Discovery Algorithms in Gut Microbiome Studies}
-      Previous research has explored causal discovery in gut microbiome studies, notably using algorithms like PC-stable to construct causal networks \\
-      and implement do-calculus for estimating microbe-microbe and microbe-outcome causal effects. More recent advancements include CD-NOD, \\
-      specifically designed for heterogeneous data, which is particularly valuable for gut microbiome research where samples often come from different studies. \\
-      These algorithms aim to identify true causal relationships by performing conditional independence tests and orienting edges using established rules, while accounting \\
-      for the unique challenges of microbiome data analysis.
+      \item \textbf{Association vs. Causation:} In many domains, researchers are often concerned with finding the underlying structure that generates the data we observe. Traditionally, we have used statistical methods and models that allow us to make associative conclusions about the hypothetical population from an observed sample. However, associations are often insufficient to answer our scientific questions, and randomized experiments can be expensive, slow, and unethical to conduct in different domains. Causal discovery and causal inference are a set of methods and models that attempt to causally answer these scientific questions given the limitations of the observed data \cite{pearl2016primer}.
+      \item \textbf{Gut Microbiome:} The gut microbiome has been shown to be an important indicator of human health, and extensive research has been conducted to explore its impact on human health and disease. Given its diverse composition, the gut microbiome is a complex area of study as it can have heterogeneous effects for different populations \cite{baars2024gutt2d}. 
+      \item \textbf{Causal Discovery and Inference in the Gut Microbiome:} Previous research has explored causal discovery in gut microbiome studies, notably using algorithms like PC-stable to construct causal networks and implement do-calculus for estimating microbe-microbe and microbe-outcome causal effects \cite{sazal2021causalgut}. More generally in the field of causal discovery, recent advancements include CD-NOD, an algorithm specifically designed for heterogeneous data, which is particularly valuable for gut microbiome research where samples often come from different studies \cite{huang2019cdnod}. 
     \end{itemize}
 
   \end{block}
@@ -93,10 +88,8 @@
     \begin{enumerate}
       \item \textbf{Microbe-Microbe:} How do the microbe-microbe interaction networks between the healthy and diseased participants differ?
       \item \textbf{Microbe-Disease:} What microbes have a causal relationship to disease status?
-      \item \textbf{Prediction:} Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? \\
-      How do they differ with the microbes learned in question 2?
+      \item \textbf{Prediction:} Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? How do they differ with the microbes learned in question 2?
     \end{enumerate}
-    %Eget augue porta, bibendum venenatis tortor.
   \end{block}
 
   \begin{block}{Data}
@@ -105,30 +98,29 @@
     an individual participant data meta-analysis dataset that investigated PCOS. 
     
     \begin{itemize}
-      \item \textbf{T2D:} For T2D, we use the NIH Human Microbiome Project (HMP2) dataset, filtered to healthy visits with 16S sequencing. Includes 153 insulin-sensitive (IS) and 178 insulin-resistant (IR) samples.
-      \item \textbf{PCOS:} For PCOS, we use a dataset aggregated from 14 different clinical studies across Asia and Europe, filtered to individual-level samples with 16S sequencing. Includes 435 healthy controls (HC) and 513 PCOS patients.
+      \item \textbf{T2D:} For T2D, we use the NIH Human Microbiome Project (HMP2) dataset \cite{zhou2019t2d}, filtered to healthy visits with 16S sequencing. Includes 153 insulin-sensitive (IS) and 178 insulin-resistant (IR) samples.
+      \item \textbf{PCOS:} For PCOS, we use a dataset aggregated from 14 different clinical studies across Asia and Europe \cite{yang2024pcos}, filtered to individual-level samples with 16S sequencing. Includes 435 healthy controls (HC) and 513 PCOS patients.
     \end{itemize}
 
   \end{block}
   
 	  \begin{alertblock}{Causal Discovery}
 	  
-	  	Causal discovery is all about recovering the true causal structure of system given observed data. One way to model this causal structure is through a graph One of the oldest and most widely-used general-purpose causal discovery algorithms
-		is PC. It follows these key steps:
+	  	Causal discovery attempts to recover the true causal structure of a system given observed data. One way to model this causal structure is through a directed graphical model. A widely-used general-purpose causal discovery algorithm is the Peter-Clark (PC) algorithm \cite{glymour2019review}. It follows these key steps:
 		\begin{enumerate}
-		    \item \textbf{Start with a fully connected graph} (every variable connected to every other).
-		    \item \textbf{Remove edges} based on statistical independence tests.
+		    \item Start with a \textbf{complete undirected graph} (each node connected to all other nodes).
+		    \item \textbf{Remove edges} based on statistical independence and conditional independence tests.
 		    \item \textbf{Identify v-structures} (patterns like $X \to Y \leftarrow Z$) to infer causal directions.
-		    \item \textbf{Apply Meek’s rules} to orient additional edges while preserving consistency.
+		    \item \textbf{Apply Meek’s rules} to orient additional edges while preserving v-structures.
 		\end{enumerate}
 
-	The result is a \textbf{CPDAG (Completed Partially Directed Acyclic Graph)}, which represents a set of causal structures consistent with the observed data.
+	The result is a \textbf{CPDAG (Completed Partially Directed Acyclic Graph)}, which represents a set of causal structures consistent with the observed data, also known as the Markov Equivalence Class (MEC). 
 
 	\textbf{\underline{Why Use PC?}}
 			\begin{itemize}
 			    \item Works for different data types (as long as independence tests match the data distribution).
 			    \item Efficient for large datasets.
-			    \item Assumes \textbf{no hidden confounders}, \textbf{causal Markov condition}, and \textbf{faithfulness}.
+			    \item Assumes the \textbf{causal Markov condition}, the \textbf{faithfulness} assumption, and \textbf{no hidden confounders},.
 			\end{itemize}
 	  
 	  \end{alertblock}
@@ -151,155 +143,97 @@
       \item \textbf{Filter out rare OTUs}. Remove microbes where all samples have less than 1\%
       relative abundance. 
       \item \textbf{Feature selection and sure screening}. For the microbe-microbe network, we use two 
-      methods, SparCC and graphical lasso to reduce the number of edges between pairs of microbes.
+      methods, SparCC \cite{friedman2012sparcc} and graphical lasso to reduce the number of edges between pairs of microbes.
       For the microbe-disease network, we use logistic lasso regression to reduce the number of 
       features that are not helpful in predicting disease. 
       \item \textbf{Causal discovery algorithms}. For the microbe-microbe network, we implement
       PC-stable with a max depth of 2. For the microbe-outcome network, we implement CD-NOD
       where the covariates correspond to the heterogeneity index. 
-      \item \textbf{Variational autoencoder}. xxx. 
+      \item \textbf{Variational autoencoder}. xxx. Formulas.
     \end{enumerate}
 
   \end{block}
 
   \begin{block}{T2D}
 
-    Et rutrum ex euismod vel. Pellentesque ultricies, velit in fermentum
-    vestibulum, lectus nisi pretium nibh, sit amet aliquam lectus augue vel
-    velit. Suspendisse rhoncus massa porttitor augue feugiat molestie. Sed
-    molestie ut orci nec malesuada. Sed ultricies feugiat est fringilla
-    posuere.
+    (Report results for microbe-microbe network). From the microbe-outcome network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). 
 
     \begin{figure}
       \centering
-      \begin{tikzpicture}
-        \begin{axis}[
-            scale only axis,
-            no markers,
-            domain=0:2*pi,
-            samples=100,
-            axis lines=center,
-            axis line style={-},
-            ticks=none]
-          \addplot[red] {sin(deg(x))};
-          \addplot[blue] {cos(deg(x))};
-        \end{axis}
-      \end{tikzpicture}
-      \caption{Another figure caption.}
+      \includegraphics[width=\linewidth]{../graphs/t2d/cdnod.png}
+      \caption{Microbe-Disease Network for T2D.}
     \end{figure}
+    
+    \begin{table}
+      \centering
+      \begin{tabular}{l r r c}
+        \toprule
+        \textbf{Genus} & \textbf{Odds Ratio} & \textbf{P-Value} & \textbf{Literature Agreement} \\
+        \midrule
+        \textit{Butyricimonas} & 0 & 0 & Unknown \\
+        \textit{Clostridium XIVb} & 0 & 0 & Unknown \\
+        \textit{Odoribacter} & 0 & 0 & Unknown \\
+        \textit{unclassified Bacteria} & 0 & 0 & Unknown \\
+        \textit{unclassified Firmicutes} & 0 & 0 & Unknown \\
+        \bottomrule
+      \end{tabular}
+      \caption{Do-Calculus Results for T2D.}
+    \end{table}
+    
+    (Insert VAE results).
 
   \end{block}
 
-  \begin{block}{PCOS}
-
-    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
-    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
-    ac ante \textit{ipsum primis} in faucibus. Etiam sit amet velit eget sem
-    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
-    ipsum. Morbi commodo condimentum massa, \textit{tempus venenatis} massa
-    hendrerit quis. Maecenas sed porta est. Praesent mollis interdum lectus,
-    sit amet sollicitudin risus tincidunt non.
-
-    Etiam sit amet tempus lorem, aliquet condimentum velit. Donec et nibh
-    consequat, sagittis ex eget, dictum orci. Etiam quis semper ante. Ut eu
-    mauris purus. Proin nec consectetur ligula. Mauris pretium molestie
-    ullamcorper. Integer nisi neque, aliquet et odio non, sagittis porta justo.
-
-    \begin{itemize}
-      \item \textbf{Sed consequat} id ante vel efficitur. Praesent congue massa
-        sed est scelerisque, elementum mollis augue iaculis.
-        \begin{itemize}
-          \item In sed est finibus, vulputate
-            nunc gravida, pulvinar lorem. In maximus nunc dolor, sed auctor eros
-            porttitor quis.
-          \item Fusce ornare dignissim nisi. Nam sit amet risus vel lacus
-            tempor tincidunt eu a arcu.
-          \item Donec rhoncus vestibulum erat, quis aliquam leo
-            gravida egestas.
-        \end{itemize}
-      \item \textbf{Sed luctus, elit sit amet} dictum maximus, diam dolor
-        faucibus purus, sed lobortis justo erat id turpis.
-      \item \textbf{Pellentesque facilisis dolor in leo} bibendum congue.
-        Maecenas congue finibus justo, vitae eleifend urna facilisis at.
-    \end{itemize}
-
-  \end{block}
-
+  
 \end{column}
 
 \separatorcolumn
 
 \begin{column}{\colwidth}
 
-  \begin{exampleblock}{Variational Autoencoder}
+   \begin{block}{PCOS}
 
-    A different kind of highlighted block.
+    (Report results for microbe-outcome network). From the microbe-outcome network (Figure 2), the following nine genera are causal to PCOS (`group' node): \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus,} and \textit{Ruminococcus gnavus group}. We find their individual causal effects with do-calculus (Table 2). 
 
-    $$
-    \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
-    $$
-
-    Interdum et malesuada fames $\{1, 4, 9, \ldots\}$ ac ante ipsum primis in
-    faucibus. Cras eleifend dolor eu nulla suscipit suscipit. Sed lobortis non
-    felis id vulputate.
-
-    \heading{A heading inside a block}
-
-    Praesent consectetur mi $x^2 + y^2$ metus, nec vestibulum justo viverra
-    nec. Proin eget nulla pretium, egestas magna aliquam, mollis neque. Vivamus
-    dictum $\mathbf{u}^\intercal\mathbf{v}$ sagittis odio, vel porta erat
-    congue sed. Maecenas ut dolor quis arcu auctor porttitor.
-
-    \heading{Another heading inside a block}
-
-    Sed augue erat, scelerisque a purus ultricies, placerat porttitor neque.
-    Donec $P(y \mid x)$ fermentum consectetur $\nabla_x P(y \mid x)$ sapien
-    sagittis egestas. Duis eget leo euismod nunc viverra imperdiet nec id
-    justo.
-
-  \end{exampleblock}
-
-  \begin{block}{Conclusion/Future Work}
-
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-    inceptos himenaeos. Phasellus libero enim, gravida sed erat sit amet,
-    scelerisque congue diam. Fusce dapibus dui ut augue pulvinar iaculis.
-
+    \begin{figure}
+      \centering
+      \includegraphics[width=\linewidth]{../graphs/pcos/cdnod.png}
+      \caption{Microbe-Disease Network for PCOS.}
+    \end{figure}
+    
     \begin{table}
       \centering
       \begin{tabular}{l r r c}
         \toprule
-        \textbf{First column} & \textbf{Second column} & \textbf{Third column} & \textbf{Fourth} \\
+        \textbf{Genus} & \textbf{Odds Ratio} & \textbf{P-Value} & \textbf{Literature Agreement} \\
         \midrule
-        Foo & 13.37 & 384,394 & $\alpha$ \\
-        Bar & 2.17 & 1,392 & $\beta$ \\
-        Baz & 3.14 & 83,742 & $\delta$ \\
-        Qux & 7.59 & 974 & $\gamma$ \\
+        \textit{Alistipes} & 0.153458 & 4.68e-05 & Unknown \\
+        \textit{Blautia} & 0 & 0 & Unknown \\
+        \textit{Burkholderia} & 0 & 0 & Unknown \\
+        \textit{Desulfovibrio} & 0 & 0 & Unknown \\
+        \textit{Holdemanella} & 0 & 0 & Unknown \\
+        \textit{Knoellia} & 0 & 0 & Unknown \\
+        \textit{Prevotellaceae NK3B31 group} & 0 & 0 & Unknown \\
+        \textit{Ruminococcus} & 0 & 0 & Unknown \\
+        \textit{Ruminococcus gnavus group} & 0 & 0 & Unknown \\
         \bottomrule
       \end{tabular}
-      \caption{A table caption.}
+      \caption{Do-Calculus Results for PCOS.}
     \end{table}
 
-    Donec quis posuere ligula. Nunc feugiat elit a mi malesuada consequat. Sed
-    imperdiet augue ac nibh aliquet tristique. Aenean eu tortor vulputate,
-    eleifend lorem in, dictum urna. Proin auctor ante in augue tincidunt
-    tempor. Proin pellentesque vulputate odio, ac gravida nulla posuere
-    efficitur. Aenean at velit vel dolor blandit molestie. Mauris laoreet
-    commodo quam, non luctus nibh ullamcorper in. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos.
+   (Insert VAE results).
 
-    Nulla varius finibus volutpat. Mauris molestie lorem tincidunt, iaculis
-    libero at, gravida ante. Phasellus at felis eu neque suscipit suscipit.
-    Integer ullamcorper, dui nec pretium ornare, urna dolor consequat libero,
-    in feugiat elit lorem euismod lacus. Pellentesque sit amet dolor mollis,
-    auctor urna non, tempus sem.
+  \end{block}
 
+  \begin{block}{Conclusion \& Future Work}
+
+    Answer questions 1, 2, and 3. Explain BIRDMAn. Point to website for more results. Fix references to et al for many authors. 
+    
   \end{block}
 
   \begin{block}{References}
 
-    \nocite{*}
-    \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
+    \footnotesize{\bibliographystyle{unsrt}\bibliography{../report/reference}}
 
   \end{block}
 

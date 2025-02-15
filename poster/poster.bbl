@@ -1,0 +1,60 @@
+\begin{thebibliography}{1}
+
+\bibitem{pearl2016primer}
+Judea Pearl, Madelyn Glymour, and Nicholas~P Jewell.
+\newblock {\em Causal Inference in Statistics---A Primer}.
+\newblock John Wiley \& Sons Ltd, 2016.
+
+\bibitem{baars2024gutt2d}
+Daniel~P. Baars, Marcos~F. Fondevila, Abraham~S. Meijnikman, and Max Nieuwdorp.
+\newblock The central role of the gut microbiota in the pathophysiology and
+  management of type 2 diabetes.
+\newblock {\em Cell Host \& Microbe}, 32(8):1280--1300, 2025/02/09 2024.
+
+\bibitem{sazal2021causalgut}
+Musfiqur Sazal, Vitalii Stebliankin, Kalai Mathee, Changwon Yoo, and Giri
+  Narasimhan.
+\newblock Causal effects in microbiomes using interventional calculus.
+\newblock {\em Scientific Reports}, 11(1):5724, 2021.
+
+\bibitem{huang2019cdnod}
+Biwei Huang, Kun Zhang, Jiji Zhang, Joseph~D Ramsey, Ruben Sanchez-Romero,
+  Clark Glymour, and Bernhard Sch{\"o}lkopf.
+\newblock Causal discovery from heterogeneous/nonstationary data with
+  independent changes.
+\newblock {\em CoRR}, abs/1903.01672, 2019.
+
+\bibitem{zhou2019t2d}
+Wenyu Zhou, M.~Reza Sailani, K{\'e}vin Contrepois, Yanjiao Zhou, Sara Ahadi,
+  Shana~R. Leopold, Martin~J. Zhang, Varsha Rao, Monika Avina, Tejaswini
+  Mishra, Jethro Johnson, Brittany Lee-McMullen, Songjie Chen, Ahmed~A.
+  Metwally, Thi Dong~Binh Tran, Hoan Nguyen, Xin Zhou, Brandon Albright,
+  Bo-Young Hong, Lauren Petersen, Eddy Bautista, Blake Hanson, Lei Chen, Daniel
+  Spakowicz, Amir Bahmani, Denis Salins, Benjamin Leopold, Melanie Ashland,
+  Orit Dagan-Rosenfeld, Shannon Rego, Patricia Limcaoco, Elizabeth Colbert,
+  Candice Allister, Dalia Perelman, Colleen Craig, Eric Wei, Hassan Chaib,
+  Daniel Hornburg, Jessilyn Dunn, Liang Liang, Sophia Miryam
+  Sch{\"u}ssler-Fiorenza Rose, Kim Kukurba, Brian Piening, Hannes Rost, David
+  Tse, Tracey McLaughlin, Erica Sodergren, George~M. Weinstock, and Michael
+  Snyder.
+\newblock Longitudinal multi-omics of host--microbe dynamics in prediabetes.
+\newblock {\em Nature}, 569(7758):663--671, 2019.
+
+\bibitem{yang2024pcos}
+Yanan Yang, Jiale Cheng, Chongyuan Liu, Xiaopo Zhang, Ning Ma, Zhi Zhou,
+  Weiying Lu, and Chongming Wu.
+\newblock Gut microbiota in women with polycystic ovary syndrome: an individual
+  based analysis of publicly available data.
+\newblock {\em eClinicalMedicine}, 77, 2025/01/19 2024.
+
+\bibitem{glymour2019review}
+Clark Glymour, Kun Zhang, and Peter Spirtes.
+\newblock Review of causal discovery methods based on graphical models.
+\newblock {\em Frontiers in Genetics}, 10, 2019.
+
+\bibitem{friedman2012sparcc}
+Jonathan Friedman and Eric~J Alm.
+\newblock Inferring correlation networks from genomic survey data.
+\newblock {\em PLoS Comput Biol}, 8(9), 2012.
+
+\end{thebibliography}
