@@ -6,17 +6,11 @@ library(rjson)
 
 set.seed(1)
 
-param <- fromJSON(file="src/data-params.json")
+param <- fromJSON(file="src/config-t2d.json")
 disease <- param$disease
-if (disease == 'pcos') {
-  group0 <- 'hc'
-  group1 <- 'pcos'
-}
-
-if(disease == 't2d') {
-  group0 <- 'IS'
-  group1 <- 'IR'
-}
+groups <- param$cohort_names
+group0 <- groups[1]
+group1 <- groups[2]
 
 # healthy cohort
 hc <- read.csv(sprintf("data/%s/%s.csv", disease, group0))

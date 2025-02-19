@@ -9,13 +9,13 @@ import os
 
 def clean_data_t2d(subject_fp, sample_fp, gut_fp):
     '''
-    Returns a clean dataset for the T2D study.
+    Returns the otu table and metadata for the T2D study.
 
     :param: subject_fp: filepath to the subject dataset
     :param: sample_fp: filepath to the sample info dataset
     :param: gut_fp: filepath to the gut abundance dataset
 
-    :return: pandas DataFrame of the clean dataset
+    :return: pandas DataFrame of the otu table, pandas DataFrame of the metadata
     '''
     subjects = pd.read_csv(subject_fp)
     samples = pd.read_csv(sample_fp)
@@ -40,24 +40,27 @@ def clean_data_t2d(subject_fp, sample_fp, gut_fp):
     merged_df = pd.merge(gut_16s_genera, samples_healthy, on='SampleID', how='inner')
     merged_df = pd.merge(subjects_IRIS_known, merged_df, on='SubjectID', how='inner')
 
-    # remove 'SubjectID' and 'SampleID'
-    merged_df = merged_df.drop(columns=['SubjectID', 'SampleID'])
+    # remove 'SubjectID' and set index to 'SampleID'
+    merged_df = merged_df.drop(columns=['SubjectID'])
+    merged_df = merged_df.set_index('SampleID')
 
     # convert categories to numbers 
     merged_df['IRIS'] = merged_df['IRIS'].map({'IS': 0, 'IR': 1, 'Unknown': 2})
     merged_df['Gender'] = merged_df['Gender'].map({'M': 0, 'F': 1})
     merged_df['Ethnicity'] = merged_df['Ethnicity'].map({'C': 0, 'A': 1, 'B': 2, 'H': 3, 'unknown': 4})
-    
-    return merged_df
+
+    otu_table = merged_df.loc[:, [x for x in merged_df.columns if 'genus_' in x]]
+    metadata = merged_df.loc[:, ['IRIS', 'Gender', 'Ethnicity']]
+    return otu_table, metadata
 
 
 def clean_data_pcos(raw_fp):
     '''
-    Returns a clean dataset for the PCOS study.
+    Returns the otu table and metadata for the PCOS study.
 
     :param: raw_fp: filepath to the raw dataset
 
-    :return: pandas DataFrame of the clean dataset
+    :return: pandas DataFrame of the otu table, pandas DataFrame of the metadata
     '''
     pcosyang2024 = pd.read_excel(raw_fp, engine='openpyxl')
     pcosyang2024 = pcosyang2024.T
@@ -97,10 +100,12 @@ def clean_data_pcos(raw_fp):
     for i in range(1, 15):
         pcosyang2024.iloc[study_site[i][0]:study_site[i][1], -1] = i
 
-    return pcosyang2024
+    otu_table = pcosyang2024.loc[:, [x for x in pcosyang2024.columns if (x != 'group') & (x != 'region') & (x !='study_site')]]
+    metadata = pcosyang2024.loc[:, ['group', 'region', 'study_site']]
+    return otu_table, metadata
 
 
-def filter_rare_OTUs(data, k=1):
+def filter_rare_otus(data, k=1):
     '''
     Filters the dataset for rare OTUs based on a chosen threshold. 
 
@@ -112,17 +117,3 @@ def filter_rare_OTUs(data, k=1):
     rare_OTUs = data.columns[(data <= k).sum() == data.shape[0]]
     filter_rare = data.drop(columns=rare_OTUs)
     return filter_rare
-
-
-def split_data(df, cohort_col):
-    '''
-    Returns two dataframes where each corresponds to each cohort: healthy or diseased patients.
-
-    :param: df: clean & filtered dataset, located in `data/{disease}/filter_rare.csv`
-    :param: cohort_col: column name corresponding to the cohort in df
-
-    :return: a pandas DataFrame for healthy patients, a pandas DataFrame for diseased patients
-    '''
-    healthy = df[df[cohort_col] == 0].drop(columns = [cohort_col])
-    diseased = df[df[cohort_col] == 1].drop(columns = [cohort_col])
-    return healthy, diseased

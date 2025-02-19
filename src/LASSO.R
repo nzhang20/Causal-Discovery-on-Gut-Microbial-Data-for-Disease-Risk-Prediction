@@ -5,25 +5,27 @@ library(data.table)
 library(rjson)
 
 # FEATURE SHRINKING ATTEMPT #1: LOGISTIC LASSO
-param <- fromJSON(file="src/data-params.json")
-disease <- param$disease
-data <- read.csv(sprintf("data/%s/filter_rare.csv", disease), check.names=F)
-X <- select(data, -c(1:4))
-Y <- data[2]
+param <- fromJSON(file="src/config-t2d.json")
+disease <- param$name
+disease_col <- param$disease_column
+data <- read.csv(sprintf("data/%s/filtered_otu_table.csv", disease), check.names=F)
+X <- select(data, -c(1))
+Y <- read.csv(sprintf("data/%s/metadata.csv", disease))[disease_col]
+data[disease_col] <- Y
 
-# balanced training set (435 HC, 435 random PCOS)
+# balanced training set
 set.seed(1)
 num_healthy <- sum(Y == 0)
 num_diseased <- sum(Y == 1)
 min_train <- min(num_healthy, num_diseased)
-healthy_df <- as.matrix(data[which(data[2] == 0),])
+healthy_df <- as.matrix(data[which(Y == 0),])
 healthy_df_index <- sample(1:num_healthy, size=min_train)
-diseased_df <- as.matrix(data[which(data[2] == 1),])
+diseased_df <- as.matrix(data[which(Y == 1),])
 diseased_df_index <- sample(1:num_diseased, size=min_train)
 data_train <- rbind(healthy_df[healthy_df_index, ], diseased_df[diseased_df_index, ])
-X_train <- data.table(data_train[, -c(1:4)])
+X_train <- data.table(data_train[, -c(1, dim(data_train)[2])])
 X_train <- apply(X_train, 2, function(x) as.numeric(x))
-Y_train <- as.numeric(data_train[, 2])
+Y_train <- as.numeric(data_train[, disease_col])
 
 cv.fit_train <- cv.glmnet(as.matrix(X_train), Y_train, family="binomial", type.measure="auc")
 png(sprintf("plots/%s/LASSO_AUC.png", disease))

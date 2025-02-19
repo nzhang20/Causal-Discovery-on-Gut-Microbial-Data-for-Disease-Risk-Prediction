@@ -1,0 +1,13 @@
+{
+	"otu_table_fp": "data/t2d/otu_table.csv",
+	"metadata_fp": "data/t2d/metadata.csv",
+	"name": "t2d",
+	"sparse_microbe_microbe": "graphical lasso",
+	"disease_column": "IRIS",
+	"cohort_names": ["IS", "IR"],
+	"covariates_map": {
+		"Gender": ["Male", "Female"],
+		"Ethnicity": ["C", "A", "B", "H"]
+	},
+	"rare_otu_threshold": 1
+}

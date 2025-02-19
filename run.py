@@ -4,97 +4,112 @@ import sys
 import json
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
-import pylab as py
 import itertools
 import glob, os
-from causallearn.search.ConstraintBased.CDNOD import cdnod
-from causallearn.utils.GraphUtils import GraphUtils
-from causallearn.utils.PCUtils.BackgroundKnowledge import BackgroundKnowledge
-from causallearn.graph.GraphNode import GraphNode
-import pydot
-from IPython.display import Image, display
+from biom.table import Table
 
 from src.etl import *
 from src.eda import *
-from src.graph import *
 from src.sparsify import *
+from src.graph import *
+from src.birdman import *
+from src.predict import *
 
 
 def main(targets):
-    with open("src/data-params.json") as fh:
-            data_params = json.load(fh)
 
-    disease = data_params['disease']
-    if disease == 'pcos':
-        non_microbes = ['group', 'region', 'study_site']
-        group0 = 'hc'
-        group1 = 'pcos'
-        cov1 = ['Europe', 'Asia']
-        cov2 = list(range(1, 15))
-    if disease == 't2d':
-        non_microbes = ['IRIS', 'Gender', 'Ethnicity']
-        group0 = 'IS'
-        group1 = 'IR'
-        cov1 = ['Male', 'Female']
-        cov2 = ['C', 'A', 'B', 'H']
-        
-    if 'data' in targets:
-        # make directory for disease
-        if not os.path.exists(f'data/{disease}'): os.mkdir(f'data/{disease}')
-        # clean data
-        if disease == 'pcos':
-            data = clean_data_pcos('data/raw/pcosyang2024.xlsx')
+    ##### SETUP #####
+    config_file = targets[0]
+    with open(config_file) as fh:
+        data_params = json.load(fh)
 
-        if disease == 't2d':
-            data = clean_data_t2d('data/raw/S1_Subjects.csv', 'data/raw/S3_SampleList.csv', 'data/raw/gut_16s_abundance.txt')
-            
-        data.to_csv(f'data/{disease}/clean.csv')
+    # load parameters
+    otu_table_fp = data_params['otu_table_fp']
+    metadata_fp = data_params['metadata_fp']
+    disease = data_params['name']
+    disease_col = data_params['disease_column']
+    group0, group1 = data_params['cohort_names']
+    covariates_map = data_params['covariates_map']
+    rare_otu_threshold = data_params['rare_otu_threshold']
 
-        # filter rare OTUs
-        covariates = data[non_microbes]
-        gut_16s = data.drop(columns=non_microbes)
-        filter_rare = filter_rare_OTUs(gut_16s, data_params['rare_OTU_threshold'])
-        filter_rare = pd.concat([covariates, filter_rare], axis=1)
-        filter_rare.to_csv(f'data/{disease}/filter_rare.csv')
-        
-        # split for easier access, transpose for SparCC input
-        healthy, diseased = split_data(filter_rare, non_microbes[0])
-        healthy.to_csv(f'data/{disease}/{group0}.csv')
-        healthy.T.to_csv(f'data/{disease}/{group0}.T.csv')
-        diseased.to_csv(f'data/{disease}/{group1}.csv')
-        diseased.T.to_csv(f'data/{disease}/{group1}.T.csv')
+    # setup data dir
+    if not os.path.exists(f'data/{disease}'): os.mkdir(f'data/{disease}')
 
+    # check that otu_table and metadata exist
+    otu_table, metadata = [], []
+    if (not os.path.exists(otu_table_fp)) | (not os.path.exists(metadata_fp)) :
+        if otu_table_fp == 'data/t2d/otu_table.csv':
+            print('Generating otu table and metadata for T2D.')
+            otu_table, metadata = clean_data_t2d('data/raw/S1_Subjects.csv', 'data/raw/S3_SampleList.csv', 'data/raw/gut_16s_abundance.txt')
+            covariates_map = {
+                'Gender': ['Male', 'Female'],
+                'Ethnicity': ['C', 'A', 'B', 'H']
+            }
+        elif otu_table_fp == 'data/pcos/otu_table.csv':
+            print('Generating otu table and metadata for PCOS.')
+            otu_table, metadata = clean_data_pcos('data/raw/pcosyang2024.xlsx')
+            covariates_map = {
+                'region': ['Europe', 'Asia'],
+                'study_site': list(range(1, 15))
+            }
+        else:
+            raise Exception('Please provide the otu table and metadata table!')
+
+        otu_table.to_csv(otu_table_fp)
+        metadata.to_csv(metadata_fp)
+
+    
+    ##### EDA #####
     if 'eda' in targets:
         # make directory for disease
         if not os.path.exists(f'plots/{disease}'): os.mkdir(f'plots/{disease}')
         if not os.path.exists(f'plots/{disease}/linearity'): os.mkdir(f'plots/{disease}/linearity')
         if not os.path.exists(f'plots/{disease}/normality'): os.mkdir(f'plots/{disease}/normality')
-        
-        # generate plots
-        filter_rare = pd.read_csv(f'data/{disease}/filter_rare.csv', index_col=0)
-        indiv_per_cohort(filter_rare, disease, non_microbes[0], [group0.upper(), group1.upper()])
-        indiv_per_cohort_cov(filter_rare, disease, non_microbes[0], non_microbes[1], [group0.upper(), group1.upper()], cov1)
-        indiv_per_cohort_cov(filter_rare, disease, non_microbes[0], non_microbes[2], [group0.upper(), group1.upper()], cov2)
+
+        # bar charts from metadata
+        metadata = pd.read_csv(metadata_fp, index_col=0)
+        covariates = [x for x in metadata.columns if x != disease_col]
+        indiv_per_cohort(metadata, disease, disease_col, [group0.upper(), group1.upper()])
+        for cov in covariates:
+            indiv_per_cohort_cov(metadata, disease, disease_col, cov, [group0.upper(), group1.upper()], covariates_map[cov])
 
         # genera only
-        gut_16s = filter_rare.drop(columns = non_microbes)
-        ok_linearity = input(f'Would you like to generate {len(list(itertools.combinations(gut_16s.columns, 2)))} scatter plots to check for linearity in {len(gut_16s.columns)} variables? (This may take a while.) \n(Y/N): ')
-        if ok_linearity.lower() == 'y': check_linearity(gut_16s, disease)
-        check_normality(gut_16s, disease)
-        plot_corr_heatmap(gut_16s, disease)
+        otu_table = pd.read_csv(otu_table_fp, index_col=0)
+        filtered_otu_table = filter_rare_otus(otu_table, rare_otu_threshold)
+        total_scatter_plots = len(list(itertools.combinations(filtered_otu_table.columns, 2)))
+        ask_linearity = f'Would you like to generate {total_scatter_plots} scatter plots to check for linearity in {filtered_otu_table.shape[1]} variables?'
+        if total_scatter_plots > 100: ask_linearity += ' (This may take a while.)'
+        ask_linearity += '\n(Y/N): '
+        if input(ask_linearity).lower() == 'y': check_linearity(filtered_otu_table, disease)
 
+        ask_normality = f'Would you like to generate {filtered_otu_table.shape[1]} qqplots to check for normality?'
+        if filtered_otu_table.shape[1] > 100: ask_normality += ' (This may take a while.)'
+        ask_normality += '\n(Y/N): '
+        if input(ask_normality).lower() == 'y': check_normality(filtered_otu_table, disease)
+        
+        plot_corr_heatmap(filtered_otu_table, disease)
+
+    
+    ##### GRAPH MICROBE-MICROBE AND MICROBE-DISEASE NETWORKS #####
     if 'graph' in targets:
-        data = pd.read_csv(f'data/{disease}/filter_rare.csv', index_col=0)
-        healthy = pd.read_csv(f'data/{disease}/{group0}.csv', index_col=0)
-        diseased = pd.read_csv(f'data/{disease}/{group1}.csv', index_col=0)
+        otu_table = pd.read_csv(otu_table_fp, index_col=0)
+        filtered_otu_table = filter_rare_otus(otu_table, rare_otu_threshold)
+        filtered_otu_table.to_csv(f'data/{disease}/filtered_otu_table.csv')
+        metadata = pd.read_csv(metadata_fp, index_col=0)
+
+        merged = pd.concat([metadata, filtered_otu_table], axis=1)
+        healthy = merged[merged[disease_col] == 0].drop(columns=[disease_col])
+        diseased = merged[merged[disease_col] == 1].drop(columns=[disease_col])
 
         check_1a = input('Would you like to generate graphs for the microbe-microbe networks? (Y/N): ')
         if check_1a.lower() == 'y':
             
             # 1a) SparCC or Graphical LASSO + our algorithm
             if data_params['sparse_microbe_microbe'].lower() == 'sparcc':
+                # Set up files
+                healthy.T.to_csv(f'data/{disease}/{group0}.T.csv')
+                diseased.T.to_csv(f'data/{disease}/{group1}.T.csv')
+                
                 print('--- Step 1. Running SparCC ---')
                 run_sparcc(disease, group0, group1)
                 print('--- Finished Step 1 ---')
@@ -156,12 +171,31 @@ def main(targets):
                 
             # 1b) Logistic LASSO + CD-NOD
             run_lasso('src/LASSO.R')
-            data_loglasso = prune_lasso(data, f'data/{disease}/lasso_covariates.txt')
+            data_loglasso = prune_lasso(merged, metadata, f'data/{disease}/lasso_covariates.txt')
+            print(data_loglasso.shape)
+            print(data_loglasso.columns)
             run_cdnod(data_loglasso, disease, f'{disease}/cdnod')
 
+    
+    ##### BIRDMAN #####
+    if 'birdman' in targets:
+        # otu_table must have otus as the index, samples on the columns and in biom Table format
+        otu_table = pd.read_csv(otu_table_fp, index_col=0).T
+        otu_table = Table(otu_table.to_numpy(), observation_ids=list(otu_table.index), sample_ids=list(otu_table.columns))
+        
+        metadata = pd.read_csv(metadata_fp, index_col=0)
+        
+        print('Starting BIRDMAn')
+        run_birdman(otu_table, metadata, ' + '.join(list(metadata.columns)), f'{disease}/birdman')
+        print('Finished BIRDMAn')
+
+    
+    ##### PREDICT VIA VAE #####
     if 'predict' in targets:
         print('prediction TBD')
 
+    
+    ##### CLEAN #####
     if 'clean' in targets:
         data_files = glob.glob(f'data/{disease}/*')
         plots_files = glob.glob(f'plots/{disease}/*')
@@ -173,9 +207,16 @@ def main(targets):
                 os.rmdir(f)
             else: os.remove(f)
 
+
 if __name__ == '__main__':
-    targets = sys.argv[1:]
-    if 'all' in targets:
-        main(['data', 'eda', 'graph', 'predict'])
+    config_file = sys.argv[1]
+    targets = sys.argv[2:]
+
+    # check config_file is json
+    if config_file.endswith('.json'):
+        if 'all' in targets:
+            main([config_file] + ['eda', 'graph', 'birdman', 'predict'])
+        else:
+            main([config_file] + targets)
     else:
-        main(targets)
+        raise Exception('Please provide a json file! e.g. `python config.json all`')

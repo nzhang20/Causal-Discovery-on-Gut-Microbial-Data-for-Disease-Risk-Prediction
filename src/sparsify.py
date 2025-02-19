@@ -194,11 +194,12 @@ def run_lasso(rscript_fp):
     os.system(cmd)
 
 
-def prune_lasso(clean, LASSO_fp):
+def prune_lasso(clean, metadata, LASSO_fp):
     '''
     Returns a pruned version of the clean dataset, based on the LASSO covariates in LASSO_fp. 
 
-    :param: clean: pandas DataFrame of the clean dataset, where the first three columns correspond to the cohort and covariates
+    :param: clean: pandas DataFrame of the clean dataset
+    :param: metadata: pandas DataFrame of the metadata, needed for its columns
     :param: LASSO_fp: filepath to the LASSO covariates txt file
 
     :return: pandas DataFrame of the pruned dataset
@@ -206,7 +207,7 @@ def prune_lasso(clean, LASSO_fp):
     LASSO_covariates = pd.read_csv(LASSO_fp)
 
     # prune
-    clean_short = clean[list(clean.columns[:3]) + list(LASSO_covariates.columns[1:])] # the first LASSO ogcol is the intercept
+    clean_short = clean[list(metadata.columns) + list(LASSO_covariates.columns[1:])] # the first LASSO ogcol is the intercept
 
     print('The pruned dataset has the following dimensions: ', clean_short.shape)
 
