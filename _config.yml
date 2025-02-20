@@ -1,5 +1,1 @@
-theme: jekyll-theme-minimal
-title: Causal Discovery on Gut Microbial Data for Disease Risk Prediction
-description: Exploring causal relationships in gut microbial data to improve disease risk prediction and personalized treatments.
-author: Mariana Paco Mendivil, Candus Shi, Nicole Zhang
-github: https://github.com/nzhang20/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction
+theme: jekyll-theme-cayman
