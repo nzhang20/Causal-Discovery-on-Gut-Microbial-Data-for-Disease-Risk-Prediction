@@ -12,3 +12,4 @@ src/.ipynb_checkpoints/
 src/__pycache__/
 config/.ipynb_checkpoints/
 .DS_Store
+.Rhistory
