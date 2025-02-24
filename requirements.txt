@@ -1,6 +1,7 @@
 arviz==0.20.0
 biom-format==2.1.16
 birdman==0.2.0
+bottleneck==2.0.1
 causal-learn==0.1.4.0
 click==8.1.8
 cmdstanpy==1.2.5
@@ -15,11 +16,13 @@ kiwisolver==1.4.8
 matplotlib==3.10.0
 momentchi2==0.1.8
 networkx==3.4.2
+numexpr==2.10.1
 numpy==2.2.3
 packaging==24.2
 pandas==2.2.3
 patsy==1.0.1
 pillow==11.1.0
+pyarrow==19.0.0
 pydot==3.0.4
 pyparsing==3.2.1
 python-dateutil==2.9.0.post0
