@@ -127,7 +127,13 @@ def run_birdman(otu_table, metadata, formula, result_fp):
         metadata = filter_meta
     )
 
+    # try:
+    #     nb.compile_model()
+    # except ValueError as e:
+    #     cmdstanpy.install_cmdstan()
+    #     nb.compile_model()
     nb.compile_model()
+        
     nb.fit_model(method='vi', num_draws=500)
 
     inference = nb.to_inference()

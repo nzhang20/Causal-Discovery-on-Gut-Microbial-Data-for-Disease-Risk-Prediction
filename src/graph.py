@@ -10,6 +10,7 @@ import matplotlib
 import matplotlib as mpl
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import pydot
+import graphviz
 import itertools
 import networkx as nx
 
@@ -66,8 +67,8 @@ def run_cdnod(data, disease, fp):
     cg = Meek.meek(cg_2)
     
     pyd = GraphUtils.to_pydot(cg.G, labels=list(data.columns))
-    # pyd.write_png(f"graphs/{fp}.png")
-    pyd.write_svg(f"graphs/{fp}.svg")
+    pyd.write_png(f"graphs/{fp}.png")
+    # pyd.write_svg(f"graphs/{fp}.svg")
 
     # due to limited visibility on the graph, print the microbes that are directly linked to the cohort and covariate nodes
     adj_nodes = []
@@ -209,8 +210,9 @@ def run_pc_depth2(data, data_sparse, alpha, fp):
     cg = Meek.meek(cg_2)
     
     pyd = GraphUtils.to_pydot(cg.G, labels=list(data.columns))
-    # pyd.write_png(f"graphs/{fp}.png")
-    pyd.write_svg(f"graphs/{fp}.svg")
+    pyd.write_png(f"graphs/{fp}.png")
+    # pyd.write_svg(f"graphs/{fp}.svg")
+    # graphviz.render('dot', 'png', f'graphs/{fp}.png')
     
     return cg.G
     
