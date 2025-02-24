@@ -1,4 +1,4 @@
-install.packages(c("glmnet", "dplyr", "data.table", "rjson"), repos="http://cran.us.r-project.org")
+# install.packages(c("glmnet", "dplyr", "data.table", "rjson"), repos="http://cran.us.r-project.org")
 library(glmnet)
 library(dplyr)
 library(data.table)

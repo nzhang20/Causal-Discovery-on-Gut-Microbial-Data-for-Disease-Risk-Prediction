@@ -124,13 +124,15 @@ def main(targets):
 
             if data_params['sparse_microbe_microbe'].lower().replace(' ', '') == 'graphicallasso':
                 print('--- Step 1. Running Graphical LASSO ---')
-                healthy.drop(columns=list(metadata.columns)).to_csv(f'data/{disease}/{group0}.csv')
-                diseased.drop(columns=list(metadata.columns)).to_csv(f'data/{disease}/{group1}.csv')
+                healthy_otu = healthy.drop(columns=list(metadata.columns))
+                healthy_otu.to_csv(f'data/{disease}/{group0}.csv')
+                diseased_otu = diseased.drop(columns=list(metadata.columns))
+                diseased_otu.to_csv(f'data/{disease}/{group1}.csv')
                 run_glasso('src/GLASSO.R')
                 print('--- Finished Step 1 ---')
 
                 print('--- Step 2. Obtain statistically significant pairs ---')
-                data_sparse_healthy, data_sparse_diseased, keep_nodes_healthy, keep_nodes_diseased = get_sig_cor_pairs_glasso(f'data/{disease}/glasso_{group0}.csv', f'data/{disease}/glasso_{group1}.csv', list(healthy.columns))
+                data_sparse_healthy, data_sparse_diseased, keep_nodes_healthy, keep_nodes_diseased = get_sig_cor_pairs_glasso(f'data/{disease}/glasso_{group0}.csv', f'data/{disease}/glasso_{group1}.csv', list(healthy_otu.columns))
                 print('--- Finished Step 2 ---')
 
                 healthy = healthy[keep_nodes_healthy]
