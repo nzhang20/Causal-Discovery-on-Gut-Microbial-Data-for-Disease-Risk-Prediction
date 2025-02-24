@@ -13,7 +13,7 @@ if [[ ! -x "$SRA_PATH/fasterq-dump" ]]; then
 fi
 
 #Insert CSV file with accession codes
-csv_file="sra-explorer.csv"
+csv_file="sra-explorer-all.csv"
 
 if [[ ! -f "$csv_file" ]]; then
     echo "The file $csv_file does not exist."
