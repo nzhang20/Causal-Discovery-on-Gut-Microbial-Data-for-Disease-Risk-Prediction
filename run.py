@@ -98,8 +98,8 @@ def main(targets):
         metadata = pd.read_csv(metadata_fp, index_col=0)
 
         merged = pd.concat([metadata, filtered_otu_table], axis=1)
-        healthy = merged[merged[disease_col] == 0].drop(columns=[disease_col])
-        diseased = merged[merged[disease_col] == 1].drop(columns=[disease_col])
+        healthy = merged[merged[disease_col] == 0] #.drop(columns=[disease_col])
+        diseased = merged[merged[disease_col] == 1] #.drop(columns=[disease_col])
 
         check_1a = input('Would you like to generate graphs for the microbe-microbe networks? (Y/N): ')
         if check_1a.lower() == 'y':
