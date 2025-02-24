@@ -124,6 +124,8 @@ def main(targets):
 
             if data_params['sparse_microbe_microbe'].lower().replace(' ', '') == 'graphicallasso':
                 print('--- Step 1. Running Graphical LASSO ---')
+                healthy.drop(columns=list(metadata.columns)).to_csv(f'data/{disease}/{group0}.csv')
+                diseased.drop(columns=list(metadata.columns)).to_csv(f'data/{disease}/{group1}.csv')
                 run_glasso('src/GLASSO.R')
                 print('--- Finished Step 1 ---')
 

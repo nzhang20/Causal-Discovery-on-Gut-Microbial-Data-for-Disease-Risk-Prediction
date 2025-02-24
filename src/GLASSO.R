@@ -1,4 +1,4 @@
-install.packages(c("glasso", "dplyr", "data.table", "rjson"), repos="http://cran.us.r-project.org")
+# install.packages(c("glasso", "dplyr", "data.table", "rjson"), repos="http://cran.us.r-project.org")
 library(glasso) 
 library(dplyr)
 library(data.table)
@@ -7,7 +7,7 @@ library(rjson)
 set.seed(1)
 
 param <- fromJSON(file="src/config-t2d.json")
-disease <- param$disease
+disease <- param$name
 groups <- param$cohort_names
 group0 <- groups[1]
 group1 <- groups[2]
