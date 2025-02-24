@@ -58,7 +58,9 @@ This study builds on recent advancements in causal discovery algorithms to inves
 
 We focus on two aspects of causal discovery and causal inference in the gut microbiome. First, we are curious to see how the microbe-microbe interaction networks may differ between the two outcome groups. Due to the high number of features compared to the number of samples in gut microbiome abundance data, we first reduce the number of edges between microbes using a sparse correlation method, SparCC \citep{weiss2016correlationbenchmark, friedman2012sparcc}, and a sparse precision matrix estimator, graphical lasso \citep{friedman2007glasso}. Then, we graph the two networks for the corresponding cohorts using a constraint-based causal discovery algorithm similar to the Peter-Clark (PC) algorithm \citep{glymour2019review}, but with a smaller depth and without a direction orientation step to reduce the multiple testing burden.
 
-Second, we are also interested in graphing the microbe-disease interaction network, where we are particularly interested in the microbes directly linked to disease status. Instead of reducing the number of edges, we reduce the number of features using logistic lasso regression to account for the outcome variable. Finally, we graph the network using the features that survive lasso and a disease status node using the constraint-based causal discovery from heterogeneous/nonstationary data algorithm (CD-NOD) \citep{huang2019cdnod} to identify microbes directly linked to disease status. Given the predictive nature of graphing a microbe-disease interaction network, we are also interested in developing a prediction model for disease using a causal representation learning technique xxx and comparing the results from CD-NOD to the microbes used in the model.
+Second, we are also interested in graphing the microbe-disease interaction network, where we are particularly interested in the microbes directly linked to disease status. Instead of reducing the number of edges, we reduce the number of features using logistic lasso regression to account for the relationships of microbes to the outcome variable. Finally, we graph the network using the features that survive lasso and a disease status node using the constraint-based causal discovery from heterogeneous/nonstationary data algorithm (CD-NOD) \citep{huang2019cdnod} to identify microbes directly linked to disease status. \sout{Given the predictive nature of graphing a microbe-disease interaction network, we are also interested in developing a prediction model for disease using a causal representation learning technique xxx and comparing the results from CD-NOD to the microbes used in the model.} 
+
+After obtaining the causal structure from CD-NOD, we move to the causal inference stage of our analysis. We use a variety of causal inference methods such as do-calculus and doubly robust estimation to estimate the causal effect of a microbe on disease status. We compare these results with a differential analysis method that also accounts for heterogeneity in the data, Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn) \citep{rahman2023birdman}. 
 
 \subsection{Literature Review}
 
@@ -77,6 +79,10 @@ PCOS is a complex endocrine disorder linked to metabolic diseases such as obesit
 Using Wilcoxon tests with Benjamini-Hochberg corrected p-values, they found differential bacteria between the healthy and PCOS groups: PCOS patients had slightly lower levels of \textit{Bacillota} and higher levels of \textit{Actinobacteriota}; PCOS patients in China had lower alpha diversity than healthy controls, whereas PCOS patients in Europe had higher diversity; PCOS patients with high testosterone (HT) had different microbial patterns compared to those with low testosterone (LT), including lower levels of \textit{Faecalibacterium} and higher levels of \textit{Prevotella}. 
 
 With biomarkers like \textit{Faecalibacterium} and \textit{Prevotella}, PCOS subtypes have distinct gut microbiota compositions that are impacted by geography and testosterone levels. These results highlight the possibility of personalized treatments based on microbiota. However, to handle population variety and improve strain-level assessments, extensive, global research is required. Given this complexity, we are interested in identifying potential biomarkers for all types of PCOS, i.e. disregarding the hyperandrogenism subtypes. \newline
+
+\textbf{Gut Microbiome Analysis}
+
+A typical gut microbiome analysis pipeline involves an upstream component and a downstream component. The upstream analysis typically starts with the raw sequencing files and involves xxx and classification to determine which OTUs are present and their abundance. The downstream analysis then proceeds with the abundance table to analyze differences in microbiome composition between groups (differential analysis), diversity, etc. (more on what people typically do and the problems with it) \newline
 
 \textbf{Causal Discovery and the Gut Microbiome}
 
@@ -191,7 +197,9 @@ In addition to the Causal Markov condition and Faithfulness assumption, CD-NOD a
 
 Given the use and application of CD-NOD on nonstationary data, more extensive longitudinal datasets similar to the T2D dataset can more confidently establish the temporality and causality problem present in most gut microbiome research. CD-NOD is implemented using the causal-learn package: \url{https://github.com/py-why/causal-learn}, with the study site and region variable as the c\_indx variables, with a required edge added from study site to region. 
 
-\subsection{Variational Autoencoder}
+\subsection{BIRDMAn}
+
+\subsection{Variational Autoencoder} 
 
 \section{Results}
 
@@ -200,6 +208,8 @@ Given the use and application of CD-NOD on nonstationary data, more extensive lo
 \subsection{Microbe-Microbe Interaction Network}
 
 \subsection{Microbe-Disease Interaction Network}
+
+\subsection{Causal Inference and BIRDMAn}
 
 \subsection{VAE Model}
 
@@ -295,5 +305,7 @@ $\textbf{Sepset}(A, B) = \textbf{Sepset}(B, A) \gets \emptyset \quad \text{(the 
 \textbf{Contributions}
 
 MPM, CS, and NZ designed the project. MPM and CS found datasets. CS and NZ performed EDA. CS built the microbe-microbe and microbe-disease interaction networks. MPM built the VAE model. BH proposed the causal discovery algorithm for the microbe-microbe interaction network. JB proposed the feature reduction and sure screening methods. BH and JB provided insightful comments and suggestions to the design. MPM, CS, and NZ interpreted the results and wrote the final report.
+
+We thank Dr. Sam Degregori (Knight Lab, UCSD) for guidance on BIRDMAn. 
 
 \end{document}

@@ -137,32 +137,42 @@ def main(targets):
                 sparse_method = 'Graphical LASSO'
                 sparse_method_fp = 'glasso'
 
-            print(f'--- Step 3. Converting {sparse_method} results to adjacency matrices ---')
-            print(f'--- {group0.upper()} ---')
-            healthy_adj = sparse_to_adj(data_sparse_healthy, list(healthy.columns))
-            print(f'--- {group1.upper()} ---')
-            diseased_adj = sparse_to_adj(data_sparse_diseased, list(diseased.columns))
-            print('--- Finished Step 3 ---')
-
             # make directory for graph
             if not os.path.exists(f'graphs/{disease}'): os.mkdir(f'graphs/{disease}')
-                
-            print('--- Step 4. Graphing adjacency matrices ---')
-            graph_networkx(healthy_adj, list(healthy.columns), f'{disease}/{sparse_method_fp}_{group0}')
-            graph_networkx(diseased_adj, list(diseased.columns), f'{disease}/{sparse_method_fp}_{group1}')
-            print('--- Finished Step 4 ---')
-            
-            print('--- Step 5. Running our algorithm ---')
+
+            print('--- Step 3. Running PC with depth 2 starting with remaining edges ---') 
             print(f'--- {group0.upper()} ---')
-            healthy_ouralg = run_ouralg(healthy_adj, healthy, list(healthy.columns), fisherz)
+            run_pc_depth2(healthy, data_sparse_healthy, 0.05, f'{disease}/{sparse_method_fp}_{group0}')
             print(f'--- {group1.upper()} ---')
-            diseased_ouralg = run_ouralg(diseased_adj, diseased, list(diseased.columns), fisherz)
-            print('--- Finished Step 5 ---')
+            run_pc_depth2(diseased, data_sparse_diseased, 0.05, f'{disease}/{sparse_method_fp}_{group1}')
+            print('--- Finished Step 3 ---')
+
+            # print(f'--- Step 3. Converting {sparse_method} results to adjacency matrices ---')
+            # print(f'--- {group0.upper()} ---')
+            # healthy_adj = sparse_to_adj(data_sparse_healthy, list(healthy.columns))
+            # print(f'--- {group1.upper()} ---')
+            # diseased_adj = sparse_to_adj(data_sparse_diseased, list(diseased.columns))
+            # print('--- Finished Step 3 ---')
+
+            # # make directory for graph
+            # if not os.path.exists(f'graphs/{disease}'): os.mkdir(f'graphs/{disease}')
+                
+            # print('--- Step 4. Graphing adjacency matrices ---')
+            # graph_networkx(healthy_adj, list(healthy.columns), f'{disease}/{sparse_method_fp}_{group0}')
+            # graph_networkx(diseased_adj, list(diseased.columns), f'{disease}/{sparse_method_fp}_{group1}')
+            # print('--- Finished Step 4 ---')
+            
+            # print('--- Step 5. Running our algorithm ---')
+            # print(f'--- {group0.upper()} ---')
+            # healthy_ouralg = run_ouralg(healthy_adj, healthy, list(healthy.columns), fisherz)
+            # print(f'--- {group1.upper()} ---')
+            # diseased_ouralg = run_ouralg(diseased_adj, diseased, list(diseased.columns), fisherz)
+            # print('--- Finished Step 5 ---')
     
-            print('--- Step 6. Graphing resulting adjacency matrices ---')
-            graph_networkx(healthy_ouralg, list(healthy.columns), f'{disease}/{sparse_method_fp}_{group0}_ouralg')
-            graph_networkx(diseased_ouralg, list(diseased.columns), f'{disease}/{sparse_method_fp}_{group1}_ouralg')
-            print('--- Finished Step 6 ---')
+            # print('--- Step 6. Graphing resulting adjacency matrices ---')
+            # graph_networkx(healthy_ouralg, list(healthy.columns), f'{disease}/{sparse_method_fp}_{group0}_ouralg')
+            # graph_networkx(diseased_ouralg, list(diseased.columns), f'{disease}/{sparse_method_fp}_{group1}_ouralg')
+            # print('--- Finished Step 6 ---')
 
         check_1b = input('Would you like to generate graphs for the microbe-disease network? (Y/N): ')
         if check_1b.lower() == 'y':

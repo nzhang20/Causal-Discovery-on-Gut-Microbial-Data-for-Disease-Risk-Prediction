@@ -1,21 +1,23 @@
 \@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
 \etoc@startlocaltoc {1}
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Literature Review}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Literature Review}{4}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Data}{6}{subsection.1.2}%
 \contentsline {section}{\numberline {2}Methods}{7}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Data Preprocessing}{7}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Feature Selection and Sure Screening}{7}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Causal Discovery Algorithms}{9}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Variational Autoencoder}{12}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Results}{12}{section.3}%
-\contentsline {subsection}{\numberline {3.1}EDA}{12}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{12}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{12}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}VAE Model}{12}{subsection.3.4}%
-\contentsline {section}{\numberline {4}Discussion}{12}{section.4}%
-\contentsline {section}{\numberline {5}Conclusion}{12}{section.5}%
-\contentsline {section}{References}{13}{section*.1}%
+\contentsline {subsection}{\numberline {2.2}Feature Selection and Sure Screening}{8}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Causal Discovery Algorithms}{10}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}BIRDMAn}{13}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Variational Autoencoder}{13}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Results}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}EDA}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{13}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{13}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{13}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}VAE Model}{13}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Discussion}{13}{section.4}%
+\contentsline {section}{\numberline {5}Conclusion}{13}{section.5}%
+\contentsline {section}{References}{14}{section*.1}%
 \contentsline {section}{Appendices}{A1}{section*.3}%
 \etoc@startlocaltoc {2}
 \contentsline {subsection}{\numberline {A.1}Algorithms}{A2}{subsection.A.1}%

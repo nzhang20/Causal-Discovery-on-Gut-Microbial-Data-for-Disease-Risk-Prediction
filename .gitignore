@@ -13,3 +13,6 @@ src/__pycache__/
 config/.ipynb_checkpoints/
 .DS_Store
 .Rhistory
+.Rproj.user
+Causal-Discovery-for-Biomedical-Applications.Rproj
+Dockerfile

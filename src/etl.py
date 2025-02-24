@@ -117,3 +117,31 @@ def filter_rare_otus(data, k=1):
     rare_OTUs = data.columns[(data <= k).sum() == data.shape[0]]
     filter_rare = data.drop(columns=rare_OTUs)
     return filter_rare
+
+
+def clr(data):
+    '''
+    Apply the centered-log ratio transformation to compositional data.
+
+    :param: data: OTU table of relative abundances
+
+    :return: a pandas DataFrame
+    '''
+    # TBD; figure out how to handle 0s
+
+    return None
+
+
+def ilr(data):
+    '''
+    Apply the isometric og ratio transformation to compositional data. This reduces the number of features by 1.
+
+    :param: data: OTU table of relative abundances
+
+    :return: a pandas DataFrame
+    '''
+    # TBD; unsure if this is the correct transformation, but in literature it is seemingly "better" than clr
+
+    return None
+
+    

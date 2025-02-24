@@ -2,7 +2,7 @@
 	"otu_table_fp": "data/pcos/otu_table.csv",
 	"metadata_fp": "data/pcos/metadata.csv",
 	"name": "pcos",
-	"sparse_microbe_microbe": "sparcc",
+	"sparse_microbe_microbe": "graphical lasso",
 	"disease_column": "group",
 	"cohort_names": ["HC", "PCOS"],
 	"covariates_map": {

@@ -92,6 +92,15 @@
   gut microbiota in type 2 diabetes.'' {\it Nature} 490\hspace{0.2ex}(7418):
   55--60. \href{http://dx.doi.org/10.1038/nature11450}{[Link]}
 
+\harvarditem[Rahman et~al.]{Rahman, Morton, Martino, Sepich-Poore, Allaband,
+  Guccione, Chen, Hakim, Estaki and Knight}{2023}{rahman2023birdman}
+\textbf{Rahman, Gibraan, James~T. Morton, Cameron Martino, Gregory~D.
+  Sepich-Poore, Celeste Allaband, Caitlin Guccione, Yang Chen, Daniel Hakim,
+  Mehrbod Estaki, and Rob Knight.} 2023. ``BIRDMAn: A Bayesian differential
+  abundance framework that enables robust inference of host-microbe
+  associations.'' {\it bioRxiv}.
+  \href{http://dx.doi.org/10.1101/2023.01.30.526328}{[Link]}
+
 \harvarditem[Sazal et~al.]{Sazal, Stebliankin, Mathee, Yoo and
   Narasimhan}{2021}{sazal2021causalgut}
 \textbf{Sazal, Musfiqur, Vitalii Stebliankin, Kalai Mathee, Changwon Yoo, and
