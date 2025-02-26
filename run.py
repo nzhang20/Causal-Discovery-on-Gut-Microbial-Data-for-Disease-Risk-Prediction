@@ -31,6 +31,7 @@ def main(targets):
     group0, group1 = data_params['cohort_names']
     covariates_map = data_params['covariates_map']
     rare_otu_threshold = data_params['rare_otu_threshold']
+    transformation = data_params['transformation']
 
     # setup data dir
     if not os.path.exists(f'data/{disease}'): os.mkdir(f'data/{disease}')
@@ -96,10 +97,15 @@ def main(targets):
         filtered_otu_table = filter_rare_otus(otu_table, rare_otu_threshold)
         filtered_otu_table.to_csv(f'data/{disease}/filtered_otu_table.csv')
         metadata = pd.read_csv(metadata_fp, index_col=0)
-
+        
         merged = pd.concat([metadata, filtered_otu_table], axis=1)
         healthy = merged[merged[disease_col] == 0] #.drop(columns=[disease_col])
         diseased = merged[merged[disease_col] == 1] #.drop(columns=[disease_col])
+
+        if transformation == 'clr':
+            merged = pd.concat([metadata, clr(filtered_otu_table)], axis=1)
+            healthy = merged[merged[disease_col == 0]
+            diseased = merged[merged[disease_col == 1]
 
         check_1a = input('Would you like to generate graphs for the microbe-microbe networks? (Y/N): ')
         if check_1a.lower() == 'y':

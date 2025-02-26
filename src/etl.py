@@ -121,15 +121,20 @@ def filter_rare_otus(data, k=1):
 
 def clr(data):
     '''
-    Apply the centered-log ratio transformation to compositional data.
+    Apply the centered-log ratio transformation to compositional data. We handle 0s by setting their CLR-transformed value to 0s, and ignoring them when calculating the geometric mean.
 
     :param: data: OTU table of relative abundances
 
     :return: a pandas DataFrame
     '''
-    # TBD; figure out how to handle 0s
+    
+    def clr_remove_0(vector):
+        col = list(vector.index)
+        geometric_mean = np.prod(vector[vector != 0]) ** (1/len(vector[vector != 0]))
+        return pd.Series([np.log(x / geometric_mean) if x > 0 else 0 for x in vector], index=col)
 
-    return None
+    
+    return data.apply(clr_remove_0, axis=1)
 
 
 def ilr(data):
