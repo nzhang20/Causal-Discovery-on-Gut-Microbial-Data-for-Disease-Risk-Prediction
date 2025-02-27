@@ -1,17 +1,25 @@
 #!/bin/bash
 
-manifest_file="manifest.tsv"
+# Current directory
+current_dir="$(pwd)"
 
-#header
-echo -e "sample-id\tabsolute-filepath" > "$manifest_file"
+# Output manifest file (manifest.tsv will be saved in the current directory)
+output_manifest="$current_dir/manifest.tsv"
 
-#Keeping forward reads only; end in _1.fastq
-find "$PWD" -type f -name "*_1.fastq" | while read -r filepath; do
-    #sample ID (remove path and _1.fastq suffix)
-    sample_id=$(basename "$filepath" | sed 's/_1.fastq//')
+# Start with header for TSV
+echo -e "sample-id\tabsolute-filepath" > "$output_manifest"
 
-    echo -e "${sample_id}\t${filepath}" >> "$manifest_file"
+# Find all .fastq files in the current directory and subdirectories
+find "$current_dir" -type f -name "*.fastq" | while read -r file; do
+    # Extract the file name from the full path
+    filename=$(basename "$file")
+
+    # Remove _1.fastq and .fastq from the filename to get the sample-id
+    sample_id="${filename/_1.fastq/}"
+    sample_id="${sample_id/.fastq/}"
+
+    # Write the sample-id and absolute path to the manifest
+    echo -e "$sample_id\t$file" >> "$output_manifest"
 done
 
-echo "Manifest file created: $manifest_file"
-
+echo "Manifest file 'manifest.tsv' created successfully in the current directory!"
