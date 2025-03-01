@@ -95,17 +95,15 @@ def main(targets):
     if 'graph' in targets:
         otu_table = pd.read_csv(otu_table_fp, index_col=0)
         filtered_otu_table = filter_rare_otus(otu_table, rare_otu_threshold)
-        filtered_otu_table.to_csv(f'data/{disease}/filtered_otu_table.csv')
+
+        if transformation == 'clr': filtered_otu_table = clr(filtered_otu_table)
+            
+        filtered_otu_table.to_csv(f'data/{disease}/filtered_otu_table_{transformation}.csv')
         metadata = pd.read_csv(metadata_fp, index_col=0)
         
         merged = pd.concat([metadata, filtered_otu_table], axis=1)
         healthy = merged[merged[disease_col] == 0] #.drop(columns=[disease_col])
         diseased = merged[merged[disease_col] == 1] #.drop(columns=[disease_col])
-
-        if transformation == 'clr':
-            merged = pd.concat([metadata, clr(filtered_otu_table)], axis=1)
-            healthy = merged[merged[disease_col == 0]
-            diseased = merged[merged[disease_col == 1]
 
         check_1a = input('Would you like to generate graphs for the microbe-microbe networks? (Y/N): ')
         if check_1a.lower() == 'y':
@@ -131,14 +129,18 @@ def main(targets):
             if data_params['sparse_microbe_microbe'].lower().replace(' ', '') == 'graphicallasso':
                 print('--- Step 1. Running Graphical LASSO ---')
                 healthy_otu = healthy.drop(columns=list(metadata.columns))
-                healthy_otu.to_csv(f'data/{disease}/{group0}.csv')
+                healthy_otu.to_csv(f'data/{disease}/{group0}_{transformation}.csv')
                 diseased_otu = diseased.drop(columns=list(metadata.columns))
-                diseased_otu.to_csv(f'data/{disease}/{group1}.csv')
+                diseased_otu.to_csv(f'data/{disease}/{group1}_{transformation}.csv')
                 run_glasso('src/GLASSO.R')
                 print('--- Finished Step 1 ---')
 
                 print('--- Step 2. Obtain statistically significant pairs ---')
-                data_sparse_healthy, data_sparse_diseased, keep_nodes_healthy, keep_nodes_diseased = get_sig_cor_pairs_glasso(f'data/{disease}/glasso_{group0}.csv', f'data/{disease}/glasso_{group1}.csv', list(healthy_otu.columns))
+                data_sparse_healthy, data_sparse_diseased, keep_nodes_healthy, keep_nodes_diseased = get_sig_cor_pairs_glasso(
+                    f'data/{disease}/glasso_{group0}_{transformation}.csv', 
+                    f'data/{disease}/glasso_{group1}_{transformation}.csv', 
+                    list(healthy_otu.columns)
+                )
                 print('--- Finished Step 2 ---')
 
                 healthy = healthy[keep_nodes_healthy]
@@ -152,9 +154,9 @@ def main(targets):
 
             print('--- Step 3. Running PC with depth 2 starting with remaining edges ---') 
             print(f'--- {group0.upper()} ---')
-            run_pc_depth2(healthy, data_sparse_healthy, 0.05, f'{disease}/{sparse_method_fp}_{group0}')
+            run_pc_depth2(healthy, data_sparse_healthy, 0.01, f'{disease}/{sparse_method_fp}_{group0}_{transformation}')
             print(f'--- {group1.upper()} ---')
-            run_pc_depth2(diseased, data_sparse_diseased, 0.05, f'{disease}/{sparse_method_fp}_{group1}')
+            run_pc_depth2(diseased, data_sparse_diseased, 0.01, f'{disease}/{sparse_method_fp}_{group1}_{transformation}')
             print('--- Finished Step 3 ---')
 
             # print(f'--- Step 3. Converting {sparse_method} results to adjacency matrices ---')
@@ -191,10 +193,10 @@ def main(targets):
                 
             # 1b) Logistic LASSO + CD-NOD
             run_lasso('src/LASSO.R')
-            data_loglasso = prune_lasso(merged, metadata, f'data/{disease}/lasso_covariates.txt')
+            data_loglasso = prune_lasso(merged, metadata, f'data/{disease}/lasso_covariates_{transformation}.txt')
             print(data_loglasso.shape)
             print(data_loglasso.columns)
-            run_cdnod(data_loglasso, disease, f'{disease}/cdnod')
+            run_cdnod(data_loglasso, disease, f'{disease}/cdnod_{transformation}')
 
     
     ##### BIRDMAN #####

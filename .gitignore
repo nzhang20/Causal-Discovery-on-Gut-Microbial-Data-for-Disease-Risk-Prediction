@@ -15,3 +15,4 @@ config/.ipynb_checkpoints/
 .Rhistory
 .Rproj.user
 Causal-Discovery-for-Biomedical-Applications.Rproj
+.RData

@@ -76,7 +76,7 @@
 
   \begin{block}{Background}
     \begin{itemize}
-      \item \textbf{Association vs. Causation:} In many domains, researchers are often concerned with finding the underlying structure that generates the data we observe. Traditionally, we have used statistical methods and models that allow us to make associative conclusions about the hypothetical population from an observed sample. However, associations are often insufficient to answer our scientific questions, and randomized experiments can be expensive, slow, and unethical to conduct in different domains. Causal discovery and causal inference are a set of methods and models that attempt to causally answer these scientific questions given the limitations of the observed data \cite{pearl2016primer}.
+      \item \textbf{Association vs. Causation:} In many domains, researchers are often concerned with finding the underlying structure that generates the data we observe. Traditional methods make associative conclusions, but these are often insufficient to answer the scientific question. Causal discovery and causal inference are a set of methods and models that attempt to causally answer these scientific questions given the limitations of observed data \cite{pearl2016primer}.
       \item \textbf{Gut Microbiome:} The gut microbiome has been shown to be an important indicator of human health, and extensive research has been conducted to explore its impact on human health and disease. Given its diverse composition, the gut microbiome is a complex area of study as it can have heterogeneous effects for different populations \cite{baars2024gutt2d}. 
       \item \textbf{Causal Discovery and Inference in the Gut Microbiome:} Previous research has explored causal discovery in gut microbiome studies, notably using algorithms like PC-stable to construct causal networks and implement do-calculus for estimating microbe-microbe and microbe-outcome causal effects \cite{sazal2021causalgut}. More generally in the field of causal discovery, recent advancements include CD-NOD, an algorithm specifically designed for heterogeneous data, which is particularly valuable for gut microbiome research where samples often come from different studies \cite{huang2019cdnod}. 
     \end{itemize}
@@ -156,11 +156,11 @@
 
   \begin{block}{T2D}
 
-    (Report results for microbe-microbe network). From the microbe-outcome network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). 
+    (Report results for microbe-microbe network). From the microbe-outcome network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). We implement three models: a simple logistic regression model regressed on the five genera causal to T2D, a logistic regression model regressed on a microbe and its neighbors, and a logistic regression model regressed on a microbe and its mediators. Their significance is denoted with a \*. 
 
     \begin{figure}
       \centering
-      \includegraphics[width=\linewidth]{../graphs/t2d/cdnod.png}
+      \includegraphics[width=\linewidth]{../graphs/t2d/cdnod_norm.png}
       \caption{Microbe-Disease Network for T2D.}
     \end{figure}
     
@@ -205,7 +205,7 @@
       \centering
       \begin{tabular}{l r r c}
         \toprule
-        \textbf{Genus} & \textbf{Odds Ratio} & \textbf{P-Value} & \textbf{Literature Agreement} \\
+        \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{Literature Agreement} \\
         \midrule
         \textit{Alistipes} & 0.153458 & 4.68e-05 & Unknown \\
         \textit{Blautia} & 0 & 0 & Unknown \\
@@ -227,7 +227,7 @@
 
   \begin{block}{Conclusion \& Future Work}
 
-    Answer questions 1, 2, and 3. Explain BIRDMAn. Point to website for more results. Fix references to et al for many authors. 
+    Answer questions 1, 2, and 3. Explain BIRDMAn. Point to website for more results. Fix references to et al for many authors. We would like to thank our mentors and Dr. Sam Degregori for guidance throughout this project. 
     
   \end{block}
 

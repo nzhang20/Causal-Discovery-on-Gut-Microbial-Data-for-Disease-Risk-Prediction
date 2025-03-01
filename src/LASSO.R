@@ -8,7 +8,9 @@ library(rjson)
 param <- fromJSON(file="src/config-t2d.json")
 disease <- param$name
 disease_col <- param$disease_column
-data <- read.csv(sprintf("data/%s/filtered_otu_table.csv", disease), check.names=F)
+transformation <- param$transformation
+
+data <- read.csv(sprintf("data/%s/filtered_otu_table_%s.csv", disease, transformation), check.names=F)
 X <- select(data, -c(1))
 Y <- read.csv(sprintf("data/%s/metadata.csv", disease))[disease_col]
 data[disease_col] <- Y
@@ -28,11 +30,11 @@ X_train <- apply(X_train, 2, function(x) as.numeric(x))
 Y_train <- as.numeric(data_train[, disease_col])
 
 cv.fit_train <- cv.glmnet(as.matrix(X_train), Y_train, family="binomial", type.measure="auc")
-png(sprintf("plots/%s/LASSO_AUC.png", disease))
+png(sprintf("plots/%s/LASSO_AUC_%s.png", disease, transformation))
 plot(cv.fit_train)
 dev.off()
 best_lambda_train <- cv.fit_train$lambda.min
 
 coef_train <- coef(cv.fit_train, s = "lambda.min")
 coef_train <- coef_train[coef_train[,1] != 0,] 
-fwrite(as.list(coef_train), file=sprintf("data/%s/lasso_covariates.txt", disease))
+fwrite(as.list(coef_train), file=sprintf("data/%s/lasso_covariates_%s.txt", disease, transformation))

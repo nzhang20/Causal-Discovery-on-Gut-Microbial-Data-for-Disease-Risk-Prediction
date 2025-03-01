@@ -9,5 +9,6 @@
 		"Gender": ["Male", "Female"],
 		"Ethnicity": ["C", "A", "B", "H"]
 	},
-	"rare_otu_threshold": 1
+	"rare_otu_threshold": 1,
+	"transformation": "clr"
 }

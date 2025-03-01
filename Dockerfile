@@ -20,7 +20,7 @@ RUN apt-get -y install traceroute nmap aria2
 # 3) install packages using notebook user
 USER jovyan
 
-RUN conda install -y python-graphviz conda-forge::cmdstan
+RUN conda install -y python-graphviz
 
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
