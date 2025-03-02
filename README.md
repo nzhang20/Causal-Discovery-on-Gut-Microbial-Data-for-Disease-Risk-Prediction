@@ -1,68 +1,32 @@
 # Causal Discovery on Gut Microbial Data for Disease Risk Prediction
 
-## Authors
-**Mariana Paco Mendivil**, **Candus Shi**, **Nicole Zhang**  
-**Mentors**: Dr. Biwei Huang, Dr. Jelena Bradic  
+Over the last few years, the scientific community has gained profound understanding of the importance of the gut microbiome to human health. However, most of these studies are purely associational, and as we all have learned "association is not causation". Thus, we are interested in tackling this causality question in the realm of gut microbiome research using causal discovery techniques such as constraint based causal graph search algorithms to understand 
+1) the differences in microbial interactions between a diseased cohort and a healthy control cohort, and
+2) the specific microbes that are directly linked to disease status.
 
-## Background
-### Association vs. Causation
-Traditional statistical models identify associations, but they often fail to capture true causal relationships. Conducting randomized experiments is expensive, slow, and sometimes unethical. Causal discovery and inference techniques allow us to infer causal relationships from observational data.
+Although we may claim to discover the causal structure of the gut microbiome for these two scenarios, conventionally, causality is established through randomized controlled trials. These can be costly and time-intensive, but we hope that our project can help aid in narrowing down the specific microbes to test for when conducting these wet-lab experiments. 
 
-### Gut Microbiome and Disease
-The gut microbiome plays a crucial role in human health. However, due to its complexity and heterogeneous effects across populations, studying its causal relationships with diseases requires advanced computational methods.
+The difficult thing about doing research on the gut microbiome is that every healthy microbiome can look very different! The only (current) hallmark of a healthy microbiome is a diverse and balanced microbiome. To aid in precision medicine, we also build a prediction model to predict one's risk for disease given a certain microbiome. 
 
-### Causal Discovery in Gut Microbiome Research
-Existing research has explored causal inference in the gut microbiome using algorithms like PC-Stable and do-calculus. More recent methods, such as CD-NOD, handle heterogeneous data, making them particularly useful for gut microbiome studies where data come from diverse sources.
+## File Descriptions
 
-## Research Questions
-1. **Microbe-Microbe Interactions**: How do microbial interaction networks differ between healthy and diseased participants?
-2. **Microbe-Disease Causal Relationships**: Which microbes have a causal effect on disease status?
-3. **Prediction**: Can we predict disease status using causal representation learning?
+### Data
+We have two data files corresponding to T2D and PCOS, respectively. In order to use BIRDMAn and be aligned with typical gut microbiome analysis where one has a table of the OTU counts, and a separate table for the metadata, each dataset is cleaned such that their OTU relative abundance values can be found in `data/{disease}/otu_table.csv` and the metadata file can be found in `data/{disease}/metadata.csv`, where `{disease}` is the disease of interest (T2D or PCOS).
 
-## Data
-We use gut microbiome datasets related to **Type 2 Diabetes (T2D)** and **Polycystic Ovary Syndrome (PCOS)**:
+(remove)
+The PCOS dataset comes from the Yang 2024 systematic review, `data/raw/pcosyang2024.xlsx`. It contains normalized gut microbiome abundances for patients from 14 different PCOS studies conducted in China, Poland, Austria, and Russia. After data cleaning and feature pruning, the clean dataset can be found in `data/pcos/clean.csv`.
 
-- **T2D Data**: NIH Human Microbiome Project (HMP2) dataset (filtered for healthy visits, 16S sequencing).  
-  - **Samples**: 153 insulin-sensitive (IS) & 178 insulin-resistant (IR).
+### Causal Discovery Algorithms & Graphs
+To address research question 1), we develop our own causal discovery algorithm to reduce the number of conditional independence tests conducted, which can inflate our false discovery rate. 
 
-- **PCOS Data**: Aggregated from 14 clinical studies (16S sequencing).  
-  - **Samples**: 435 healthy controls (HC) & 513 PCOS patients.
+To address research question 2), we implement Constraint-based causal Discovery from heterogeneous/NOnstationary Data (CD-NOD) where our domain index is the disease status. 
 
-## Causal Discovery Methods
-We use **causal discovery algorithms** alongside predictive modeling to analyze microbe-microbe and microbe-disease relationships. Our methodology includes:
+## Usage
+Create and activate the conda envrionment with `conda env create -f environment.yml` and `conda activate capstone`. 
 
-1. **Feature Selection**: Reduce data dimensionality using sparse estimation and sure-screening.
-   - Remove rare OTUs (operational taxonomic units) with <1% relative abundance.
-   - Apply **SparCC** and **Graphical Lasso** to filter microbe-microbe interactions.
-   - Use **Lasso Logistic Regression** to identify disease-relevant microbes.
-
-2. **Causal Discovery Algorithms**:
-   - **PC-Stable** (max depth = 2) for microbe-microbe networks.
-   - **CD-NOD** to model heterogeneity in microbe-disease relationships.
-
-3. **Causal Effect Estimation**:
-   - Use **do-calculus** and logistic regression to estimate individual microbial effects.
-
-## Key Findings
-### Type 2 Diabetes (T2D)
-From our **microbe-disease network**, we identified five genera with causal relationships to T2D:
-- **Butyricimonas**, **Clostridium XIVb**, **Odoribacter**, **Unclassified Bacteria**, **Unclassified Firmicutes**
-
-Using do-calculus, we estimated their causal effects on T2D. (See Table 1 in the original poster for statistical results.)
-
-### Polycystic Ovary Syndrome (PCOS)
-Our **microbe-disease network** for PCOS identified nine causal genera:
-- **Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus, Ruminococcus gnavus group**
-
-Causal effects were further validated using do-calculus (See Table 2 in the original poster).
-
-## Conclusion & Future Work
-- Answered key research questions on microbial interactions and disease risk.
-- Developed a framework combining **causal discovery** and **predictive modeling** for microbiome analysis.
-- Future work includes improving **causal representation learning** using Variational Autoencoders (VAE) and integrating **BIRDMAn** for Bayesian inference.
-
-## References
-
-## More Information
-Visit our project GitHub:  
-[https://github.com/nzhang20/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/](https://github.com/nzhang20/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/)
+To replicate our results, run...
+- `python run.py all`: runs the entire process from data cleaning to causal discovery algorithms and graphs
+- `python run.py data`: recreates our clean dataset from the raw data
+- `python run.py eda`: runs our EDA to produce plots assessing linearity, Gaussianity, and correlations between features
+- `python run.py graph`: runs the causal discovery algorithms and generates results in the form of causal graphs
+- `python run.py clean`: remove all generated files (e.g. the clean dataset, plots, and graphs)
