@@ -18,6 +18,7 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.14}
 \usepackage{anyfontsize}
+\usepackage{amsmath}
 
 % ====================
 % Lengths
@@ -76,9 +77,9 @@
 
   \begin{block}{Background}
     \begin{itemize}
-      \item \textbf{Association vs. Causation:} In many domains, researchers are often concerned with finding the underlying structure that generates the data we observe. Traditional methods make associative conclusions, but these are often insufficient to answer the scientific question. Causal discovery and causal inference are a set of methods and models that attempt to causally answer these scientific questions given the limitations of observed data \cite{pearl2016primer}.
-      \item \textbf{Gut Microbiome:} The gut microbiome has been shown to be an important indicator of human health, and extensive research has been conducted to explore its impact on human health and disease. Given its diverse composition, the gut microbiome is a complex area of study as it can have heterogeneous effects for different populations \cite{baars2024gutt2d}. 
-      \item \textbf{Causal Discovery and Inference in the Gut Microbiome:} Previous research has explored causal discovery in gut microbiome studies, notably using algorithms like PC-stable to construct causal networks and implement do-calculus for estimating microbe-microbe and microbe-outcome causal effects \cite{sazal2021causalgut}. More generally in the field of causal discovery, recent advancements include CD-NOD, an algorithm specifically designed for heterogeneous data, which is particularly valuable for gut microbiome research where samples often come from different studies \cite{huang2019cdnod}. 
+      \item \textbf{Association vs. Causation:} In many domains, researchers are often concerned with finding the underlying structure that generates the data we observe. Traditional methods make associative conclusions, but these are often insufficient to answer the scientific question. Causal discovery and causal inference are a set of methods and models that attempt to causally answer these scientific questions given the limitations of observed data.
+      \item \textbf{Gut Microbiome:} The gut microbiome is an important indicator of human health, and extensive research is ongoing to explore its impact on human health and disease.
+      % \item \textbf{Causal Discovery and Inference in the Gut Microbiome:} Previous work has attempted causal discovery in gut microbiome studies, using PC-stable to construct causal networks and implement do-calculus for estimating microbe-microbe and microbe-outcome causal effects. 
     \end{itemize}
 
   \end{block}
@@ -86,27 +87,26 @@
   \begin{block}{Research Questions}
 
     \begin{enumerate}
-      \item \textbf{Microbe-Microbe:} How do the microbe-microbe interaction networks between the healthy and diseased participants differ?
-      \item \textbf{Microbe-Disease:} What microbes have a causal relationship to disease status?
+      \item \textbf{Microbe-Microbe:} How do the microbe-microbe interaction networks between healthy and diseased participants differ?
+      \item \textbf{Microbe-Disease:} Which microbes have a causal relationship to disease status, and how is it quantified?
       \item \textbf{Prediction:} Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? How do they differ with the microbes learned in question 2?
     \end{enumerate}
   \end{block}
 
   \begin{block}{Data}
 
-    To answer the questions above, we apply our framework to gut microbial data that investigated T2D and 
-    an individual participant data meta-analysis dataset that investigated PCOS. 
+    We apply our framework to gut microbial data that studied T2D and PCOS. 
     
     \begin{itemize}
-      \item \textbf{T2D:} For T2D, we use the NIH Human Microbiome Project (HMP2) dataset \cite{zhou2019t2d}, filtered to healthy visits with 16S sequencing. Includes 153 insulin-sensitive (IS) and 178 insulin-resistant (IR) samples.
-      \item \textbf{PCOS:} For PCOS, we use a dataset aggregated from 14 different clinical studies across Asia and Europe \cite{yang2024pcos}, filtered to individual-level samples with 16S sequencing. Includes 435 healthy controls (HC) and 513 PCOS patients.
+      \item \textbf{T2D:} We use the NIH Human Microbiome Project (HMP2) dataset, filtered to healthy visits with 16S sequencing. Includes 153 insulin-sensitive (IS) and 178 insulin-resistant (IR) samples.
+      \item \textbf{PCOS:} We use a meta analysis dataset from 14 different clinical studies across Asia and Europe. Includes 435 healthy controls (HC) and 513 PCOS patients.
     \end{itemize}
 
   \end{block}
   
 	  \begin{alertblock}{Causal Discovery}
 	  
-	  	Causal discovery attempts to recover the true causal structure of a system given observed data. One way to model this causal structure is through a directed graphical model. A widely-used general-purpose causal discovery algorithm is the Peter-Clark (PC) algorithm \cite{glymour2019review}. It follows these key steps:
+	  	Causal discovery attempts to recover the true causal structure of a system given observed data. One way to model this causal structure is through a directed graphical model. A widely-used general-purpose causal discovery algorithm is the Peter-Clark (PC) algorithm. It follows these key steps:
 		\begin{enumerate}
 		    \item Start with a \textbf{complete undirected graph} (each node connected to all other nodes).
 		    \item \textbf{Remove edges} based on statistical independence and conditional independence tests.
@@ -116,22 +116,16 @@
 
 	The result is a \textbf{CPDAG (Completed Partially Directed Acyclic Graph)}, which represents a set of causal structures consistent with the observed data, also known as the Markov Equivalence Class (MEC). 
 
-	\textbf{\underline{Why Use PC?}}
-			\begin{itemize}
-			    \item Works for different data types (as long as independence tests match the data distribution).
-			    \item Efficient for large datasets.
-			    \item Assumes the \textbf{causal Markov condition}, the \textbf{faithfulness} assumption, and \textbf{no hidden confounders},.
-			\end{itemize}
+%	\textbf{\underline{Why Use PC?}}
+%			\begin{itemize}
+%			    \item Works for different data types (as long as independence tests match the data distribution).
+%			    \item Efficient for large datasets.
+%			    \item Assumes the \textbf{causal Markov condition}, the \textbf{faithfulness} assumption, and \textbf{no hidden confounders}.
+%			\end{itemize}
 	  
 	  \end{alertblock}
-
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-
-  \begin{block}{Methods}
+	  
+\begin{block}{Methods}
 
    In this study, we use causal discovery algorithms and compare them with 
    predictive modeling to explore the causal relationships between the 
@@ -142,21 +136,30 @@
     \begin{enumerate}
       \item \textbf{Filter out rare OTUs}. Remove microbes where all samples have less than 1\%
       relative abundance. 
-      \item \textbf{Feature selection and sure screening}. For the microbe-microbe network, we use two 
-      methods, SparCC \cite{friedman2012sparcc} and graphical lasso to reduce the number of edges between pairs of microbes.
-      For the microbe-disease network, we use logistic lasso regression to reduce the number of 
-      features that are not helpful in predicting disease. 
-      \item \textbf{Causal discovery algorithms}. For the microbe-microbe network, we implement
-      PC-stable with a max depth of 2. For the microbe-outcome network, we implement CD-NOD
-      where the covariates correspond to the heterogeneity index. 
+      \item \textbf{Feature selection and sure screening}. For the microbe-microbe network, we use SparCC and graphical lasso to reduce the number of edges between pairs of microbes.
+      For the microbe-disease network, we use logistic lasso regression to reduce the number of features that are not helpful in predicting disease. 
+      \item \textbf{Causal discovery algorithms}. For the microbe-microbe network, we implement PC-stable with a max depth of 2. For the microbe-outcome network, we implement CD-NOD (a variant of PC) where the covariates correspond to the heterogeneity index. 
+      \item \textbf{Causal inference}. We estimate the causal effects of microbes using do-calculus, and compare the results with Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn).
       \item \textbf{Variational autoencoder}. xxx. Formulas.
     \end{enumerate}
 
   \end{block}
 
+
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+  
   \begin{block}{T2D}
 
-    (Report results for microbe-microbe network). From the microbe-outcome network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). We implement three models: a simple logistic regression model regressed on the five genera causal to T2D, a logistic regression model regressed on a microbe and its neighbors, and a logistic regression model regressed on a microbe and its mediators. Their significance is denoted with a \*. 
+    From the microbe-disease network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). We implement three models: a simple logistic regression model regressed on the five genera causal to T2D, a logistic regression model regressed on a microbe and its neighbors, and a logistic regression model regressed on a microbe and its mediators. We compare the values with the BIRDMAn's mean CLR. Their significance is denoted with an asterisk (*). 
+    
+    \textbf{Model 1}: logit(disease status) $\sim$ microbes directly linked \\
+    \textbf{Model 2}: logit(disease status) $\sim$ microbe + neighbors(microbe) or mediators \\
+    \textbf{BIRDMAn}: Bayesian inference with $NegBinomial(\mu, \phi)$ where $\mu$ is the mean count and $\phi$ is the dispersion
 
     \begin{figure}
       \centering
@@ -166,19 +169,21 @@
     
     \begin{table}
       \centering
-      \begin{tabular}{l r r c}
+      \begin{tabular}{l r r r c}
         \toprule
-        \textbf{Genus} & \textbf{Odds Ratio} & \textbf{P-Value} & \textbf{Literature Agreement} \\
+        \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
         \midrule
-        \textit{Butyricimonas} & 0 & 0 & Unknown \\
-        \textit{Clostridium XIVb} & 0 & 0 & Unknown \\
-        \textit{Odoribacter} & 0 & 0 & Unknown \\
-        \textit{unclassified Bacteria} & 0 & 0 & Unknown \\
-        \textit{unclassified Firmicutes} & 0 & 0 & Unknown \\
+        \textit{Butyricimonas} & 0 & 0 & 0 & Unknown \\
+        \textit{Clostridium XIVb} & 0 & 0 & 0 & Unknown \\
+        \textit{Odoribacter} & 0 & 0 & 0 & Unknown \\
+        \textit{unclassified Bacteria} & 0 & 0 & 0 & Unknown \\
+        \textit{unclassified Firmicutes} & 0 & 0 & 0 & Unknown \\
         \bottomrule
       \end{tabular}
       \caption{Do-Calculus Results for T2D.}
     \end{table}
+    
+    We generate similar graphs for the two microbe-microbe networks using PC with a max depth of 2, and find that the two cohorts share xxx, but xxx are different. Insert figures. \\
     
     (Insert VAE results).
 
@@ -193,33 +198,35 @@
 
    \begin{block}{PCOS}
 
-    (Report results for microbe-outcome network). From the microbe-outcome network (Figure 2), the following nine genera are causal to PCOS (`group' node): \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus,} and \textit{Ruminococcus gnavus group}. We find their individual causal effects with do-calculus (Table 2). 
+    From the microbe-disease network (Figure 2), the following nine genera are causal to PCOS (`group' node): \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus,} and \textit{Ruminococcus gnavus group}. We find their individual causal effects with do-calculus (Table 2). 
 
     \begin{figure}
       \centering
-      \includegraphics[width=\linewidth]{../graphs/pcos/cdnod.png}
+      \includegraphics[width=\linewidth]{../graphs/pcos/cdnod_norm.png}
       \caption{Microbe-Disease Network for PCOS.}
     \end{figure}
     
     \begin{table}
       \centering
-      \begin{tabular}{l r r c}
+      \begin{tabular}{l r r r c}
         \toprule
-        \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{Literature Agreement} \\
+        \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
         \midrule
-        \textit{Alistipes} & 0.153458 & 4.68e-05 & Unknown \\
-        \textit{Blautia} & 0 & 0 & Unknown \\
-        \textit{Burkholderia} & 0 & 0 & Unknown \\
-        \textit{Desulfovibrio} & 0 & 0 & Unknown \\
-        \textit{Holdemanella} & 0 & 0 & Unknown \\
-        \textit{Knoellia} & 0 & 0 & Unknown \\
-        \textit{Prevotellaceae NK3B31 group} & 0 & 0 & Unknown \\
-        \textit{Ruminococcus} & 0 & 0 & Unknown \\
-        \textit{Ruminococcus gnavus group} & 0 & 0 & Unknown \\
+        \textit{Alistipes} & 0.153458 & 4.68e-05 & 0 & Unknown \\
+        \textit{Blautia} & 0 & 0 & 0 & Unknown \\
+        \textit{Burkholderia} & 0 & 0 & 0 & Unknown \\
+        \textit{Desulfovibrio} & 0 & 0 & 0 & Unknown \\
+        \textit{Holdemanella} & 0 & 0 & 0 & Unknown \\
+        \textit{Knoellia} & 0 & 0 & 0 & Unknown \\
+        \textit{Prevotellaceae NK3B31 group} & 0 & 0 & 0 & Unknown \\
+        \textit{Ruminococcus} & 0 & 0 & 0 & Unknown \\
+        \textit{Ruminococcus gnavus group} & 0 & 0 & 0 & Unknown \\
         \bottomrule
       \end{tabular}
       \caption{Do-Calculus Results for PCOS.}
     \end{table}
+    
+    For the microbe-microbe networks, we see that the two cohorts share xxx, but differ in xxx. Please see our website for these visualizations. \\
 
    (Insert VAE results).
 
@@ -227,15 +234,17 @@
 
   \begin{block}{Conclusion \& Future Work}
 
-    Answer questions 1, 2, and 3. Explain BIRDMAn. Point to website for more results. Fix references to et al for many authors. We would like to thank our mentors and Dr. Sam Degregori for guidance throughout this project. 
+	To answer our research questions, we can see differences between the healthy and diseased cohorts from their microbe-microbe networks, and these differences align with the current literature with respect to the disease. We are also able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also agree with current literature. Finally, (VAE conclusions). \\
+	
+	We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic, and Dr. Sam Degregori \& the Knight Lab for guidance throughout this project. 
     
   \end{block}
 
-  \begin{block}{References}
-
-    \footnotesize{\bibliographystyle{unsrt}\bibliography{../report/reference}}
-
-  \end{block}
+%    \begin{block}{References}
+%    
+%    \footnotesize{\bibliographystyle{unsrt}\bibliography{../report/reference}}
+%    
+%    \end{block}
 
 \end{column}
 
