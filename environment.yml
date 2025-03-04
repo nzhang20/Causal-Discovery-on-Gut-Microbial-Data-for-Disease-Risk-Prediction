@@ -406,7 +406,11 @@ dependencies:
       - fonttools==4.56.0
       - h5netcdf==1.5.0
       - h5py==3.13.0
+      - ipywidgets==8.1.5
       - joblib==1.4.2
+      - jupyter==1.1.1
+      - jupyter-console==6.6.3
+      - jupyterlab-widgets==3.0.13
       - kiwisolver==1.4.7
       - matplotlib==3.9.4
       - momentchi2==0.1.8
@@ -427,6 +431,7 @@ dependencies:
       - threadpoolctl==3.5.0
       - tqdm==4.67.1
       - tzdata==2025.1
+      - widgetsnbextension==4.0.13
       - xarray==2024.7.0
       - xarray-einstats==0.7.0
 prefix: /opt/anaconda3/envs/causal-gut-v2
