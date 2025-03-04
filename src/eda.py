@@ -58,7 +58,7 @@ def indiv_per_cohort_cov(data, disease, cohort_col, covariate_col, cohort_labels
     plt.close()
 
 
-def check_linearity(data, disease):
+def check_linearity(data, disease, transformation):
     '''
     Graphs the scatter plot of every pair of genera in the dataset to assess linearity.
 
@@ -75,11 +75,11 @@ def check_linearity(data, disease):
         ax.set_xlabel(x)
         ax.set_ylabel(y)
         ax.set_title(f'Scatter Plot of {x} and {y}')
-        fig.savefig(f'plots/{disease}/linearity/{x}_vs_{y}.png')
+        fig.savefig(f'plots/{disease}/linearity/{transformation}/{x}_vs_{y}.png')
         plt.close()
 
 
-def check_normality(data, disease):
+def check_normality(data, disease, transformation):
     '''
     Graphs the qqplots of every genera in the dataset to assess normality.
 
@@ -90,7 +90,7 @@ def check_normality(data, disease):
         fig, ax = plt.subplots()
         sm.qqplot(data.iloc[:, i], line='q', fit=True, ax=ax)
         ax.set_title(f'QQPlot of {data.columns[i]}')
-        fig.savefig(f'plots/{disease}/normality/{data.columns[i]}.png')
+        fig.savefig(f'plots/{disease}/normality/{transformation}/{data.columns[i]}.png')
         plt.close()
 
 

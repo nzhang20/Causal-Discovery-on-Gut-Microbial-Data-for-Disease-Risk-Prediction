@@ -65,7 +65,9 @@ def main(targets):
         # make directory for disease
         if not os.path.exists(f'plots/{disease}'): os.mkdir(f'plots/{disease}')
         if not os.path.exists(f'plots/{disease}/linearity'): os.mkdir(f'plots/{disease}/linearity')
+        if not os.path.exists(f'plots/{disease}/linearity/{transformation}'): os.mkdir(f'plots/{disease}/linearity/{transformation}')
         if not os.path.exists(f'plots/{disease}/normality'): os.mkdir(f'plots/{disease}/normality')
+        if not os.path.exists(f'plots/{disease}/normality/{transformation}'): os.mkdir(f'plots/{disease}/normality/{transformation}')
 
         # bar charts from metadata
         metadata = pd.read_csv(metadata_fp, index_col=0)
@@ -81,12 +83,12 @@ def main(targets):
         ask_linearity = f'Would you like to generate {total_scatter_plots} scatter plots to check for linearity in {filtered_otu_table.shape[1]} variables?'
         if total_scatter_plots > 100: ask_linearity += ' (This may take a while.)'
         ask_linearity += '\n(Y/N): '
-        if input(ask_linearity).lower() == 'y': check_linearity(filtered_otu_table, disease)
+        if input(ask_linearity).lower() == 'y': check_linearity(filtered_otu_table, disease, transformation)
 
         ask_normality = f'Would you like to generate {filtered_otu_table.shape[1]} qqplots to check for normality?'
         if filtered_otu_table.shape[1] > 100: ask_normality += ' (This may take a while.)'
         ask_normality += '\n(Y/N): '
-        if input(ask_normality).lower() == 'y': check_normality(filtered_otu_table, disease)
+        if input(ask_normality).lower() == 'y': check_normality(filtered_otu_table, disease, transformation)
         
         plot_corr_heatmap(filtered_otu_table, disease)
 
@@ -132,7 +134,7 @@ def main(targets):
                 healthy_otu.to_csv(f'data/{disease}/{group0}_{transformation}.csv')
                 diseased_otu = diseased.drop(columns=list(metadata.columns))
                 diseased_otu.to_csv(f'data/{disease}/{group1}_{transformation}.csv')
-                run_glasso('src/GLASSO.R')
+                run_glasso('src/GLASSO.R', config_file)
                 print('--- Finished Step 1 ---')
 
                 print('--- Step 2. Obtain statistically significant pairs ---')
@@ -192,7 +194,7 @@ def main(targets):
             if not os.path.exists(f'graphs/{disease}'): os.mkdir(f'graphs/{disease}')
                 
             # 1b) Logistic LASSO + CD-NOD
-            run_lasso('src/LASSO.R')
+            run_lasso('src/LASSO.R', config_file)
             data_loglasso = prune_lasso(merged, metadata, f'data/{disease}/lasso_covariates_{transformation}.txt')
             print(data_loglasso.shape)
             print(data_loglasso.columns)

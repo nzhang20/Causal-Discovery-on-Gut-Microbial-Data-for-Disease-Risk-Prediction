@@ -1,11 +1,18 @@
-# install.packages(c("glmnet", "dplyr", "data.table", "rjson"), repos="http://cran.us.r-project.org")
-library(glmnet)
-library(dplyr)
-library(data.table)
-library(rjson)
+#!/usr/bin/env Rscript
+
+args <- commandArgs(trailingOnly = TRUE)
+config <- args[1]
+
+if (!require("pacman")) install.packages("pacman", repos="http://cran.us.r-project.org")
+pacman::p_load(glmnet, dplyr, data.table, rjson)
+
+# library(glmnet)
+# library(dplyr)
+# library(data.table)
+# library(rjson)
 
 # FEATURE SHRINKING ATTEMPT #1: LOGISTIC LASSO
-param <- fromJSON(file="src/config-t2d.json")
+param <- fromJSON(file=config)
 disease <- param$name
 disease_col <- param$disease_column
 transformation <- param$transformation

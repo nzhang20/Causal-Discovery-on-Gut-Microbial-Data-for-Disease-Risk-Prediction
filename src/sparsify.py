@@ -57,13 +57,13 @@ def run_sparcc(disease, group0, group1):
     os.system('python SparCC/General_Execution.py')
 
 
-def run_glasso(rscript_fp):
+def run_glasso(rscript_fp, config_file):
     '''
     Runs Graphical LASSO in R.
 
     :param: rscript_fp: filepath to the GLASSO R file
     '''
-    cmd = 'Rscript ' + rscript_fp
+    cmd = f'Rscript {rscript_fp} {config_file}'
     os.system(cmd)
 
 
@@ -184,13 +184,13 @@ def sparse_to_adj(data_sparse, genus_lst):
 ##### MICROBE-DISEASE NETWORK METHODS #####
 
 
-def run_lasso(rscript_fp):
+def run_lasso(rscript_fp, config_file):
     '''
     Runs Logistic Regression w/ LASSO in R. 
 
     :param: rscript_fp: filepath to the LASSO R file
     '''
-    cmd = 'Rscript ' + rscript_fp
+    cmd = f'Rscript {rscript_fp} {config_file}'
     os.system(cmd)
 
 
