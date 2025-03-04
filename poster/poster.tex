@@ -19,6 +19,7 @@
 \pgfplotsset{compat=1.14}
 \usepackage{anyfontsize}
 \usepackage{amsmath}
+\usepackage{wrapfig}
 
 % ====================
 % Lengths
@@ -77,8 +78,9 @@
 
   \begin{block}{Background}
     \begin{itemize}
-      \item \textbf{Association vs. Causation:} In many domains, researchers are often concerned with finding the underlying structure that generates the data we observe. Traditional methods make associative conclusions, but these are often insufficient to answer the scientific question. Causal discovery and causal inference are a set of methods and models that attempt to causally answer these scientific questions given the limitations of observed data.
+      \item \textbf{Causal Discovery \& Causal Inference:} These are a set of methods and models that attempt to causally answer scientific questions using observed data rather than RCTs.
       \item \textbf{Gut Microbiome:} The gut microbiome is an important indicator of human health, and extensive research is ongoing to explore its impact on human health and disease.
+      \item \textbf{Causality in the Gut Microbiome:} Most studies report associations, but these are often insufficient to answer the scientific question of interest.
       % \item \textbf{Causal Discovery and Inference in the Gut Microbiome:} Previous work has attempted causal discovery in gut microbiome studies, using PC-stable to construct causal networks and implement do-calculus for estimating microbe-microbe and microbe-outcome causal effects. 
     \end{itemize}
 
@@ -95,11 +97,11 @@
 
   \begin{block}{Data}
 
-    We apply our framework to gut microbial data that studied T2D and PCOS. 
+   % We apply our framework to gut microbial data that studied T2D and PCOS. 
     
     \begin{itemize}
-      \item \textbf{T2D:} We use the NIH Human Microbiome Project (HMP2) dataset, filtered to healthy visits with 16S sequencing. Includes 153 insulin-sensitive (IS) and 178 insulin-resistant (IR) samples.
-      \item \textbf{PCOS:} We use a meta analysis dataset from 14 different clinical studies across Asia and Europe. Includes 435 healthy controls (HC) and 513 PCOS patients.
+      \item \textbf{T2D:} NIH Human Microbiome Project (HMP2) dataset, filtered to healthy visits with 16S sequencing. Includes 153 insulin-sensitive (IS) and 178 insulin-resistant (IR) samples.
+      \item \textbf{PCOS:} Meta analysis dataset from 14 different clinical studies across Asia and Europe. Includes 435 healthy controls (HC) and 513 PCOS patients.
     \end{itemize}
 
   \end{block}
@@ -155,7 +157,7 @@
   
   \begin{block}{T2D}
 
-    From the microbe-disease network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). We implement three models: a simple logistic regression model regressed on the five genera causal to T2D, a logistic regression model regressed on a microbe and its neighbors, and a logistic regression model regressed on a microbe and its mediators. We compare the values with the BIRDMAn's mean CLR. Their significance is denoted with an asterisk (*). 
+%    From the microbe-disease network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). We implement three models: a simple logistic regression model regressed on the five genera causal to T2D, a logistic regression model regressed on a microbe and its neighbors, and a logistic regression model regressed on a microbe and its mediators. We compare the values with the BIRDMAn's mean CLR. Their significance is denoted with an asterisk (*). 
     
     \textbf{Model 1}: logit(disease status) $\sim$ microbes directly linked \\
     \textbf{Model 2}: logit(disease status) $\sim$ microbe + neighbors(microbe) or mediators \\
@@ -183,7 +185,18 @@
       \caption{Do-Calculus Results for T2D.}
     \end{table}
     
-    We generate similar graphs for the two microbe-microbe networks using PC with a max depth of 2, and find that the two cohorts share xxx, but xxx are different. Insert figures. \\
+    We generate similar graphs for the two microbe-microbe networks using PC with a max depth of 2, and find that the two cohorts share xxx, but xxx are different.
+    
+    \begin{figure}
+    	\centering
+	\includegraphics[width=\linewidth]{../graphs/t2d/glasso_IS_norm.png}
+	\caption{Microbe-Microbe Network for T2D, IS cohort.}
+    \end{figure}
+    
+    \begin{figure}
+	\includegraphics[width=\linewidth]{../graphs/t2d/glasso_IR_norm.png}
+	\caption{Microbe-Microbe Network for T2D IR cohort.}
+    \end{figure}
     
     (Insert VAE results).
 
@@ -233,10 +246,17 @@
   \end{block}
 
   \begin{block}{Conclusion \& Future Work}
-
-	To answer our research questions, we can see differences between the healthy and diseased cohorts from their microbe-microbe networks, and these differences align with the current literature with respect to the disease. We are also able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also agree with current literature. Finally, (VAE conclusions). \\
+  
+  \begin{enumerate}
+      \item \textbf{Microbe-Microbe:} Healthy and diseased participants share certain microbes, but mostly differ on which microbes are present and how they interact with other microbes. It is important to consider these microbes as communities of organisms rather than singular entities.      
+      \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also agree with current literature.
+      \item \textbf{Prediction:} TBD
+   \end{enumerate}
 	
-	We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic, and Dr. Sam Degregori \& the Knight Lab for guidance throughout this project. 
+	\begin{wrapfigure}{r}{0.2\textwidth}
+           \centering
+           \includegraphics[width=\linewidth]{website_qr.png}
+    	\end{wrapfigure} We hope this project shows the potential of causal discovery and causal inference methods in human gut microbiome research, and can be generically applied to other diseases of interest. We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic,  and Dr. Sam Degregori \& the Knight Lab for guidance throughout this project.
     
   \end{block}
 
