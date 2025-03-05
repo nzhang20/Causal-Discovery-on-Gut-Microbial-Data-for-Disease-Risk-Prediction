@@ -40,7 +40,7 @@
 
 \title{\centering Causal Discovery on Gut Microbial Data for Disease Risk Prediction}
 
-\author{Mariana Paco Mendivil \inst{1} \and Candus Shi \inst{2} \and Nicole Zhang \inst{3} \and Mentor: Dr. Biwei Huang \inst{4} \and Mentor: Dr. Jelena Bradic \inst{5}}
+\author{Mariana Paco Mendivil \inst{1} \and Candus Shi \inst{2} \and Nicole Zhang \inst{3} \and Mentor: Biwei Huang \inst{4} \and Mentor: Jelena Bradic \inst{5}}
  
 \institute[shortinst]{\inst{1} mpacomendivil@ucsd.edu \samelineand \inst{2} c6shi@ucsd.edu \samelineand \inst{3} nwzhang@ucsd.edu \samelineand \inst{4} bih007@ucsd.edu \samelineand \inst{5} jbradic@ucsd.edu}
 
@@ -129,11 +129,11 @@
 	  
 \begin{block}{Methods}
 
-   In this study, we use causal discovery algorithms and compare them with 
-   predictive modeling to explore the causal relationships between the 
-   gut microbiome and two diseases: T2D and PCOS. Due to the high-dimensionality
-   of the data and small sample sizes, we first select features through sparse
-   estimation methods and sure-screening to reduce the number of microbes. 
+%   In this study, we use causal discovery algorithms and compare them with 
+%   predictive modeling to explore the causal relationships between the 
+%   gut microbiome and two diseases: T2D and PCOS. Due to the high-dimensionality
+%   of the data and small sample sizes, we first select features through sparse
+%   estimation methods and sure-screening to reduce the number of microbes. 
 
     \begin{enumerate}
       \item \textbf{Filter out rare OTUs}. Remove microbes where all samples have less than 1\%
@@ -233,15 +233,15 @@
         \toprule
         \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
         \midrule
-        \textit{Alistipes} & 0.13272* & 0.15346* & 0 & Unknown \\
-        \textit{Blautia} & 0.07461* & 0.07008* & 0 & Unknown \\
-        \textit{Burkholderia} & -7.60599 & -0.48578 & 0 & Unknown \\
-        \textit{Desulfovibrio} & -0.79283* & -1.14492* & 0 & Unknown \\
-        \textit{Holdemanella} & -0.22801* & -0.17267* & 0 & Unknown \\
-        \textit{Knoellia} & 592.26751 & 1.40864 & 0 & Unknown \\
-        \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & 0 & Unknown \\
-        \textit{Ruminococcus} & -0.14137* & -0.13490* & 0 & Unknown \\
-        \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 0 & Unknown \\
+        \textit{Alistipes} & 0.13272* & 0.15346* & 1.28613* & Unknown \\
+        \textit{Blautia} & 0.07461* & 0.07008* & 0.82554* & Unknown \\
+        \textit{Burkholderia} & -7.60599 & -0.48578 & -10.95696* & Unknown \\
+        \textit{Desulfovibrio} & -0.79283* & -1.14492* & -0.17153 & Unknown \\
+        \textit{Holdemanella} & -0.22801* & -0.17267* & -0.13299 & Unknown \\
+        \textit{Knoellia} & 592.26751 & 1.40864 & 5.57650* & Unknown \\
+        \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & -1.76743* & Unknown \\
+        \textit{Ruminococcus} & -0.14137* & -0.13490* & -0.12796 & Unknown \\
+        \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 2.01842 & Unknown \\
         \bottomrule
       \end{tabular}
       \caption{Do-Calculus Results for PCOS.}
