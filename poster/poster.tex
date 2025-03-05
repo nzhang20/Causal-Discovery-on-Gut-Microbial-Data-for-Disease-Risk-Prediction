@@ -158,10 +158,6 @@
   \begin{block}{T2D}
 
 %    From the microbe-disease network (Figure 1), the following five genera are causal to T2D (`IRIS' node): \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria,} and \textit{unclassified Firmicutes}. To further investigate their individual effects, we implement do-calculus through logistic regression models on T2D given the neighbors of the genus of interest (Table 1). We implement three models: a simple logistic regression model regressed on the five genera causal to T2D, a logistic regression model regressed on a microbe and its neighbors, and a logistic regression model regressed on a microbe and its mediators. We compare the values with the BIRDMAn's mean CLR. Their significance is denoted with an asterisk (*). 
-    
-    \textbf{Model 1}: logit(disease status) $\sim$ microbes directly linked \\
-    \textbf{Model 2}: logit(disease status) $\sim$ microbe + neighbors(microbe) or mediators \\
-    \textbf{BIRDMAn}: Bayesian inference with $NegBinomial(\mu, \phi)$ where $\mu$ is the mean count and $\phi$ is the dispersion
 
     \begin{figure}
       \centering
@@ -169,23 +165,33 @@
       \caption{Microbe-Disease Network for T2D.}
     \end{figure}
     
+    \textbf{Model 1}: logit(disease status) $\sim$ microbes directly linked \\
+    \textbf{Model 2}: logit(disease status) $\sim$ microbe + neighbors(microbe) or mediators \\
+    \textbf{BIRDMAn}: Bayesian inference with $NegBinomial(\mu, \phi)$ where $\mu$ is the mean count and $\phi$ is the dispersion
+    
     \begin{table}
       \centering
       \begin{tabular}{l r r r c}
         \toprule
         \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
         \midrule
-        \textit{Butyricimonas} & 0 & 0 & 0 & Unknown \\
-        \textit{Clostridium XIVb} & 0 & 0 & 0 & Unknown \\
-        \textit{Odoribacter} & 0 & 0 & 0 & Unknown \\
-        \textit{unclassified Bacteria} & 0 & 0 & 0 & Unknown \\
-        \textit{unclassified Firmicutes} & 0 & 0 & 0 & Unknown \\
+        \textit{Butyricimonas} & -2.0070* & -2.26645* & -5.19385* & Yes \\
+        \textit{Clostridium XIVb} & 1.54212* & 1.80822* & 2.15788* & Inconclusive \\
+        \textit{Odoribacter} & -1.46989* & -3.055047* & -2.43796* & Yes \\
+        \textit{unclassified Bacteria} & -0.12991* & -0.12284* & 0.12409 & N/A \\
+        \textit{unclassified Firmicutes} & -0.69477* & -0.933718* & -1.47437* & N/A \\
         \bottomrule
       \end{tabular}
       \caption{Do-Calculus Results for T2D.}
     \end{table}
     
-    We generate similar graphs for the two microbe-microbe networks using PC with a max depth of 2, and find that the two cohorts share xxx, but xxx are different.
+    Table 1. shows the log odds ratio for Model 1 and Model 2, and the mean CLR from BIRDMAn. Significant values are denoted with an asterisk (*). \\
+    
+    % Shared (21): Phascolarctobacterium, Akkermansia, Blautia, Lachnospiracea_incertae_sedis, Coprococcus, Collinsella, Prevotella, Roseburia, unclassified Lachnospiraceae, Bacteroides, Oscillibacter, Alistipes, unclassified_Ruminococcaceae, unclassified_Firmicutes, unclassified_Bacteria, unclassified_Clostridiales, Barnesiella, Clostridium.IV, Faecalibacterium, Parabacteroides, unclassified_Porphyromonadaceae
+    
+    % IS (24): Clostridium.XI, Clostridium.XIVa, Parasutterella
+    
+    % IR (25): unclassified_Erysipelotrichaceae, Dorea, Ruminococcus, Veillonella
     
     \begin{figure}
     	\centering
@@ -197,6 +203,8 @@
 	\includegraphics[width=\linewidth]{../graphs/t2d/glasso_IR_norm.png}
 	\caption{Microbe-Microbe Network for T2D IR cohort.}
     \end{figure}
+    
+    We generate similar graphs for the two microbe-microbe networks using PC with a max depth of 2 (Figure 2 and 3), and find that the two cohorts share 21 microbes. IS have an additional three: \textit{Clostridium.XI, Clostridium.XIVa,} and \textit{Parasutterella}; IR have an additional four: \textit{Dorea, Ruminococcus, Veillonella,} and \textit{unclassified Ersipelotrichaceae}. 
     
     (Insert VAE results).
 
@@ -225,15 +233,15 @@
         \toprule
         \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
         \midrule
-        \textit{Alistipes} & 0.153458 & 4.68e-05 & 0 & Unknown \\
-        \textit{Blautia} & 0 & 0 & 0 & Unknown \\
-        \textit{Burkholderia} & 0 & 0 & 0 & Unknown \\
-        \textit{Desulfovibrio} & 0 & 0 & 0 & Unknown \\
-        \textit{Holdemanella} & 0 & 0 & 0 & Unknown \\
-        \textit{Knoellia} & 0 & 0 & 0 & Unknown \\
-        \textit{Prevotellaceae NK3B31 group} & 0 & 0 & 0 & Unknown \\
-        \textit{Ruminococcus} & 0 & 0 & 0 & Unknown \\
-        \textit{Ruminococcus gnavus group} & 0 & 0 & 0 & Unknown \\
+        \textit{Alistipes} & 0.13272* & 0.15346* & 0 & Unknown \\
+        \textit{Blautia} & 0.07461* & 0.07008* & 0 & Unknown \\
+        \textit{Burkholderia} & -7.60599 & -0.48578 & 0 & Unknown \\
+        \textit{Desulfovibrio} & -0.79283* & -1.14492* & 0 & Unknown \\
+        \textit{Holdemanella} & -0.22801* & -0.17267* & 0 & Unknown \\
+        \textit{Knoellia} & 592.26751 & 1.40864 & 0 & Unknown \\
+        \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & 0 & Unknown \\
+        \textit{Ruminococcus} & -0.14137* & -0.13490* & 0 & Unknown \\
+        \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 0 & Unknown \\
         \bottomrule
       \end{tabular}
       \caption{Do-Calculus Results for PCOS.}
@@ -248,7 +256,7 @@
   \begin{block}{Conclusion \& Future Work}
   
   \begin{enumerate}
-      \item \textbf{Microbe-Microbe:} Healthy and diseased participants share certain microbes, but mostly differ on which microbes are present and how they interact with other microbes. It is important to consider these microbes as communities of organisms rather than singular entities.      
+      \item \textbf{Microbe-Microbe:} Healthy and diseased participants share certain microbes, but also differ on which microbes are present and how they interact with other microbes. It is important to consider these microbes as communities of organisms rather than singular entities.      
       \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also agree with current literature.
       \item \textbf{Prediction:} TBD
    \end{enumerate}
