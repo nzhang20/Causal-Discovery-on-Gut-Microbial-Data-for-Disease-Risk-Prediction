@@ -6,11 +6,6 @@ config <- args[1]
 if (!require("pacman")) install.packages("pacman", repos="http://cran.us.r-project.org")
 pacman::p_load(glmnet, dplyr, data.table, rjson)
 
-# library(glmnet)
-# library(dplyr)
-# library(data.table)
-# library(rjson)
-
 # FEATURE SHRINKING ATTEMPT #1: LOGISTIC LASSO
 param <- fromJSON(file=config)
 disease <- param$name

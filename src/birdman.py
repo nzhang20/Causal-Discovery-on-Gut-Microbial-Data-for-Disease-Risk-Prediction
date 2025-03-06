@@ -134,7 +134,7 @@ def run_birdman(otu_table, metadata, formula, result_fp):
         cmdstanpy.rebuild_cmdstan()
         nb.compile_model()
         
-    nb.fit_model(method='vi', num_draws=500)
+    nb.fit_model(method='vi', num_draws=100)
 
     inference = nb.to_inference()
     inference.posterior = posterior_alr_to_clr(
