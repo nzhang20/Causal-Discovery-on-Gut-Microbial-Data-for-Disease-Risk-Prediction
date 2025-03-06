@@ -85,6 +85,8 @@
     \end{itemize}
 
   \end{block}
+  
+  \vspace{0.5cm}
 
   \begin{block}{Research Questions}
 
@@ -94,6 +96,8 @@
       \item \textbf{Prediction:} Is it possible to predict disease status with the current composition of the dataset given causal representation learning techniques? How do they differ with the microbes learned in question 2?
     \end{enumerate}
   \end{block}
+  
+  \vspace{0.5cm}
 
   \begin{block}{Data}
 
@@ -105,6 +109,8 @@
     \end{itemize}
 
   \end{block}
+  
+  \vspace{0.5cm}
   
 	  \begin{alertblock}{Causal Discovery}
 	  
@@ -126,6 +132,8 @@
 %			\end{itemize}
 	  
 	  \end{alertblock}
+	  
+	  \vspace{0.5cm}
 	  
 \begin{block}{Methods}
 
@@ -163,6 +171,8 @@
       \caption{Microbe-Disease Network for T2D.}
     \end{figure}
     
+    \vspace{0.5cm}
+    
     \textbf{Model 1}: logit(disease status) $\sim$ microbes directly linked \\
     \textbf{Model 2}: logit(disease status) $\sim$ microbe + neighbors(microbe) or mediators \\
     \textbf{BIRDMAn}: Bayesian inference with $NegBinomial(\mu, \phi)$ where $\mu$ is the mean count and $\phi$ is the dispersion
@@ -191,6 +201,8 @@
     
     % IR (25): unclassified_Erysipelotrichaceae, Dorea, Ruminococcus, Veillonella
     
+    \vspace{1cm}
+    
     \begin{figure}
     	\centering
 	\includegraphics[width=\linewidth]{../graphs/t2d/glasso_IS_norm.png}
@@ -203,12 +215,13 @@
     \end{figure}
     
     \begin{itemize}
-    	\item IR and IS cohorts share 21 microbes (Figure 2 and 3).
+    	\item IR and IS cohorts share 21 microbes (Figures 2 and 3).
 	\item IS have an additional three: \textit{Clostridium.XI, Clostridium.XIVa,} and \textit{Parasutterella}.
 	\item IR have an additional four: \textit{Dorea, Ruminococcus, Veillonella,} and \textit{unclassified Ersipelotrichaceae}. 
     \end{itemize}
   \end{block}
 
+\vspace{0.5cm}
 % VAE Section
   \begin{block}{VAE}
     \begin{figure}[ht]
@@ -257,9 +270,16 @@
       \caption{Do-Calculus Results for PCOS.}
     \end{table}
     
-    For the PCOS microbe-microbe networks, please see our website for the graphs and differing microbes. \\
+    For the PCOS microbe-microbe networks, please see our website for the graphs and the specific differing microbes. \\
+    \begin{itemize}
+    	\item HC and PCOS cohorts share xx microbes.
+	\item HC have an additional xxx. Includes (bring up a microbe-disease microbe). 
+	\item PCOS have an additional xxx. Includes (bring up a microbe-disease microbe). 
+    \end{itemize}
 
   \end{block}
+  
+  \vspace{0.5cm}
 
   \begin{block}{Conclusion \& Future Work}
   
@@ -268,6 +288,8 @@
       \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also mostly agree with current literature.
       \item \textbf{Prediction:} We find that baseline models like logistic regression perform better than the VAE model. Due to the complexity of the model, we may require more hyper parameter tuning or longitudinal data for the VAE to be on par with baseline models.
    \end{enumerate}
+   
+   Our work can be improved to adjust for multiple testing and low statistical power, use different causal discovery algorithms for different data structures (e.g. longitudinal, meta-analyses, etc.) and account for compositionality and rareness in gut microbiome data. 
 	
 	\begin{wrapfigure}{r}{0.2\textwidth}
            \centering
