@@ -86,8 +86,6 @@
 
   \end{block}
   
-  \vspace{0.5cm}
-
   \begin{block}{Research Questions}
 
     \begin{enumerate}
@@ -97,8 +95,6 @@
     \end{enumerate}
   \end{block}
   
-  \vspace{0.5cm}
-
   \begin{block}{Data}
 
    % We apply our framework to gut microbial data that studied T2D and PCOS. 
@@ -109,12 +105,10 @@
     \end{itemize}
 
   \end{block}
-  
-  \vspace{0.5cm}
-  
-	  \begin{alertblock}{Causal Discovery}
+    
+	\begin{alertblock}{Causal Discovery}
 	  
-	  	Causal discovery attempts to recover the true causal structure of a system given observed data. One way to model this causal structure is through a directed graphical model. A widely-used general-purpose causal discovery algorithm is the Peter-Clark (PC) algorithm. It follows these key steps:
+	  	Causal discovery attempts to recover the true causal structure of a system given observed data. One way to model this causal structure is through a directed graphical model. A widely-used general-purpose causal discovery algorithm is the Peter-Clark (PC) algorithm:
 		\begin{enumerate}
 		    \item Start with a \textbf{complete undirected graph} (each node connected to all other nodes).
 		    \item \textbf{Remove edges} based on statistical independence and conditional independence tests.
@@ -131,9 +125,8 @@
 %			    \item Assumes the \textbf{causal Markov condition}, the \textbf{faithfulness} assumption, and \textbf{no hidden confounders}.
 %			\end{itemize}
 	  
-	  \end{alertblock}
+	\end{alertblock}
 	  
-	  \vspace{0.5cm}
 	  
 \begin{block}{Methods}
 
@@ -148,19 +141,50 @@
       \item \textbf{Feature selection and sure screening}. SparCC and graphical lasso to reduce the number of edges between pairs of microbes; logistic lasso regression to reduce the number of features that are not helpful in predicting disease. 
       \item \textbf{Causal discovery algorithms}. PC-stable with a max depth of 2 for microbe-microbe; CD-NOD (a variant of PC) for microbe-outcome.
       \item \textbf{Causal inference}. do-calculus and logistic regression for causal effects; compare with Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn).
-      \item \textbf{Variational autoencoder}. Incorporated a latent space decomposition to distinguish between condition-dependent features. Compared baseline classification models using both the original data and VAE-reconstructed outputs.
+      \item \textbf{Variational autoencoder}. Incorporated a latent space decomposition for condition-dependent features. Compared baseline classification models with original data \& VAE-reconstructed outputs.
     \end{enumerate}
 
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=\linewidth]{modified_vae.jpg} % Adjust the width as needed
+      \caption{VAE Overview}
+      \label{fig:baseline_vae}
+    \end{figure}
 
-  \end{block}
-
+\end{block}
 
 \end{column}
 
 \separatorcolumn
-
-\begin{column}{\colwidth}
-
+\begin{column}{0.65\textwidth}
+  
+  \begin{columns}[t]
+      \begin{column}{0.5\linewidth}
+        \begin{block}{PCOS}
+        \begin{figure}
+          \centering
+          \includegraphics[width=1.0\textwidth]{../graphs/pcos/cdnod_norm.png}
+          \caption{Microbe-Disease Network for PCOS.}
+        \end{figure}
+      \end{block}
+      \end{column}
+      \begin{column}{0.5\linewidth}
+        \begin{block}{Microbe-Microbe Networks}
+        \textbf{T2D}
+        \begin{itemize}
+          \item IR and IS cohorts share 21 microbes.
+          \item IS have an additional three: \textit{Clostridium.XI, Clostridium.XIVa,} and \textit{Parasutterella}.
+          \item IR have an additional four: \textit{Dorea, Ruminococcus, Veillonella,} and \textit{unclassified Ersipelotrichaceae}. 
+        \end{itemize}
+        \textbf{PCOS}
+        \begin{itemize}
+          \item HC and PCOS cohorts share xx microbes.
+          \item HC have an additional xxx. Includes (bring up a microbe-disease microbe). 
+          \item PCOS have an additional xxx. Includes (bring up a microbe-disease microbe). 
+        \end{itemize}
+      \end{block}
+      \end{column}
+  \end{columns}
   
   \begin{block}{T2D}
 
@@ -171,143 +195,86 @@
       \includegraphics[width=\linewidth]{../graphs/t2d/cdnod_norm.png}
       \caption{Microbe-Disease Network for T2D.}
     \end{figure}
-    
-    \vspace{0.5cm}
-    
-    \textbf{Model 1}: logit(disease status) $\sim$ microbes directly linked \\
-    \textbf{Model 2}: logit(disease status) $\sim$ microbe + neighbors(microbe) or mediators \\
-    \textbf{BIRDMAn}: Bayesian inference with $NegBinomial(\mu, \phi)$ where $\mu$ is the mean count and $\phi$ is the dispersion
-    
-    \begin{table}
-      \centering
-      \begin{tabular}{l r r r c}
-        \toprule
-        \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
-        \midrule
-        \textit{Butyricimonas} & -2.0070* & -2.26645* & -5.19385* & Yes \\
-        \textit{Clostridium XIVb} & 1.54212* & 1.80822* & 2.15788* & Inconclusive \\
-        \textit{Odoribacter} & -1.46989* & -3.055047* & -2.43796* & Yes \\
-        \textit{unclassified Bacteria} & -0.12991* & -0.12284* & 0.12409 & N/A \\
-        \textit{unclassified Firmicutes} & -0.69477* & -0.933718* & -1.47437* & N/A \\
-        \bottomrule
-      \end{tabular}
-      \caption{Do-Calculus Results for T2D.}
-    \end{table}
-    
-    Table 1. shows the log odds ratio for Model 1 and Model 2, and the mean CLR from BIRDMAn. Significant values are denoted with an asterisk (*). \\
-    
-    % Shared (21): Phascolarctobacterium, Akkermansia, Blautia, Lachnospiracea_incertae_sedis, Coprococcus, Collinsella, Prevotella, Roseburia, unclassified Lachnospiraceae, Bacteroides, Oscillibacter, Alistipes, unclassified_Ruminococcaceae, unclassified_Firmicutes, unclassified_Bacteria, unclassified_Clostridiales, Barnesiella, Clostridium.IV, Faecalibacterium, Parabacteroides, unclassified_Porphyromonadaceae
-    
-    % IS (24): Clostridium.XI, Clostridium.XIVa, Parasutterella
-    
-    % IR (25): unclassified_Erysipelotrichaceae, Dorea, Ruminococcus, Veillonella
-    
-    \vspace{1cm}
-    
-    \begin{figure}
-    	\centering
-	\includegraphics[width=\linewidth]{../graphs/t2d/glasso_IS_norm.png}
-	\caption{Microbe-Microbe Network for T2D, IS cohort.}
-    \end{figure}
-    
-    \begin{figure}
-	\includegraphics[width=\linewidth]{../graphs/t2d/glasso_IR_norm.png}
-	\caption{Microbe-Microbe Network for T2D IR cohort.}
-    \end{figure}
-    
-    \begin{itemize}
-    	\item IR and IS cohorts share 21 microbes (Figures 2 and 3).
-	\item IS have an additional three: \textit{Clostridium.XI, Clostridium.XIVa,} and \textit{Parasutterella}.
-	\item IR have an additional four: \textit{Dorea, Ruminococcus, Veillonella,} and \textit{unclassified Ersipelotrichaceae}. 
-    \end{itemize}
-  \end{block}
-
-\vspace{0.5cm}
-% VAE Section
-  \begin{block}{VAE}
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[width=\linewidth]{modified_vae.jpg} % Adjust the width as needed
-      \caption{VAE Overview}
-      \label{fig:baseline_vae}
-    \end{figure}
-
-  \end{block}
-
   
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-
-   \begin{block}{PCOS}
 
     % From the microbe-disease network (Figure 2), the following nine genera are causal to PCOS (`group' node): \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus,} and \textit{Ruminococcus gnavus group}. We find their individual causal effects with do-calculus (Table 2). 
 
-    \begin{figure}
-      \centering
-      \includegraphics[width=\linewidth]{../graphs/pcos/cdnod_norm.png}
-      \caption{Microbe-Disease Network for PCOS.}
-    \end{figure}
     
-    \begin{table}
-      \centering
-      \begin{tabular}{l r r r c}
-        \toprule
-        \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
-        \midrule
-        \textit{Alistipes} & 0.13272* & 0.15346* & 1.28613* & Inconclusive \\
-        \textit{Blautia} & 0.07461* & 0.07008* & 0.82554* & No \\
-        \textit{Burkholderia} & -7.60599 & -0.48578 & -10.95696* & Inconclusive \\
-        \textit{Desulfovibrio} & -0.79283* & -1.14492* & -0.17153 & No \\
-        \textit{Holdemanella} & -0.22801* & -0.17267* & -0.13299 & Yes \\
-        \textit{Knoellia} & 592.26751 & 1.40864 & 5.57650* & Inconclusive \\
-        \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & -1.76743* & Inconclusive \\
-        \textit{Ruminococcus} & -0.14137* & -0.13490* & -0.12796 & Inconclusive \\
-        \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 2.01842 & Yes \\
-        \bottomrule
-      \end{tabular}
-      \caption{Do-Calculus Results for PCOS.}
-    \end{table}
-    
-    For the PCOS microbe-microbe networks, please see our website for the graphs and the specific differing microbes. \\
-    \begin{itemize}
-    	\item HC and PCOS cohorts share xx microbes.
-	\item HC have an additional xxx. Includes (bring up a microbe-disease microbe). 
-	\item PCOS have an additional xxx. Includes (bring up a microbe-disease microbe). 
-    \end{itemize}
-
-  \end{block}
-  
-  \vspace{0.5cm}
-
-  \begin{block}{Conclusion \& Future Work}
-  
-  \begin{enumerate}
-      \item \textbf{Microbe-Microbe:} Healthy and diseased participants share certain microbes, but also differ on which microbes are present and how they interact with other microbes. It is important to consider these microbes as communities of organisms rather than singular entities.      
-      \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also mostly agree with current literature.
-      \item \textbf{Prediction:} We find that baseline models like logistic regression perform better than those using representations from our VAE. We may require longitudinal data to leverage the mapped reconstruction of each microbe.
-   \end{enumerate}
-   
-   Our work can be improved to adjust for multiple testing and low statistical power, use different causal discovery algorithms for different data structures (e.g. longitudinal, meta-analyses, etc.) and account for compositionality and rareness in gut microbiome data. 
-	
-	\begin{wrapfigure}{r}{0.2\textwidth}
-           \centering
-           \includegraphics[width=\linewidth]{website_qr.png}
-    	\end{wrapfigure} We hope this project shows the potential of causal discovery and causal inference methods in human gut microbiome research, and can be generically applied to other diseases of interest. We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic,  and Dr. Sam Degregori (Knight Lab) for guidance throughout this project.
-    
+%    \vspace{0.5cm}
   \end{block}
 
-%    \begin{block}{References}
-%    
-%    \footnotesize{\bibliographystyle{unsrt}\bibliography{../report/reference}}
-%    
-%    \end{block}
+  \begin{columns}[t]
+    \begin{column}{0.5\linewidth}
+      \begin{block}{Discussion}
+      \begin{itemize}
+        \item \textbf{Model 1}: \( \text{logit(disease status)} \sim \text{microbes directly linked} \)
+        \item \textbf{Model 2}: \( \text{logit(disease status)} \sim \text{microbe + neighbors(microbe) or mediators} \)
+        \item \textbf{BIRDMan}: Bayesian inference with \( \text{NegBinomial}(\mu, \phi) \)
+      \end{itemize}
+
+      \begin{table}
+        
+        \centering
+        \begin{tabular}{l r r r c}
+          \toprule
+          \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
+          \midrule
+          \textit{Butyricimonas} & -2.0070* & -2.26645* & -5.19385* & Yes \\
+          \textit{Clostridium XIVb} & 1.54212* & 1.80822* & 2.15788* & Inconclusive \\
+          \textit{Odoribacter} & -1.46989* & -3.055047* & -2.43796* & Yes \\
+          \textit{unclassified Bacteria} & -0.12991* & -0.12284* & 0.12409 & N/A \\
+          \textit{unclassified Firmicutes} & -0.69477* & -0.933718* & -1.47437* & N/A \\
+          \bottomrule
+        \end{tabular}
+        \caption{Log odds ratios for M1 \& M2, and mean CLR from BIRDMAn for T2D.}
+      \end{table}
+      
+      \begin{table}
+        \centering
+        \begin{tabular}{l r r r c}
+          \toprule
+          \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
+          \midrule
+          \textit{Alistipes} & 0.13272* & 0.15346* & 1.28613* & Inconclusive \\
+          \textit{Blautia} & 0.07461* & 0.07008* & 0.82554* & No \\
+          \textit{Burkholderia} & -7.60599 & -0.48578 & -10.95696* & Inconclusive \\
+          \textit{Desulfovibrio} & -0.79283* & -1.14492* & -0.17153 & No \\
+          \textit{Holdemanella} & -0.22801* & -0.17267* & -0.13299 & Yes \\
+          \textit{Knoellia} & 592.26751 & 1.40864 & 5.57650* & Inconclusive \\
+          \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & -1.76743* & Inconclusive \\
+          \textit{Ruminococcus} & -0.14137* & -0.13490* & -0.12796 & Inconclusive \\
+          \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 2.01842 & Yes \\
+          \bottomrule
+        \end{tabular}
+        \caption{Do-Calculus Results for PCOS.}
+      \end{table}
+    \end{block}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      
+      \begin{block}{Conclusion \& Future Work}
+    
+        \begin{enumerate}
+            \item \textbf{Microbe-Microbe:} Healthy and diseased participants share certain microbes, but also differ on which microbes are present and how they interact with other microbes. It is important to consider these microbes as communities of organisms rather than singular entities.      
+            \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also mostly agree with current literature.
+            \item \textbf{Prediction:} We find that baseline models like logistic regression perform better than those using representations from our VAE. We may require longitudinal data to leverage the mapped reconstruction of each microbe.
+        \end{enumerate}
+        
+        Our work can be improved to adjust for multiple testing and low statistical power, use different causal discovery algorithms for different data structures (e.g. longitudinal, meta-analyses, etc.) and account for compositionality and rareness in gut microbiome data. 
+        
+        \begin{wrapfigure}{r}{0.2\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{website_qr.png}
+        \end{wrapfigure} We hope this project shows the potential of causal discovery and causal inference methods in human gut microbiome research, and can be generically applied to other diseases of interest. We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic,  and Dr. Sam Degregori (Knight Lab) for guidance throughout this project.
+          
+      \end{block}
+
+    \end{column}
+  \end{columns}
 
 \end{column}
 
-\separatorcolumn
 \end{columns}
 \end{frame}
 
