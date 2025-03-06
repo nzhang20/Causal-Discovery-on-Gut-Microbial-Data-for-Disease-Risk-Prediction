@@ -148,8 +148,9 @@
       \item \textbf{Feature selection and sure screening}. SparCC and graphical lasso to reduce the number of edges between pairs of microbes; logistic lasso regression to reduce the number of features that are not helpful in predicting disease. 
       \item \textbf{Causal discovery algorithms}. PC-stable with a max depth of 2 for microbe-microbe; CD-NOD (a variant of PC) for microbe-outcome.
       \item \textbf{Causal inference}. do-calculus and logistic regression for causal effects; compare with Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn).
-      \item \textbf{Variational autoencoder}. xxx. Formulas.
+      \item \textbf{Variational autoencoder}. Incorporated a latent space decomposition to distinguish between condition-dependent features. Compared baseline classification models using both the original data and VAE-reconstructed outputs.
     \end{enumerate}
+
 
   \end{block}
 
@@ -227,7 +228,7 @@
     \begin{figure}[ht]
       \centering
       \includegraphics[width=\linewidth]{modified_vae.jpg} % Adjust the width as needed
-      \caption{Baseline VAE}
+      \caption{VAE Overview}
       \label{fig:baseline_vae}
     \end{figure}
 
@@ -286,7 +287,7 @@
   \begin{enumerate}
       \item \textbf{Microbe-Microbe:} Healthy and diseased participants share certain microbes, but also differ on which microbes are present and how they interact with other microbes. It is important to consider these microbes as communities of organisms rather than singular entities.      
       \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also mostly agree with current literature.
-      \item \textbf{Prediction:} We find that baseline models like logistic regression perform better than the VAE model. Due to the complexity of the model, we may require more hyper parameter tuning or longitudinal data for the VAE to be on par with baseline models.
+      \item \textbf{Prediction:} We find that baseline models like logistic regression perform better than those using representations from our VAE. We may require longitudinal data to leverage the mapped reconstruction of each microbe.
    \end{enumerate}
    
    Our work can be improved to adjust for multiple testing and low statistical power, use different causal discovery algorithms for different data structures (e.g. longitudinal, meta-analyses, etc.) and account for compositionality and rareness in gut microbiome data. 
