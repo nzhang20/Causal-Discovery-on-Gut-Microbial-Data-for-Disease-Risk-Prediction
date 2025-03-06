@@ -235,23 +235,21 @@
         \toprule
         \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
         \midrule
-        \textit{Alistipes} & 0.13272* & 0.15346* & 1.28613* & Unknown \\
-        \textit{Blautia} & 0.07461* & 0.07008* & 0.82554* & Unknown \\
-        \textit{Burkholderia} & -7.60599 & -0.48578 & -10.95696* & Unknown \\
-        \textit{Desulfovibrio} & -0.79283* & -1.14492* & -0.17153 & Unknown \\
-        \textit{Holdemanella} & -0.22801* & -0.17267* & -0.13299 & Unknown \\
-        \textit{Knoellia} & 592.26751 & 1.40864 & 5.57650* & Unknown \\
-        \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & -1.76743* & Unknown \\
-        \textit{Ruminococcus} & -0.14137* & -0.13490* & -0.12796 & Unknown \\
-        \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 2.01842 & Unknown \\
+        \textit{Alistipes} & 0.13272* & 0.15346* & 1.28613* & Inconclusive \\
+        \textit{Blautia} & 0.07461* & 0.07008* & 0.82554* & No \\
+        \textit{Burkholderia} & -7.60599 & -0.48578 & -10.95696* & Inconclusive \\
+        \textit{Desulfovibrio} & -0.79283* & -1.14492* & -0.17153 & No \\
+        \textit{Holdemanella} & -0.22801* & -0.17267* & -0.13299 & Yes \\
+        \textit{Knoellia} & 592.26751 & 1.40864 & 5.57650* & Inconclusive \\
+        \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & -1.76743* & Inconclusive \\
+        \textit{Ruminococcus} & -0.14137* & -0.13490* & -0.12796 & Inconclusive \\
+        \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 2.01842 & Yes \\
         \bottomrule
       \end{tabular}
       \caption{Do-Calculus Results for PCOS.}
     \end{table}
     
-    For the microbe-microbe networks, we see that the two cohorts share xxx, but differ in xxx. Please see our website for these visualizations. \\
-
-   (Insert VAE results).
+    For the PCOS microbe-microbe networks, please see our website for the graphs and differing microbes. \\
 
   \end{block}
 
@@ -259,8 +257,8 @@
   
   \begin{enumerate}
       \item \textbf{Microbe-Microbe:} Healthy and diseased participants share certain microbes, but also differ on which microbes are present and how they interact with other microbes. It is important to consider these microbes as communities of organisms rather than singular entities.      
-      \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also agree with current literature.
-      \item \textbf{Prediction:} TBD
+      \item \textbf{Microbe-Disease:} Using CDNOD and do-calculus, we are able to quantify the effects of microbes on disease status, and they agree with microbiome-specific differential analysis methods such as BIRDMAn, and they also mostly agree with current literature.
+      \item \textbf{Prediction:} We find that baseline models like logistic regression perform better than the VAE model. Due to the complexity of the model, we may require more hyper parameter tuning or longitudinal data for the VAE to be on par with baseline models.
    \end{enumerate}
 	
 	\begin{wrapfigure}{r}{0.2\textwidth}
