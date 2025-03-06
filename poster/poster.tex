@@ -136,12 +136,10 @@
 %   estimation methods and sure-screening to reduce the number of microbes. 
 
     \begin{enumerate}
-      \item \textbf{Filter out rare OTUs}. Remove microbes where all samples have less than 1\%
-      relative abundance. 
-      \item \textbf{Feature selection and sure screening}. For the microbe-microbe network, we use SparCC and graphical lasso to reduce the number of edges between pairs of microbes.
-      For the microbe-disease network, we use logistic lasso regression to reduce the number of features that are not helpful in predicting disease. 
-      \item \textbf{Causal discovery algorithms}. For the microbe-microbe network, we implement PC-stable with a max depth of 2. For the microbe-outcome network, we implement CD-NOD (a variant of PC) where the covariates correspond to the heterogeneity index. 
-      \item \textbf{Causal inference}. We estimate the causal effects of microbes using do-calculus, and compare the results with Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn).
+      \item \textbf{Filter out rare OTUs}. 
+      \item \textbf{Feature selection and sure screening}. SparCC and graphical lasso to reduce the number of edges between pairs of microbes; logistic lasso regression to reduce the number of features that are not helpful in predicting disease. 
+      \item \textbf{Causal discovery algorithms}. PC-stable with a max depth of 2 for microbe-microbe; CD-NOD (a variant of PC) for microbe-outcome.
+      \item \textbf{Causal inference}. do-calculus and logistic regression for causal effects; compare with Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn).
       \item \textbf{Variational autoencoder}. xxx. Formulas.
     \end{enumerate}
 
@@ -204,7 +202,11 @@
 	\caption{Microbe-Microbe Network for T2D IR cohort.}
     \end{figure}
     
-    We generate similar graphs for the two microbe-microbe networks using PC with a max depth of 2 (Figure 2 and 3), and find that the two cohorts share 21 microbes. IS have an additional three: \textit{Clostridium.XI, Clostridium.XIVa,} and \textit{Parasutterella}; IR have an additional four: \textit{Dorea, Ruminococcus, Veillonella,} and \textit{unclassified Ersipelotrichaceae}. 
+    \begin{itemize}
+    	\item IR and IS cohorts share 21 microbes (Figure 2 and 3).
+	\item IS have an additional three: \textit{Clostridium.XI, Clostridium.XIVa,} and \textit{Parasutterella}.
+	\item IR have an additional four: \textit{Dorea, Ruminococcus, Veillonella,} and \textit{unclassified Ersipelotrichaceae}. 
+    \end{itemize}
     
     (Insert VAE results).
 
@@ -219,7 +221,7 @@
 
    \begin{block}{PCOS}
 
-    From the microbe-disease network (Figure 2), the following nine genera are causal to PCOS (`group' node): \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus,} and \textit{Ruminococcus gnavus group}. We find their individual causal effects with do-calculus (Table 2). 
+    % From the microbe-disease network (Figure 2), the following nine genera are causal to PCOS (`group' node): \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus,} and \textit{Ruminococcus gnavus group}. We find their individual causal effects with do-calculus (Table 2). 
 
     \begin{figure}
       \centering
@@ -264,7 +266,7 @@
 	\begin{wrapfigure}{r}{0.2\textwidth}
            \centering
            \includegraphics[width=\linewidth]{website_qr.png}
-    	\end{wrapfigure} We hope this project shows the potential of causal discovery and causal inference methods in human gut microbiome research, and can be generically applied to other diseases of interest. We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic,  and Dr. Sam Degregori \& the Knight Lab for guidance throughout this project.
+    	\end{wrapfigure} We hope this project shows the potential of causal discovery and causal inference methods in human gut microbiome research, and can be generically applied to other diseases of interest. We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic,  and Dr. Sam Degregori (Knight Lab) for guidance throughout this project.
     
   \end{block}
 
