@@ -20,6 +20,8 @@
 \usepackage{anyfontsize}
 \usepackage{amsmath}
 \usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
 
 % ====================
 % Lengths
@@ -52,8 +54,7 @@
 % Footer (optional)
 % ====================
 
-\footercontent{
-  Please visit our website at \href{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/}{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/} or at the above QR code.}
+% \footercontent{}
 % (can be left out to remove footer)
 
 % ====================
@@ -156,32 +157,38 @@
 \end{column}
 
 \separatorcolumn
-\begin{column}{0.65\textwidth}
+
+\begin{column}{2\colwidth + \sepwidth}
   
   \begin{columns}[t]
-      \begin{column}{0.5\linewidth}
+      \begin{column}{\colwidth}
         \begin{block}{PCOS}
         \begin{figure}
           \centering
-          \includegraphics[width=1.0\textwidth]{../graphs/pcos/cdnod_norm.png}
+          \includegraphics[width=\linewidth]{../graphs/pcos/cdnod_norm.png}
           \caption{Microbe-Disease Network for PCOS.}
         \end{figure}
       \end{block}
       \end{column}
-      \begin{column}{0.5\linewidth}
+   
+      
+      \begin{column}{\colwidth}
         \begin{block}{Microbe-Microbe Networks}
-        \textbf{T2D}
-        \begin{itemize}
-          \item IR and IS cohorts share 21 microbes.
-          \item IS have an additional three: \textit{Clostridium.XI, Clostridium.XIVa,} and \textit{Parasutterella}.
-          \item IR have an additional four: \textit{Dorea, Ruminococcus, Veillonella,} and \textit{unclassified Ersipelotrichaceae}. 
-        \end{itemize}
-        \textbf{PCOS}
-        \begin{itemize}
-          \item HC and PCOS cohorts share xx microbes.
-          \item HC have an additional xxx. Includes (bring up a microbe-disease microbe). 
-          \item PCOS have an additional xxx. Includes (bring up a microbe-disease microbe). 
-        \end{itemize}
+        
+        \begin{figure}
+          \centering
+          \begin{minipage}{0.45\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{t2d_microbe_microbe_venn.png}
+            \captionof{figure}{Venn Diagram of Common and Different Microbes for T2D Cohorts, IS and IR}
+          \end{minipage}%
+          \begin{minipage}{0.45\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{pcos_microbe_microbe_venn.png}
+            \captionof{figure}{Venn Diagram of Common and Different Microbes for PCOS Cohorts, HC and PCOS}
+          \end{minipage}
+        \end{figure}
+        
       \end{block}
       \end{column}
   \end{columns}
@@ -204,7 +211,7 @@
   \end{block}
 
   \begin{columns}[t]
-    \begin{column}{0.5\linewidth}
+    \begin{column}{\colwidth}
       \begin{block}{Discussion}
       \begin{itemize}
         \item \textbf{Model 1}: \( \text{logit(disease status)} \sim \text{microbes directly linked} \)
@@ -226,7 +233,7 @@
           \textit{unclassified Firmicutes} & -0.69477* & -0.933718* & -1.47437* & N/A \\
           \bottomrule
         \end{tabular}
-        \caption{Log odds ratios for M1 \& M2, and mean CLR from BIRDMAn for T2D.}
+        \caption{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D.}
       \end{table}
       
       \begin{table}
@@ -246,12 +253,12 @@
           \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 2.01842 & Yes \\
           \bottomrule
         \end{tabular}
-        \caption{Do-Calculus Results for PCOS.}
+        \caption{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for PCOS.}
       \end{table}
     \end{block}
     \end{column}
 
-    \begin{column}{0.5\textwidth}
+    \begin{column}{\colwidth}
       
       \begin{block}{Conclusion \& Future Work}
     
@@ -263,10 +270,14 @@
         
         Our work can be improved to adjust for multiple testing and low statistical power, use different causal discovery algorithms for different data structures (e.g. longitudinal, meta-analyses, etc.) and account for compositionality and rareness in gut microbiome data. 
         
-        \begin{wrapfigure}{r}{0.2\textwidth}
+        We hope this project shows the potential of causal discovery and causal inference methods in human gut microbiome research, and can be generically applied to other diseases of interest. We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic,  and Dr. Sam Degregori (Knight Lab) for guidance throughout this project.
+        
+        \begin{figure}
                 \centering
-                \includegraphics[width=\linewidth]{website_qr.png}
-        \end{wrapfigure} We hope this project shows the potential of causal discovery and causal inference methods in human gut microbiome research, and can be generically applied to other diseases of interest. We would like to thank our mentors, Dr. Biwei Huang \& Dr. Jelena Bradic,  and Dr. Sam Degregori (Knight Lab) for guidance throughout this project.
+                \includegraphics[width=0.2\linewidth]{website_qr.png}
+        \end{figure} 
+        
+        Please visit our website at \href{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/}{https://nzhang20.github.io/Causal-Discovery-on-Gut-Microbial-Data-for-Disease-Risk-Prediction/} or at the above QR code.
           
       \end{block}
 
@@ -274,7 +285,7 @@
   \end{columns}
 
 \end{column}
-
+\separatorcolumn
 \end{columns}
 \end{frame}
 
