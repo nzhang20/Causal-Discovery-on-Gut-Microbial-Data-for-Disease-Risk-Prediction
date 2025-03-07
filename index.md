@@ -24,10 +24,20 @@ We analyze gut microbiome datasets related to **Type 2 Diabetes (T2D)** and **Po
 - **PCOS Data**: Meta-analysis dataset from 14 clinical studies across Asia and Europe.
   - **Samples**: 435 healthy controls (HC) & 513 PCOS patients.
 
-## Methods
-### Causal Discovery
-Causal discovery seeks to recover the true causal structure of a system using observed data. We model this structure using **directed graphical models** and apply the following algorithms:
+## Causal Discovery
+Causal discovery attempts to recover the true causal structure of a system given observed data.
+One way to model this causal structure is through a directed graphical model. A widely-used
+general-purpose causal discovery algorithm is the Peter-Clark (PC) algorithm:
+1. Start with a complete undirected graph (each node connected to all other nodes).
+2. Remove edges based on statistical independence and conditional independence tests.
+3. Identify v-structures (patterns like X → Y ← Z) to infer causal directions.
+4. Apply Meek’s rules to orient additional edges while preserving v-structures.
+The result is a CPDAG (Completed Partially Directed Acyclic Graph), which represents a set
+of causal structures consistent with the observed data, also known as the Markov Equivalence
+Class (MEC).
 
+
+## Methods
 1. **Feature Selection**
    - Remove rare OTUs (<1% relative abundance).
    - Use **SparCC** and **Graphical Lasso** to filter microbe-microbe interactions.
@@ -50,15 +60,51 @@ Causal discovery seeks to recover the true causal structure of a system using ob
 Our **microbe-disease network** identified five genera with causal effects on T2D:
 - **Butyricimonas, Clostridium XIVb, Odoribacter, Unclassified Bacteria, Unclassified Firmicutes**
 
+![T2D Microbe-Disease Network](graphs/t2d/cdnod_norm.png)
+
+**Figure 1.** Microbe-Disease Network for T2D.
+
 Using **do-calculus**, we estimated their causal effects on T2D.
 
-![T2D Microbe-Disease Network](graphs/t2d/cdnod_norm.png)
+| Genus                    | Model 1     | Model 2     | BIRDMAn    | Literature Agreement |
+|--------------------------|------------|------------|------------|----------------------|
+| *Butyricimonas*         | -2.0070    | -2.2664   | -5.19385  | Yes                  |
+| *Clostridium XIVb*      | 1.54212   | 1.88022   | 2.15788   | Inconclusive         |
+| *Odoribacter*           | -1.46989  | -3.055047 | -2.43796  | N/A                |
+| *unclassified Bacteria* | -0.12991  | -0.12284  | 0.12409   | N/A                |
+| *unclassified Firmicutes* | -0.69477 | -0.933718 | -1.47437  | N/A                |
+
+*Table 1. Log-Odds Ratios for Models 1 & 2, and Mean CLR from BIRDMAn for T2D.*
+
+### Model Descriptions
+- **Model 1**: logit(disease status) ~ microbes directly linked  
+- **Model 2**: logit(disease status) ~ microbe + neighbors(microbe) or mediators  
+- **BIRDMAn**: Bayesian inference with NegBinomial(μ, φ)
 
 ### Polycystic Ovary Syndrome (PCOS)
 Our **microbe-disease network** for PCOS identified nine causal genera:
 - **Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus, Ruminococcus gnavus group**
 
 ![PCOS Microbe-Disease Network](graphs/pcos/cdnod_norm.png)
+
+**Figure 2.** Microbe-Disease Network for PCOS.
+
+Using **do-calculus**, we estimated their causal effects on PCOS.
+
+| Genus                           | Model 1     | Model 2     | BIRDMAn    | Literature Agreement |
+|---------------------------------|------------|------------|------------|----------------------|
+| *Alistipes*                     | 0.13272   | 0.15346   | 1.28613   | Inconclusive         |
+| *Blautia*                       | 0.07461   | 0.07008   | 0.82554   | No                   |
+| *Burkholderia*                  | -7.6059   | -0.48578  | -10.95696 | Inconclusive         |
+| *Desulfovibrio*                 | -0.79283  | -1.14492  | -0.17153  | No                   |
+| *Holdemanella*                  | -0.22801  | -1.07267  | -0.13299  | Yes                  |
+| *Knoellia*                      | 592.26751  | 1.40864   | 5.57650   | Inconclusive         |
+| *Prevotellaceae NK3B31 group*   | -0.42407  | -0.47231  | -1.76743  | Inconclusive         |
+| *Ruminococcus*                  | -0.14137  | -0.13490  | -0.12796  | Inconclusive         |
+| *Ruminococcus gnavus group*     | 0.24152   | 0.18259   | 2.01842   | Yes                  |
+
+*Table 2. Log-Odds Ratios for Models 1 & 2, and Mean CLR from BIRDMAn for PCOS.*
+
 
 ## Conclusion & Future Work
 1. **Microbe-Microbe Interactions**: Healthy and diseased participants share certain microbes but differ in their interactions. Microbes should be analyzed as communities rather than isolated entities.
