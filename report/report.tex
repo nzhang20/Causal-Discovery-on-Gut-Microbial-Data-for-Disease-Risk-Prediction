@@ -226,6 +226,7 @@ Given the use and application of CD-NOD on nonstationary data, more extensive lo
 
 \bibliography{reference}
 \bibliographystyle{style/dsc180bibstyle}
+% \bibstyle{style/dsc180bibstyle}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Appendix
@@ -235,6 +236,10 @@ Given the use and application of CD-NOD on nonstationary data, more extensive lo
 \makeappendix
 
 Please see a copy of our \href{https://drive.google.com/file/d/1fEGpmoSULPbpG6bcopPBKdlyF6gG_Gv_/view?usp=sharing}{project proposal}. 
+
+\subsection{T2D Meta-Analysis Metadata}
+
+(Insert T2D Metadata)
 
 \subsection{Algorithms}
 
@@ -276,30 +281,66 @@ $\textbf{Sepset}(A, B) = \textbf{Sepset}(B, A) \gets \emptyset \quad \text{(the 
 }
 \end{algorithm}
 
-\begin{algorithm}
-\caption{Our Algorithm}
-\label{alg:ouralg}
+\begin{algorithm}[H]
+\caption{CD-NOD}
+\label{alg:cdnod}
 \DontPrintSemicolon
 \LinesNumbered
-\KwIn{initial adjacency matrix, $A$}
-\KwOut{updated adjacency matrix, $A$}
-\tcp{Remove conditional independencies of conditioning set size 1}
-\For{$(A_i, A_j)$ pairs where $A_{ij} = 1$} {
-    \For{$A_k \neq A_i, A_j$} {
-        \If{$A_i \ind A_j | A_k$} {
-            $A_{ij}, A_{ji} \gets 0$\;
+\KwIn{Data, $\mathbf D$ which has variable set $\mathbf V$; surrogate $\mathbf C$}
+\KwOut{CPDAG, $G$}
+$G \gets \text{the complete undirected graph over $\mathbf V \cup \mathbf C$}$\;
+\tcp{Detect changing causal modules}
+$\textbf{Sepset}(V_i, C) \gets \emptyset \quad \text{(the d-separation set of $V_i$ and $C$ $\forall V_i \in \mathbf V$)}$\;
+\For{$V_i$ in $\mathbf V$}{
+    $n \gets 0$\;
+    \While{$\exists$ a set $S = \{V_k | k \neq i\}$ in $G$}{
+        \If{$V_i \ind C | S$}{
+            $\text{remove the edge between $V_i$ and $C$}$\;
+            $\text{record $S$ in \textbf{Sepset}$(V_i, C)$}$\;
+            \textbf{break}
         }
+        $n \gets n + 1$\;
     }
 }
-\tcp{Remove conditional independencies of conditioning set size 2}
-\For{$(A_i, A_j)$ pairs where $A_{ij} = 1$} {
-    \For{$A_k, A_l \neq A_i, A_j$ and $A_k \neq A_l$} {
-        \If{$A_i \ind A_j | \{A_k, A_l\}$} {
-            $A_{ij}, A_{ji} \gets 0$\;
+\tcp{Causal skeleton discovery}
+$\textbf{Sepset}(A, B) = \textbf{Sepset}(B, A) \gets \emptyset \quad \text{(the d-separation set of $A$ and $B$ $\forall A, B \in G$)}$\;
+\For{$(A, B)$ adjacent pairs in $G$} {
+    $n \gets 0$\;
+    \While{$\exists$ a set $C$ in $G$ adjacent to $A$ or $B$ s.t. $|C| = n$}{
+        \If{$A \ind B | C \cup \mathbf C$} {
+            $\text{remove the edge between $A$ and $B$}$\;
+            $\text{record $C$ in \textbf{Sepset}$(A, B)$ and \textbf{Sepset}$(B, A)$}$\;
+            \textbf{break}
         }
+        $n \gets n + 1$\;
+    }
+}
+\tcp{Find v-structures}
+\For{$(A, B, C)$ triple in $G$ s.t. $A - B - C$}{
+    \If{$B \notin \textbf{Sepset}(A, C)$}{
+        $\text{orient the edges $A \to B \leftarrow C$}$\;
     }
 }
 \end{algorithm}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\LinesNumbered
+\setcounter{AlgoLine}{30}
+\tcp{Orientation propagation via Meek rules}
+\While{there are edges to orient} {
+    \If{$A \to B$, and $B$ and $C$ are adjacent, and $A$ and $C$ are not adjacent, and there is no arrowhead at $B$} {
+        $\text{orient the edge $B - C$ as $B \to C$}$\;
+    }
+    \If{$\exists$ a directed path from $A$ to $B$, and an edge between $A$ and $B$}{
+        $\text{orient the edge $A - B$ as $A \to B$}$\;
+    }
+}
+\end{algorithm}
+
+\subsection{SparCC Microbe-Microbe Interaction Networks}
+
+(Insert 4 graphs)
 
 \clearpage
 \textbf{Contributions}

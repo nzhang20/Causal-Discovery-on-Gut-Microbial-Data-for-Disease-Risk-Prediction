@@ -20,4 +20,6 @@
 \contentsline {section}{References}{14}{section*.1}%
 \contentsline {section}{Appendices}{A1}{section*.3}%
 \etoc@startlocaltoc {2}
-\contentsline {subsection}{\numberline {A.1}Algorithms}{A2}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.1}T2D Meta-Analysis Metadata}{A1}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Algorithms}{A2}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}SparCC Microbe-Microbe Interaction Networks}{A4}{subsection.A.3}%
