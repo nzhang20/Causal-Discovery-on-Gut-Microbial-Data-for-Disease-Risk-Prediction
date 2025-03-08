@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  7 MAR 2025 19:28
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  8 MAR 2025 11:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1070,53 +1070,76 @@ Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
 LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 (Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
 )
+(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/02/19 v1.6 Sub-captions (AR)
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/03/12 v3.6j Customizing captions (AR)
+\c@caption@flags=\count363
+\c@continuedfloat=\count364
+Package caption Info: float package is loaded.
+Package caption Info: floatrow package is loaded.
+Package caption Info: floatrow package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: threeparttable package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 239.
+\c@subfigure=\count365
+Package caption Info: New subtype `subtable' on input line 239.
+\c@subtable=\count366
+)
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 30.
+h' as default language. on input line 31.
 
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
-0.
+1.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 31.
 LaTeX Font Info:    Trying to load font information for MDA+cmr on input line 3
-0.
+1.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdacmr.fd
 File: mdacmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for MDB/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for MDB/cmr/m/n on input line 31.
 LaTeX Font Info:    Trying to load font information for MDB+cmr on input line 3
-0.
+1.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdbcmr.fd
 File: mdbcmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    ... okay on input line 31.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1152,7 +1175,7 @@ LaTeX Font Info:    ... okay on input line 30.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 30.
+Package hyperref Info: Link coloring ON on input line 31.
 (./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
@@ -1164,8 +1187,9 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 30.
+or `english'. on input line 31.
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: Fixing longtable code of `floatrow' package.
 Package caption Info: End \AtBeginDocument code.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/floatrow/fr-longtable.sty
@@ -1173,119 +1197,119 @@ Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 
 \flrow@LT@lasthead=\box134
 \flrow@LT@prelastfoot=\box135
-\c@FBLTpage=\count363
+\c@FBLTpage=\count367
 )
 \Etoc@tf=\read3
 LaTeX Font Info:    Trying to load font information for OT1+mdbch on input line
- 32.
+ 33.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdbch/ot1mdbch.fd
 File: ot1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OT1/mdbch.
 )
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Trying to load font information for OML+mdbch on input line
- 32.
+ 33.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdbch/omlmdbch.fd
 File: omlmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OML/mdbch.
 )
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Trying to load font information for OMS+mdbch on input line
- 32.
+ 33.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdbch/omsmdbch.fd
 File: omsmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMS/mdbch.
 )
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Trying to load font information for OMX+mdbch on input line
- 32.
+ 33.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdbch/omxmdbch.fd
 File: omxmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMX/mdbch.
 )
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Trying to load font information for MDA+mdbch on input line
- 32.
+ 33.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdbch/mdamdbch.fd
 File: mdamdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDA/mdbch.
 )
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Trying to load font information for MDB+mdbch on input line
- 32.
+ 33.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathdesign/mdbch/mdbmdbch.fd
 File: mdbmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDB/mdbch.
 )
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
+(Font)              scaled to size 5.76004pt on input line 33.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 11.52008pt on input line 32.
+(Font)              scaled to size 11.52008pt on input line 33.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 32.
+(Font)              scaled to size 7.68005pt on input line 33.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 32.
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 32
+(Font)              scaled to size 5.76004pt on input line 33.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 33
 .
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
 LaTeX Font Info:    Font shape `TU/FiraCode(0)/m/n' will be
-(Font)              scaled to size 10.79993pt on input line 32.
+(Font)              scaled to size 10.79993pt on input line 33.
 \npageW=\skip118
 \subnumberW=\skip119
 \tf@toc=\write4
@@ -1297,88 +1321,148 @@ LaTeX Font Info:    Font shape `TU/FiraCode(0)/m/n' will be
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 
  []
 
-[5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+[5] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
  []
 
-[7] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
 
  []
 
 
-Package natbib Warning: Citation `spirtes2000causation' on page 10 undefined on
- input line 161.
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
+[10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
-[11] [12] [13] (./report.bbl
-Underfull \hbox (badness 3396) in paragraph at lines 107--110
+[12] [13]
+File: ../plots/t2d/Gender_bar_chart.png Graphic file (type bmp)
+<../plots/t2d/Gender_bar_chart.png>
+File: ../plots/t2d/Ethnicity_bar_chart.png Graphic file (type bmp)
+<../plots/t2d/Ethnicity_bar_chart.png>
+File: ../plots/pcos/region_bar_chart.png Graphic file (type bmp)
+<../plots/pcos/region_bar_chart.png>
+File: ../plots/pcos/study_site_bar_chart.png Graphic file (type bmp)
+<../plots/pcos/study_site_bar_chart.png>
+File: ../plots/t2d/linearity/norm/genus_Akkermansia_vs_genus_Blautia.png Graphi
+c file (type bmp)
+<../plots/t2d/linearity/norm/genus_Akkermansia_vs_genus_Blautia.png>
+File: ../plots/t2d/linearity/norm/genus_Clostridium.IV_vs_genus_Dorea.png Graph
+ic file (type bmp)
+<../plots/t2d/linearity/norm/genus_Clostridium.IV_vs_genus_Dorea.png>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: ../plots/t2d/normality/norm/genus_Blautia.png Graphic file (type bmp)
+<../plots/t2d/normality/norm/genus_Blautia.png>
+File: ../plots/t2d/normality/norm/genus_Clostridium.XlVb.png Graphic file (type
+ bmp)
+<../plots/t2d/normality/norm/genus_Clostridium.XlVb.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14]
+File: ../graphs/t2d/glasso_IS_norm.png Graphic file (type bmp)
+<../graphs/t2d/glasso_IS_norm.png>
+File: ../graphs/t2d/glasso_IR_norm.png Graphic file (type bmp)
+<../graphs/t2d/glasso_IR_norm.png>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: ../poster/t2d_microbe_microbe_venn.png Graphic file (type bmp)
+<../poster/t2d_microbe_microbe_venn.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: ../graphs/pcos/glasso_HC_norm.png Graphic file (type bmp)
+<../graphs/pcos/glasso_HC_norm.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: ../graphs/pcos/glasso_PCOS_norm.png Graphic file (type bmp)
+<../graphs/pcos/glasso_PCOS_norm.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: ../poster/pcos_microbe_microbe_venn.png Graphic file (type bmp)
+<../poster/pcos_microbe_microbe_venn.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[15] [16]
+File: ../graphs/t2d/cdnod_norm.png Graphic file (type bmp)
+<../graphs/t2d/cdnod_norm.png>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: ../graphs/pcos/cdnod_norm.png Graphic file (type bmp)
+<../graphs/pcos/cdnod_norm.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[17] [18]
+Overfull \hbox (28.86906pt too wide) in paragraph at lines 384--399
+ [][] 
+ []
+
+[19] [20] [21] (./report.bbl [22
+
+]
+Underfull \hbox (badness 3396) in paragraph at lines 166--169
 []\TU/XCharter(0)/b/n/12 Sazal, Musfiqur, Vitalii Stebliankin, Kalai Mathee, Ch
 angwon Yoo, and Giri
  []
 
-[14
-
-]) [15] [1
+[23]) [24] [1
 
 ] [2] [3] [4]
 \tf@thm=\write5
 \openout5 = `report.thm'.
 
-
-
-Package natbib Warning: There were undefined citations.
-
-[5
+ [5
 
 ] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 8B2A22C98F14774D1F62EDD8C8005B53;1345.
+(rerunfilecheck)             Checksum: 42183A3BA832C2FBF9862B8207CFE38A;1350.
  ) 
 Here is how much of TeX's memory you used:
- 23923 strings out of 476683
- 495198 string characters out of 5804048
+ 24723 strings out of 476683
+ 513416 string characters out of 5804048
  1864018 words of memory out of 5000000
- 43774 multiletter control sequences out of 15000+600000
+ 44542 multiletter control sequences out of 15000+600000
  535855 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,22n,102p,1889b,918s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,22n,102p,1889b,934s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (20 pages).
+Output written on report.pdf (29 pages).

@@ -3,6 +3,7 @@
 \documentclass[12pt,letterpaper]{article}
 \usepackage{style/dsc180reportstyle} % import dsc180reportstyle.sty
 \usepackage{wasysym}
+\usepackage{subcaption}
 \newcommand{\ind}{\perp\!\!\!\!\perp}
 \SetKwComment{Comment}{/* }{ */}
 
@@ -37,7 +38,7 @@
 
 \begin{abstract}
     \textcolor{black}{
-    The human gut microbiome has become a significant factor in understanding metabolic health, influencing conditions such as type 2 diabetes (T2D) and polycystic ovary syndrome (PCOS). Despite its recognized impact, much of the current research on the human gut microbiome and diseases remain limited to associative and correlational studies, leaving gaps in understanding the underlying causal relationships. This study addresses these gaps by utilizing causal discovery algorithms and causal inference methods and comparing them with prediction models to investigate microbial contributions to T2D and PCOS. First, we graph the microbe-microbe interaction networks on the genus level for healthy and diseased cohorts using a version of the Peter-Clark (PC) algorithm altered to reduce the multiple testing burden. Then, we graph the microbe-disease interaction network on the genus level for a disease using the constraint-based causal discovery from heterogeneous/nonstationary data algorithm (CD-NOD) and compare the microbes directly linked to disease with microbes from a variational autoencoder (VAE) prediction model. Our results show that there are microbes causal to T2D and microbes causal to PCOS (expand). This work aims to provide a framework for investigating causal relationships between the gut microbiome and other diseases as well as guide further research and wet-lab experiments and develop a stronger understanding of the role of the gut microbiome in precision medicine.}
+    The human gut microbiome has become a significant factor in understanding metabolic health, influencing conditions such as type 2 diabetes (T2D) and polycystic ovary syndrome (PCOS). Despite its recognized impact, much of the current research on the human gut microbiome and diseases remain limited to associative and correlational studies, leaving gaps in understanding the underlying causal relationships. This study addresses these gaps by utilizing causal discovery algorithms and causal inference methods and comparing them with prediction models to investigate microbial contributions to T2D and PCOS. First, we graph the microbe-microbe interaction networks on the genus level for healthy and diseased cohorts using a version of the Peter-Clark (PC) algorithm altered to reduce the multiple testing burden. Then, we graph the microbe-disease interaction network on the genus level for a disease using the constraint-based causal discovery from heterogeneous/nonstationary data algorithm (CD-NOD) and compare the microbes directly linked to disease with microbes from a variational autoencoder (VAE) prediction model. Our results show that \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria}, and \textit{unclassified Firmicutes} are causal to T2D; \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31, Ruminococcus}, and \textit{Ruminococcus gnavus} are causal to PCOS. Finally, we compute their causal effects using do-calculus and compare with the differential analysis method BIRDMAn. This work aims to provide a framework for investigating causal relationships between the gut microbiome and other diseases as well as guide further research and wet-lab experiments and develop a stronger understanding of the role of the gut microbiome in precision medicine.}
 \end{abstract}
 
 \begin{center}
@@ -56,9 +57,9 @@ Code: \url{https://github.com/nzhang20/Causal-Discovery-on-Gut-Microbial-Data-fo
 The human gut microbiome has gained significant attention in recent years for its important role in metabolic health. While there has been extensive research that links the microbiome to health disorders such as type 2 diabetes (T2D) \citep{zhou2019t2d} and polycystic ovary syndrome (PCOS) \citep{yang2024pcos}, the majority of these studies remain correlational, leaving causal relationships undiscovered. Understanding these relationships is essential to improving and personalizing medical treatments for such diseases.
 This study builds on recent advancements in causal discovery algorithms to investigate how microbial taxa influence metabolic disorders. Our goal is to find patterns that conventional association-based methods might miss by leveraging the marginal and conditional independencies found in the data as well as graph theory to assess where a causal relationship might occur and if possible, its causal direction. Given the high-dimensional nature of this type of data, we also explore different feature pruning techniques to reduce the multiple testing burden and for ease of interpretation. 
 
-We focus on two aspects of causal discovery and causal inference in the gut microbiome. First, we are curious to see how the microbe-microbe interaction networks may differ between the two outcome groups. Due to the high number of features compared to the number of samples in gut microbiome abundance data, we first reduce the number of edges between microbes using a sparse correlation method, SparCC \citep{weiss2016correlationbenchmark, friedman2012sparcc}, and a sparse precision matrix estimator, graphical lasso \citep{friedman2007glasso}. Then, we graph the two networks for the corresponding cohorts using a constraint-based causal discovery algorithm similar to the Peter-Clark (PC) algorithm \citep{glymour2019review}, but with a smaller depth and without a direction orientation step to reduce the multiple testing burden.
+We focus on two aspects of causal discovery and causal inference in the gut microbiome. First, we are curious to see how the microbe-microbe interaction networks may differ between the two outcome groups. Due to the high number of features compared to the number of samples in gut microbiome abundance data, we first reduce the number of edges between microbes using a sparse correlation method, SparCC \citep{weiss2016correlationbenchmark, friedman2012sparcc}, and a sparse precision matrix estimator, graphical lasso \citep{friedman2008glasso}. Then, we graph the two networks for the corresponding cohorts using a constraint-based causal discovery algorithm similar to the Peter-Clark (PC) algorithm \citep{glymour2019review}, but with a smaller depth and without a direction orientation step to reduce the multiple testing burden.
 
-Second, we are also interested in graphing the microbe-disease interaction network, where we are particularly interested in the microbes directly linked to disease status. Instead of reducing the number of edges, we reduce the number of features using logistic lasso regression to account for the relationships of microbes to the outcome variable. Finally, we graph the network using the features that survive lasso and a disease status node using the constraint-based causal discovery from heterogeneous/nonstationary data algorithm (CD-NOD) \citep{huang2019cdnod} to identify microbes directly linked to disease status. \sout{Given the predictive nature of graphing a microbe-disease interaction network, we are also interested in developing a prediction model for disease using a causal representation learning technique xxx and comparing the results from CD-NOD to the microbes used in the model.} 
+Second, we are also interested in graphing the microbe-disease interaction network, where we are particularly interested in the microbes directly linked to disease status. Instead of reducing the number of edges, we reduce the number of features using logistic lasso regression to account for the relationships of microbes to the outcome variable. Finally, we graph the network using the features that survive lasso and a disease status node using the constraint-based causal discovery from heterogeneous/nonstationary data algorithm (CD-NOD) \citep{huang2019cdnod} to identify microbes directly linked to disease status. Given the predictive nature of graphing a microbe-disease interaction network, we are also interested in developing a prediction model for disease using a causal representation learning technique embedding each sample with a Variational Autoencoder (VAE) in a classification task \citep{khemakhem2020vaenonlinearica}, then comparing the results from CD-NOD to the microbes used in the model.
 
 After obtaining the causal structure from CD-NOD, we move to the causal inference stage of our analysis. We use a variety of causal inference methods such as do-calculus and doubly robust estimation to estimate the causal effect of a microbe on disease status. We compare these results with a differential analysis method that also accounts for heterogeneity in the data, Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn) \citep{rahman2023birdman}. 
 
@@ -82,7 +83,11 @@ With biomarkers like \textit{Faecalibacterium} and \textit{Prevotella}, PCOS sub
 
 \textbf{Gut Microbiome Analysis}
 
-A typical gut microbiome analysis pipeline involves an upstream component and a downstream component. The upstream analysis typically starts with the raw sequencing files and involves demultiplexing, denoising, and classification to determine which OTUs are present and their abundance. The downstream analysis then proceeds with the abundance table to analyze differences in microbiome composition between groups (differential analysis), diversity, etc. (more on what people typically do and the problems with it) \newline
+A typical gut microbiome analysis pipeline involves an upstream component and a downstream component. The upstream analysis typically starts with the raw sequencing files and involves demultiplexing, denoising, and classification to determine which OTUs are present and their abundance. There are multiple methods with their own unique advantages and disadvantages. The most common method is 16s rRNA sequencing which is a type of amplicon analysis, and amplifies a piece of DNA that occurs within the 16s rRNA PCR primer region, and based on a region of the 16s rRNA gene (V1-V9), can differentiate bacterial taxa \citep{allaband2019microbiome101}. Then, one can try to identify the taxa by placing the sequences onto a phylogenetic tree or matching them to a taxonomy database. There are also different databases that have been curated such as Greengenes2 \citep{mcdonald2024greengenes2}, SILVA \citep{pruesse2007silva}, and RDP \citep{cole2014rdp}, and the choice of database can also affect results. These databases are also often highly incomplete, making this taxonomy-identification task quite difficult and sensitive to choice of parameters. 
+
+Besides 16s rRNA sequencing, shotgun metagenomics is another method gaining traction for its ability to infer a complete list of microbial strains, fungi, and viruses (which are different from bacteria), which are missed by 16s rRNA. It works by sequencing small fragments of the DNA and trying to piece them back together into a view of the microbiome, rather than only looking at one gene like 16s rRNA. However, since it uses more than one gene, it is limited by the number of unknown microbe genomes. As more researchers work on studying the gut microbiome, we can expect this issue to diminish as we uncover more microbe genomes. 
+
+The downstream analysis then proceeds with the abundance table to analyze differences in microbiome composition between groups, also known as differential analysis, and calculate different measures of diversity. For example, alpha diversity is a measure of intra-subject variability, while beta diversity measures inter-subject variability, and each diversity measure has different metrics such Chao1, Shannon, Faith’s phylogenetic diversity for alpha diversity, and Bray-Curtis, Jaccard, and UniFrac for beta diversity \citep{knight2018bestpractices}. Current differential analysis methods include applying an isometric log-ratio transformation to account for the compositionality of the data, then proceeding with standard regression and classification models. \newline
 
 \textbf{Causal Discovery and the Gut Microbiome}
 
@@ -92,11 +97,13 @@ Additionally, there have been advancement to causal discovery algorithms since t
 
 \subsection{Data}
 
-To answer our research question, we used the NIH Human Microbiome Project (HMP2) dataset \citep{zhou2019t2d} for T2D and the aggregated dataset from an individual participant data (IPD) meta analysis and systematic review conducted by \citep{yang2024pcos} for PCOS. 
+To answer our research question, we used the NIH Human Microbiome Project (HMP2) dataset \citep{zhou2019t2d} for T2D and the aggregated dataset from an individual participant data (IPD) meta analysis and systematic review conducted by \citep{yang2024pcos} for PCOS. We also conducted a meta-analysis of T2D studies to enhance the diversity of the study regions. The corresponding metadata can be found in the Appendix.
 
 The HMP2 dataset \citep{zhou2019t2d} followed 106 participants for up to four years, collecting blood, stool, and nasal samples at every self-reported healthy visit and additional visits during periods of respiratory viral infection (RVI), influenza immunization, and other stresses such as antibiotic treatment. Since we are interested in the gut microbes, we look specifically at the visits where gut microbial taxa were profiled using 16S sequencing which provides normalized gut microbe abundance for taxa classified at 6 phyla, 28 classes, 12 orders, 21 families, and 45 genera. As the study authors illustrate, the gut microbiome can fluctuate with the presence of antibiotics and other stressor events such as illness, so we also only look at the visits that were classified as “Healthy”. For each individual, there is information about their race, sex, age, BMI, steady-state plasma glucose (SSPG), and insulin sensitivity classification. For 66 participants, their insulin sensitivity was assessed using an insulin suppression test measured by SSPG: 31 individuals were insulin-sensitive (IS: SSPG < 150 mg/dl), and 35 individuals were insulin-resistant (IR: SSPG $\geq$150 mg/dl). The remaining 40 individuals are classified as unknown due to medical contraindications leading to a lack of insulin suppression tests. Since the dataset is longitudinal but with very few time points per subject, we treated it as a cross-sectional dataset, leaving us with 153 and 178 samples for the IS and IR cohorts respectively.
 
 The IPD meta analysis dataset \citep{yang2024pcos} is an aggregation of the 14 studies that were included in the systematic review, but at the individual level. This is different from a meta analysis which analyzes aggregated data or statistics from multiple different studies. Each row of this PCOS dataset represents one sample of gut microbe abundance measurements as well as the sample’s study’s region (Asia or Europe), the sample’s classification as a PCOS patient or a healthy control (HC), and if they were a PCOS patient, whether they had low (LT) or high (HT) testosterone levels. This granularity gives us more data and statistical power behind our results rather than using just one PCOS study. Since the only considerations for confounding their selection criteria specified were no drug interventions, there are other gut microbiome-related confounders that may be present in our data, such as diet, alcohol usage, stress, etc. We examined the study designs of the 14 included studies and found that they varied in external factors including diet, alcohol consumption, the use of antibiotics, and more. Although this is a limitation with the dataset, we chose to continue with this dataset due to its large sample size. This dataset provided us with 1,128 genera and 435 HC \& 513 PCOS individuals. 
+
+For the T2D meta-analysis, we chose 7 studies, with 284 non-T2D and 527 T2D individuals from Japan, Indonesia, Pakistan, Vietnam, Finland, and Sudan. They are all V3-V4 primer regions, adult samples, and use 16s rRNA sequencing.
 
 \section{Methods}
 
@@ -132,9 +139,9 @@ We run SparCC in Python using the package: \url{https://github.com/dlegor/SparCC
 
 \textbf{Graphical Lasso}
 
-An alternative to SparCC to reduce the edges in the microbe-microbe network is to apply the lasso penalty on the inverse covariance matrix. This method, graphical lasso, was developed by \citep{friedman2007glasso} and assumes that the data are multivariate normal with mean $\mu$ and a covariance matrix $\Sigma$. The inverse covariance matrix, $\Theta \coloneq \Sigma^{-1}$ is also known as the precision matrix where if $\Sigma_{ij}^{-1} = 0$, then variables $i$ and $j$ are conditionally independent given all of the other variables. The lasso component comes in when each variable is modeled by all other variables as predictors and applies the lasso penalty to obtain the coefficients of the predictors. Then, each row of $\Theta$ can be filled in by the covariates of this lasso model for each variable. 
+An alternative to SparCC to reduce the edges in the microbe-microbe network is to apply the lasso penalty on the inverse covariance matrix. This method, graphical lasso, was developed by \citep{friedman2008glasso} and assumes that the data are multivariate normal with mean $\mu$ and a covariance matrix $\Sigma$. The inverse covariance matrix, $\Theta \coloneq \Sigma^{-1}$ is also known as the precision matrix where if $\Sigma_{ij}^{-1} = 0$, then variables $i$ and $j$ are conditionally independent given all of the other variables. The lasso component comes in when each variable is modeled by all other variables as predictors and applies the lasso penalty to obtain the coefficients of the predictors. Then, each row of $\Theta$ can be filled in by the covariates of this lasso model for each variable. 
 
-This estimand is not novel, but \citep{friedman2007glasso} propose that their graphical lasso algorithm can estimate the precision matrix in a more simple and fast way than previous algorithms using pathwise coordinate descent. Again, the exact details are not relevant to our project, but it is important to highlight the distributional assumption of multivariate normality. This is most often not the case for gut microbiome data and may be assessed by checking the normality of the marginal distributions through qqplots. If the data do not satisfy this assumption for the precision matrix, (Gaussian represents second-order relationships, which is a pairwise Markov graph…).
+This estimand is not novel, but \citep{friedman2008glasso} propose that their graphical lasso algorithm can estimate the precision matrix in a more simple and fast way than previous algorithms using pathwise coordinate descent. Again, the exact details are not relevant to our project, but it is important to highlight the distributional assumption of multivariate normality. This is most often not the case for gut microbiome data and may be assessed by checking the normality of the marginal distributions through qqplots. If the data do not satisfy this assumption for the precision matrix, then there may be spurious edges that remain. Since we use graphical lasso as a feature selection step before causal discovery, the spurious edges are not a concern; they should be identified and removed via causal discovery.
 
 Graphical lasso is implemented in R using the glasso package with a regularization parameter of 2 to reduce runtime. Graphical lasso with grid search on the regularization parameter can also be implemented to find a more optimal value. \newline
 
@@ -168,13 +175,13 @@ PC assumes iid data for consistency, no latent confounders, the Causal Markov co
 
 The Causal Markov condition and Faithfulness assumption together give us necessary and sufficient conditions for learning the causal graph from conditional independencies. 
 
-PC works with all data types as long as the conditional independence tests used are appropriate for the empirical distribution of the data. For example, our dataset includes all continuous variables (normalized abundances of gut microbes), but our EDA shows us that they are not linear nor Gaussian. Thus, we ought to use non-parametric conditional independence tests, such as KCI. However, non-parametric estimators do not perform well in high-dimensions with low sample sizes. Due to this tradeoff between distribution assumptions and statistical power limitations, we must carefully consider whether to use a linear parametric test like Fisher-Z or a nonparametric test like KCI. But, in more general cases, PC’s greatest limitation is arguably the assumption that there are no latent confounders. \newline
-
-\textbf{Our algorithm}
+PC works with all data types as long as the conditional independence tests used are appropriate for the empirical distribution of the data. For example, our dataset includes all continuous variables (normalized abundances of gut microbes), but our EDA shows us that they are not linear nor Gaussian. Thus, we ought to use non-parametric conditional independence tests, such as KCI. However, non-parametric estimators do not perform well in high-dimensions with low sample sizes. Due to this tradeoff between distribution assumptions and statistical power limitations, we must carefully consider whether to use a linear parametric test like Fisher-Z or a nonparametric test like KCI. But, in more general cases, PC’s greatest limitation is arguably the assumption that there are no latent confounders.
 
 The main issue with the PC is the series of conditional independence tests conducted on a fixed threshold of $\alpha = 0.05$. Due to the number of features in our dataset, the number of conditional independence tests conducted can be quite large and also impact algorithm complexity. This brings into the conversation a multiple-testing issue that is not being corrected. We attempt to minimize the prevalence of this issue with our own variation on the constraint-based search algorithm. To correct for this statistical shortcoming, we reduce the number of tests done by taking advantage of the correlational findings from the preceding feature reduction and sure screening step. The remaining steps of PC regarding direction orientation remain the same. 
 
-One pitfall of our algorithm is that it assumes that the correlations found using SparCC or graphical lasso are a superset of the set of all causal relations. This may not be the case due to a well-known phenomenon called Simpson’s paradox, which essentially demonstrates that a statistical association in the data for an entire population may be reversed in every sub-population, e.g. when new information or variable is conditioned for \citep{pearl2016primer}. In other words, there may be certain causal relationships that are not statistically correlated due to a lack of information. However, this is not so far-fetched as the other well-established algorithms we use assume Faithfulness and solely rely on conditional independencies found in the data (and d-separation rules) to identify all casual relations. \newline
+One pitfall of our algorithm is that it assumes that the correlations found using SparCC or graphical lasso are a superset of the set of all causal relations. This may not be the case due to a well-known phenomenon called Simpson’s paradox, which essentially demonstrates that a statistical association in the data for an entire population may be reversed in every sub-population, e.g. when new information or variable is conditioned for \citep{pearl2016primer}. In other words, there may be certain causal relationships that are not statistically correlated due to a lack of information. However, this is not so far-fetched as the other well-established algorithms we use assume Faithfulness and solely rely on conditional independencies found in the data (and d-separation rules) to identify all casual relations. 
+
+PC with max depth 2 is implemented using the causal-learn package  \url{https://github.com/py-why/causal-learn}, where we adjust the skeleton-discovery algorithm to perform tests up to depth 2. This PC algorithm is actually a stable version of PC, PC-stable \citep{colombo2014pcstable}, which tracks independencies and the d-separation sets for an entire depth before removing edges, to remove the variability of the CPDAG output when performing the conditional independence tests in different orders. \newline
 
 \textbf{CD-NOD}
 
@@ -195,27 +202,236 @@ In addition to the Causal Markov condition and Faithfulness assumption, CD-NOD a
 
 \textit {Pseudo Causal Sufficiency}. We assume that the confounders, if any, can be written as functions of the domain index or smooth functions of time. It follows that in each domain or at each time instance, the values of these confounders are fixed. 
 
+Pseudo causal sufficiency is equivalent to the causal-sufficiency-assumption requirement in PC. This is essentially the no hidden confounders assumption; recall that causal sufficiency means that a set of variables contains every direct cause of any pair of variables in the set. Since we assume the confounders can be represented in a low-dimension (the domain or time index), we would assume that there are no hidden confounders not accounted for in the causal graph. 
+
 Given the use and application of CD-NOD on nonstationary data, more extensive longitudinal datasets similar to the T2D dataset can more confidently establish the temporality and causality problem present in most gut microbiome research. CD-NOD is implemented using the causal-learn package: \url{https://github.com/py-why/causal-learn}, with the study site and region variable as the c\_indx variables, with a required edge added from study site to region. 
 
 \subsection{BIRDMAn}
+
+To benchmark the results from our method, we also consider differential analysis methods that are used in gut microbiome research. One such method is Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn) which addresses issues of compositionality, various study designs, population heterogeneity, and statistical power by using Bayesian inference to estimate posterior distributions from which to compute differentials \citep{rahman2023birdman}.
+
+The general workflow of BIRDMAn is to model the OTU table for two cohorts (e.g. healthy vs diseased) using Bayesian probabilistic programming (Stan), e.g. with the Negative Binomial distribution parameterized by $\mu$, the mean count, and $\phi$, the overdispersion, where $\mu = exp(\eta)$ where $\eta$ is the log mean count and can be represented by linear terms. The Negative Binomial distribution is preferred over the Poisson distribution (which is known to be used to model counts) because there is overdispersion in the data: the variance is much larger than the mean. Since the expectation and variance of the Poisson distribution are equal, it is not a good choice, and we use Negative Binomial instead. Following Bayes rule, BIRDMAn will estimate the parameter posterior distributions and their credible intervals, and compute the differentials for each microbe which is a mean CLR (centered log ratio of the abundance in the two cohorts). A common visualization in differential analysis is the feature rank, where each microbe’s differentials are sorted by feature rank. 
+
+BIRDMAn is implemented using the birdman package \url{https://github.com/biocore/BIRDMAn/tree/main}, and we use the default Negative Binomial model with 100 draws. 
 
 \subsection{Variational Autoencoder} 
 
 \section{Results}
 
+For the following sections, we illustrate the outputs of our pipeline on the T2D and PCOS data. We also check for linearity and normality assumptions before applying causal discovery algorithms and using parametric models. 
+
 \subsection{EDA}
+
+First, we take a look at the distribution of the covariates for each respective dataset. The T2D dataset contains the ‘Gender’ and ‘Ethnicity’ covariates, which seem roughly equally balanced between the IR and IS cohorts (Figure \ref{fig:t2dcovariates}), except for the Asian and Black ethnicities. The PCOS dataset contains the ‘Region’ and ‘Study/site’ covariates, which are also for the most part equally balanced, but contain a few outliers: e.g. study 4 does not contain any HC, and studies 6 \& 9 have pretty unbalanced cohort sizes (Figure \ref{fig:pcoscovariates}). These covariates may end up confounding any causal effects. 
+
+\begin{figure}[h!]
+\begin{minipage}{0.34\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{../plots/t2d/Gender_bar_chart.png}
+\end{minipage}%
+\begin{minipage}{0.66\linewidth}
+   \centering
+   \includegraphics[width=\linewidth]{../plots/t2d/Ethnicity_bar_chart.png}
+\end{minipage}
+\caption{T2D Covariates Distribution}
+\label{fig:t2dcovariates}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{minipage}{0.2\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{../plots/pcos/region_bar_chart.png}
+\end{minipage}%
+\begin{minipage}{0.8\linewidth}
+   \centering
+   \includegraphics[width=\linewidth]{../plots/pcos/study_site_bar_chart.png}
+\end{minipage}
+\caption{PCOS Covariates Distribution}
+\label{fig:pcoscovariates}
+\end{figure}
+
+We also check for linearity with scatter plots, and we check for normality with qqplots. Figure \ref{fig:t2dscatterplots} is a sample of scatter plots of pairs of microbes from the T2D dataset. Figure \ref{fig:t2dqqplots} is a sample of qqplots of microbes from the T2D dataset. We find that most microbes are non-linear and non-Gaussian, which means we need to be careful in selecting which independence tests to run and which models to fit. 
+
+\begin{figure}[h!]
+\begin{minipage}{0.47\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{../plots/t2d/linearity/norm/genus_Akkermansia_vs_genus_Blautia.png}
+\end{minipage}%
+\begin{minipage}{0.47\linewidth}
+   \centering
+   \includegraphics[width=\linewidth]{../plots/t2d/linearity/norm/genus_Clostridium.IV_vs_genus_Dorea.png}
+\end{minipage}
+\caption{T2D Scatter Plots for \textit{Akkermansia} vs. \textit{Blautia} and \textit{Clostridium IV} vs. \textit{Dorea}}
+\label{fig:t2dscatterplots}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{minipage}{0.47\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{../plots/t2d/normality/norm/genus_Blautia.png}
+\end{minipage}%
+\begin{minipage}{0.47\linewidth}
+   \centering
+   \includegraphics[width=\linewidth]{../plots/t2d/normality/norm/genus_Clostridium.XlVb.png}
+\end{minipage}
+\caption{T2D QQ Plots for \textit{Blautia} and \textit{Clostridium XIVb}}
+\label{fig:t2dqqplots}
+\end{figure}
 
 \subsection{Microbe-Microbe Interaction Network}
 
+To explore microbial interactions, we built microbe-microbe networks using SparCC and graphical lasso for feature selection. We then applied the PC algorithm with a max depth of 2 to infer causal relationships within these microbial networks. The following figures correspond to microbe-microbe networks where graphical lasso was applied as the feature selection method. The SparCC versions can be found in the Appendix.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{../graphs/t2d/glasso_IS_norm.png}
+  \caption{T2D Microbe-Microbe Network for IS after Graphical Lasso}
+  \label{fig:t2dglassoISnorm}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{../graphs/t2d/glasso_IR_norm.png}
+  \caption{T2D Microbe-Microbe Network for IR after Graphical Lasso}
+  \label{fig:t2dglassoIRnorm}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\linewidth]{../poster/t2d_microbe_microbe_venn.png}
+  \caption{T2D Microbe-Microbe Network Venn Diagram}
+  \label{fig:t2dglassovenn}
+\end{figure}
+
+For T2D, the two networks (Figures \ref{fig:t2dglassoISnorm} and \ref{fig:t2dglassoIRnorm}) found that both IR and IS cohorts share 21 microbes (Figure \ref{fig:t2dglassovenn}). The IS cohort has three additional genera: \textit{Clostridium XI, Clostridium XIVa}, and \textit{Parasutterella}. The IR cohort has four additional genera: \textit{Dorea, Ruminococcus, Veillonella}, and \textit{unclassified Ersipelotrichaceae}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{../graphs/pcos/glasso_HC_norm.png}
+  \caption{PCOS Microbe-Microbe Network for HC after graphical lasso}
+  \label{fig:pcosglassoHCnorm}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{../graphs/pcos/glasso_PCOS_norm.png}
+  \caption{PCOS Microbe-Microbe Network for PCOS after graphical lasso}
+  \label{fig:pcosglassoPCOSnorm}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\linewidth]{../poster/pcos_microbe_microbe_venn.png}
+  \caption{PCOS Microbe-Microbe Network Venn Diagram}
+  \label{fig:pcosglassovenn}
+\end{figure}
+
+For PCOS, the two networks (Figures \ref{fig:pcosglassoHCnorm} and \ref{fig:pcosglassoPCOSnorm}) found that both HC and PCOS cohorts share 45 microbes (Figure \ref{fig:pcosglassovenn}). The HC cohort has 15 additional genera, which include \textit{Burkholderia} and \textit{Holdemanella}. The PCOS cohort has 17 additional genera, which include \textit{Knoellia} and \textit{Ruminococcus gnavus} group. 
+
 \subsection{Microbe-Disease Interaction Network}
+
+For the microbe-disease interaction networks, we used logistic lasso regression for feature selection and applied the CD-NOD algorithm with the non-microbe covariates as the heterogeneity index variables. For T2D, these are “Gender” and “Ethnicity”; for PCOS, these are “study/site” and “region”. We generated one causal graph for T2D and one for PCOS and identified the main microbial genera directly linked to the disease status nodes. For T2D, there were five genera: \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria}, and \textit{unclassified Firmicutes}. For PCOS, there were nine genera: \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus}, and \textit{Ruminococcus gnavus group}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{../graphs/t2d/cdnod_norm.png}
+  \caption{T2D Microbe-Disease Network}
+  \label{fig:t2dcdnod}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{../graphs/pcos/cdnod_norm.png}
+  \caption{PCOS Microbe-Disease Network}
+  \label{fig:pcoscdnod}
+\end{figure}
 
 \subsection{Causal Inference and BIRDMAn}
 
+To strengthen our causal interpretations, we applied do-calculus to estimate the effect of each genera while accounting for confounders. Model 1 used logistic regression to estimate the effects of the directly linked microbes to disease status, and essentially considers the directly linked microbes as a community of microbes. For example, the model for the T2D graph is: \begin{align*}\text{logit(IRIS)} = &\beta_0 + \beta_1 \textit{Butyricimonas} + \beta_2 \textit{Clostridium XIVb}\\ &+ \beta_3 \textit{Odoribacter} + \beta_4 \textit{unclassified Bacteria} + \beta_5 \textit{unclassified Firmicutes}\end{align*}
+where we are interested in $\beta_1, \dots, \beta_5$ for the effect of \textit{Butyricimonas}, …, \textit{unclassified Firmicutes}, respectively.
+
+Model 2 tries a different approach by estimating the marginal effects of each of the directly linked microbes to disease status by incorporating the microbe’s neighbors and mediators to adjust for potential indirect effects. For example, one of the models for the T2D graph are: \[\textit{logit(IRIS)} = \beta_0 + \beta_1 \textit{Butyricimonas} + \beta_2 \textit{Clostridium XIVa} + \beta_3 \textit{Oscillibacter}\]
+where we are interested in $\beta_1$ for the effect of \textit{Butyricimonas}. This model only needs to account for the neighbors of \textit{Butyricimonas} (\textit{Clostridium XIVa} and \textit{Oscillibacter}) to obtain the effect. 
+
+On the other hand, \textit{Odoribacter} and \textit{unclassified Firmicutes} are mediated by \textit{unclassified Bacteria}. We have to use a different method to estimate the total direct effect of \textit{Odoribacter} and \textit{unclassified Firmicutes} by estimating the direct effect of \textit{Odoribacter} and \textit{unclassified Firmicutes}, and adding their indirect effects through the mediator. For example, the models for \textit{Odoribacter} are:
+\[\textit{unclassified Bacteria} = \theta_0 + \theta_1 \textit{Odoribacter}\]
+\[\textit{logit(IRIS)} = \beta_0 + \beta_1 \textit{Odoribacter} + \beta_2 \textit{unclassified Bacteria} + \beta_3 \textit{Alistipes} + \beta_4 \textit{Barnesiella}\]
+where we compute the total direct effect as $\beta_1 + \theta_1\beta_2$. 
+
+Additionally, we utilized Bayesian inference through BIRDMAn, using a negative binomial model to conduct a more traditional differential analysis that is commonly used in gut microbiome studies. BIRDMAn tells us the mean CLR of each microbe’s abundance and ranks them based on their mean CLRs. We are interested in comparing the directions of the values of these three models, to ensure that they all agree on whether a microbe is harmful or beneficial to odds or risk of disease. Their magnitudes may be different because they are all different models, and we do not imply that any of the models are better than the others, or that one value should be trusted more than the others. We also check with the current literature to see if the biological mechanisms of these microbes and associated metabolites and relation to disease agree. 
+
+\begin{table}
+        
+        \centering
+        \begin{tabular}{l r r r c}
+          \toprule
+          \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
+          \midrule
+          \textit{Butyricimonas} & -2.0070* & -2.26645* & -5.19385* & Yes \\
+          \textit{Clostridium XIVb} & 1.54212* & 1.80822* & 2.15788* & Inconclusive \\
+          \textit{Odoribacter} & -1.46989* & -3.055047* & -2.43796* & Yes \\
+          \textit{unclassified Bacteria} & -0.12991* & -0.12284* & 0.12409 & N/A \\
+          \textit{unclassified Firmicutes} & -0.69477* & -0.933718* & -1.47437* & N/A \\
+          \bottomrule
+        \end{tabular}
+        \caption{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D.}
+        \label{table:t2dresults}
+      \end{table}
+      
+      \begin{table}
+        \centering
+        \begin{tabular}{l r r r c}
+          \toprule
+          \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
+          \midrule
+          \textit{Alistipes} & 0.13272* & 0.15346* & 1.28613* & Inconclusive \\
+          \textit{Blautia} & 0.07461* & 0.07008* & 0.82554* & No \\
+          \textit{Burkholderia} & -7.60599 & -0.48578 & -10.95696* & Inconclusive \\
+          \textit{Desulfovibrio} & -0.79283* & -1.14492* & -0.17153 & No \\
+          \textit{Holdemanella} & -0.22801* & -0.17267* & -0.13299 & Yes \\
+          \textit{Knoellia} & 592.26751 & 1.40864 & 5.57650* & Inconclusive \\
+          \textit{Prevotellaceae NK3B31 group} & -0.42407 & -0.47231* & -1.76743* & Inconclusive \\
+          \textit{Ruminococcus} & -0.14137* & -0.13490* & -0.12796 & Inconclusive \\
+          \textit{Ruminococcus gnavus group} & 0.24152* & 0.18259* & 2.01842 & Yes \\
+          \bottomrule
+        \end{tabular}
+        \caption{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for PCOS.}
+        \label{table:pcosresults}
+      \end{table}
+
+Table \ref{table:t2dresults} shows the coefficients obtained in Model 1 and Model 2 for the five microbes, as well as their BIRDMAn mean CLR values. Significant values ($\alpha < 0.05$) are denoted by *. The most important part of the results is the sign of the values. For example, \textit{Butyricimonas, Odoribacter, unclassified Bacteria}, and \textit{unclassified Firmicutes} have negative values, which means that they are protective towards T2D. We consult with the literature on the biological mechanisms of these microbes that are available and currently known to check that our results make sense. Table \ref{table:pcosresults} show the same results for the PCOS dataset. 
+
 \subsection{VAE Model}
+
+xxx
 
 \section{Discussion}
 
+xxx
+
+\subsection{Limitations}
+
+There remain a few limitation to our project that encompass some of the limitations commonly found in gut microbiome research. First, it is difficult to convince researchers that our results are “causal” because the gut microbiome is constantly changing. It can vary throughout the year, seasons, and even during the day as people consume food or alcohol, take medications, and encounter stressful situations. Thus, gut microbiome longitudinal studies are often the best study design to assess causality. It is still difficult to collect many samples of longitudinal data that are consistent and account for all confounding variables, but we believe our pipeline can still be applied to these data when it is available. There may also be better causal discovery and causal inference methods that account for such longitudinal structures. 
+
+The lack of accounting for confounding is also a limitation as it pertains to causal discovery, where we assume no hidden confounders for algorithms like PC and CD-NOD. However, we know that there are many potential confounding variables to the gut microbiome, and our datasets did not include variables for them. Thus, the results may change drastically depending on how well confounding variables are accounted for in the data. 
+
+There is one particular confounding variable that can be problematic in the case of meta analyses: study id. In gut microbiome data, samples that come from the same study are often very related because the study uses the same sequencing and classification methods to produce the OTU table. The classification methods are also not 100\% accurate; common classifiers may have 80-90\% accuracy, meaning there is already some error in the data. The taxonomies that it produces also depend on the OTUs that are only present in those samples, so when combining the OTU tables of multiple studies, we will often see blocks, where an OTU has non-zero values only in particular studies. Additionally, people of different regions of the world will have different diets which can have a large impact on their gut microbiome compositions. Those living in similar regions will thus have similar gut microbiome compositions compared to two very different regions. 
+
+Another gut microbiome-specific limitation is addressing the rarity of a certain microbe. A microbe may be considered rare in a dataset, i.e. it has a low abundance, due to two reasons: (1) the microbe is rare as a result of the artifact, or (2) the microbe is truly rare in the gut. The former issue is a result of the sequencing instrument only containing a fixed number of slots where gut microbe DNA can fit, so a microbe that appears rare may only be rare since it did not make it into one of the slots of the sequencing instrument. One way to address this issue is to perform a centered-log ratio transformation on each sample (the log of the proportion of the count over the geometric mean of the sample) to reduce the disparity between rare microbe values and abundant microbe values. However, this makes the interpretation of each feature relevant to all other features on the log scale and the results must be interpreted as such. 
+
+Finally, in terms of causal discovery algorithms, we face issues of low statistical power when performing many conditional independence tests due to the high-dimensional nature of the data. It is also difficult to obtain large samples (anything over 1,000) in gut microbiome studies, and one way to address low statistical power from multiple testing is to apply a multiple testing correction, such as on the false discovery rate. However, there are currently no concrete multiple testing corrections for causal discovery algorithms, and the power and multiple testing problem remains to be a limitation.
+
+
+\subsection{Improvements and Future Directions}
+
+In addition to addressing the limitations described above, we hope our pipeline’s results can be verified with experiments and further research on the biological mechanisms of gut microbes, as is traditionally done to prove causality. We also hope that our pipeline can be applied to gut microbiome data on other diseases, and that it can be further improved in the choice of algorithms and methods with respect to the data characteristics, e.g. sparsity, compositionality, longitudinal/time series. 
+
+As we use BIRDMAn as a benchmark tool for differential analysis methods, we can also benchmark our results with other differential analysis and network methods that exist and are popular in gut microbiome research today. We hope that further development in this area of microbiome analysis can also allow us to assess our pipeline on more sophisticated methods. 
+
 \section{Conclusion}
+
+xxx
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Reference / Bibliography
@@ -345,8 +561,9 @@ $\textbf{Sepset}(A, B) = \textbf{Sepset}(B, A) \gets \emptyset \quad \text{(the 
 \clearpage
 \textbf{Contributions}
 
-MPM, CS, and NZ designed the project. MPM and CS found datasets. CS and NZ performed EDA. CS built the microbe-microbe and microbe-disease interaction networks. MPM built the VAE model. BH proposed the causal discovery algorithm for the microbe-microbe interaction network. JB proposed the feature reduction and sure screening methods. BH and JB provided insightful comments and suggestions to the design. MPM, CS, and NZ interpreted the results and wrote the final report.
+MPM, CS, and NZ designed the project. MPM and CS found datasets. CS and NZ performed EDA. CS built the microbe-microbe and microbe-disease interaction networks. MPM built the VAE model. BH assisted in causal discovery methods and interpretation. JB proposed the feature reduction and sure screening methods. BH and JB provided insightful comments and suggestions to the design. MPM, CS, and NZ interpreted the results and wrote the final report. NZ built the website. MPM ran the upstream analysis using QIIME2. 
 
-We thank Dr. Sam Degregori (Knight Lab, UCSD) for guidance on BIRDMAn. 
+We thank Dr. Sam Degregori (Knight Lab) for guidance on BIRDMAn and the additional T2D meta-analysis studies. 
+
 
 \end{document}

@@ -4,21 +4,23 @@
 \contentsline {subsection}{\numberline {1.1}Literature Review}{4}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Data}{6}{subsection.1.2}%
 \contentsline {section}{\numberline {2}Methods}{7}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Data Preprocessing}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}Data Preprocessing}{8}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Feature Selection and Sure Screening}{8}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Causal Discovery Algorithms}{10}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}BIRDMAn}{13}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Variational Autoencoder}{13}{subsection.2.5}%
-\contentsline {section}{\numberline {3}Results}{13}{section.3}%
-\contentsline {subsection}{\numberline {3.1}EDA}{13}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{13}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{13}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{13}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}VAE Model}{13}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Discussion}{13}{section.4}%
-\contentsline {section}{\numberline {5}Conclusion}{13}{section.5}%
-\contentsline {section}{References}{14}{section*.1}%
-\contentsline {section}{Appendices}{A1}{section*.3}%
+\contentsline {subsection}{\numberline {2.5}Variational Autoencoder}{14}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Results}{14}{section.3}%
+\contentsline {subsection}{\numberline {3.1}EDA}{14}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{15}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{16}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{18}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}VAE Model}{20}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Discussion}{20}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Limitations}{20}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Improvements and Future Directions}{21}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Conclusion}{21}{section.5}%
+\contentsline {section}{References}{22}{section*.15}%
+\contentsline {section}{Appendices}{A1}{section*.17}%
 \etoc@startlocaltoc {2}
 \contentsline {subsection}{\numberline {A.1}T2D Meta-Analysis Metadata}{A1}{subsection.A.1}%
 \contentsline {subsection}{\numberline {A.2}Algorithms}{A2}{subsection.A.2}%
