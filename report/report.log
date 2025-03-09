@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  8 MAR 2025 22:56
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.2)  9 MAR 2025 10:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1448,7 +1448,12 @@ angwon Yoo, and Giri
 
 [27]) [28] [1
 
-] [2] [3] [4]
+] [2] [3]
+File: ../graphs/t2d/sparcc_IS_norm.png Graphic file (type bmp)
+<../graphs/t2d/sparcc_IS_norm.png>
+File: ../graphs/t2d/sparcc_IR_norm.png Graphic file (type bmp)
+<../graphs/t2d/sparcc_IR_norm.png>
+ [4]
 \tf@thm=\write5
 \openout5 = `report.thm'.
 
@@ -1458,14 +1463,17 @@ angwon Yoo, and Giri
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 3132E804D1568AED24D1E726970FEA29;1350.
  ) 
 Here is how much of TeX's memory you used:
- 24769 strings out of 476683
- 514910 string characters out of 5804048
+ 24787 strings out of 476683
+ 515506 string characters out of 5804048
  1864018 words of memory out of 5000000
- 44585 multiletter control sequences out of 15000+600000
+ 44601 multiletter control sequences out of 15000+600000
  535855 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  87i,22n,102p,2391b,960s stack positions out of 10000i,1000n,20000p,200000b,200000s
