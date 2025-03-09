@@ -216,6 +216,85 @@ BIRDMAn is implemented using the birdman package \url{https://github.com/biocore
 
 \subsection{Variational Autoencoder} 
 
+The architecture comprises an \textbf{Encoder}, a \textbf{Decoder}, and integrates the following components for improved representation learning:
+
+\subsubsection{Encoder}
+
+\begin{itemize}
+    \item \textbf{Input Handling}: The encoder receives input $x$ and a conditioning variable $y$. The input is processed through a linear layer after concatenating $y$ with $x$:
+    \[
+    h = \text{ReLU}(\text{fc1}(x \oplus y))
+    \]
+    
+    \item \textbf{Latent Space Outputs}: Two separate latent variables are defined:
+    \begin{align*}
+        \mu_{z_1} &= \text{fc2\_mu\_z1}(h), \quad \log \sigma_{z_1}^2 = \text{fc2\_logvar\_z1}(h)  \\
+        \mu_{z_2} &= \text{fc2\_mu\_z2}(h), \quad \log \sigma_{z_2}^2 = \text{fc2\_logvar\_z2}(h)
+    \end{align*}
+\end{itemize}
+
+\subsubsection{Decoder}
+
+\begin{itemize}
+    \item \textbf{Latent Concatenation}: The decoder concatenates with both latent variables as follows:
+    \[
+    z = z_1 \oplus z_2
+    \]
+    
+    \item \textbf{Reconstruction}: The reconstructed output is produced as:
+    \[
+    \hat{x} = \sigma(\text{fc2}(\text{ReLU}(\text{fc1}(z))))
+    \]
+\end{itemize}
+
+\subsubsection{Reparameterization Trick}
+
+For both $z_1$ and $z_2$, the reparameterization trick is applied:
+\[
+z_1 = \mu_{z_1} + \epsilon_1 \cdot \sigma_{z_1}, \quad z_2 = \mu_{z_2} + \epsilon_2 \cdot \sigma_{z_2}
+\]
+where $\epsilon$ follows a standard normal distribution $\mathcal{N}(0, I)$.
+
+\subsubsection{Loss Function}
+
+The combined loss function distinguishes integrates both reconstruction and regularization components:
+
+\begin{itemize}
+    \item \textbf{Reconstruction Loss}:
+    \[
+    \mathcal{L}_{\text{recon}} = \frac{1}{N} \sum_{i=1}^{N} ||\hat{x}_i - x_i||^2
+    \]
+
+    \item \textbf{KL Divergence for $z_2$}:
+    \[
+    \mathcal{L}_{\text{KL}_{z_2}} = -0.5 \sum_{j} (1 + \log \sigma_{z_2,j}^2 - \mu_{z_2,j}^2 - \sigma_{z_2,j}^2)
+    \]
+
+    \item \textbf{Conditional KL Divergence for $z_1$}:
+    \[
+    \mu_Y = 
+    \begin{cases} 
+    2.0 & \text{if } y = 1 \\
+    0.0 & \text{otherwise} 
+    \end{cases}
+    \]
+    \[
+    \mathcal{L}_{\text{KL}_{z_1}} = -0.5 \sum_{j} \left(1 + \log \sigma_{z_1,j}^2 - (\mu_{z_1,j} - \mu_Y)^2 - \sigma_{z_1,j}^2\right)
+    \]
+
+    \item \textbf{Causal Loss}:
+    \[
+    \mathcal{L}_{\text{causal}} = \text{causal\_reg} \cdot \left(\frac{1}{N} \sum_{i} \mu_{z_1,i} \cdot \mu_{z_2,i}\right)
+    \]
+
+    \item \textbf{Total Loss}:
+    \[
+    \mathcal{L}_{\text{total}} = \mathcal{L}_{\text{recon}} + \mathcal{L}_{\text{KL}_{z_1}} + \mathcal{L}_{\text{KL}_{z_2}} + \mathcal{L}_{\text{causal}}
+    \]
+\end{itemize}
+
+All hyper-parameters were optimized using the framework from Optuna \citep{optuna_2019}, in an attempt to yield a lower loss between original and reconstructed data.
+
 \section{Results}
 
 For the following sections, we illustrate the outputs of our pipeline on the T2D and PCOS data. We also check for linearity and normality assumptions before applying causal discovery algorithms and using parametric models. 
@@ -436,7 +515,52 @@ Table \ref{table:t2dresults} shows the coefficients obtained in Model 1 and Mode
 
 \subsection{VAE Model}
 
-xxx
+After training, the model's effectiveness was assessed using the latent variables $z_1$ and $z_2$ for classification tasks. The results indicated a significant imbalance in prediction accuracy:
+
+\begin{itemize}
+    \item \textbf{Confusion Matrix} showed that the model struggled to distinguish between classes, with outputs biased toward the majority class:
+    \[
+    \begin{bmatrix}
+        0 & 87 \\
+        0 & 157
+    \end{bmatrix}
+    \]
+\end{itemize}
+
+Both classifiers performed poorly, classifying nearly all instances as one class, indicating a potential issue with the representations.
+
+\subsection{Identical Classification Results for Both Latent Spaces}
+
+The classifiers for both \( z_1 \) and \( z_2 \) yielded identical results:
+
+\begin{verbatim}
+Z1 Classifier Results:
+[[  0  87] [  0 157]]
+              precision    recall  f1-score   support
+           0       0.00      0.00      0.00        87
+           1       0.64      1.00      0.78       157
+    accuracy                           0.64       244
+   macro avg       0.32      0.50      0.39       244
+weighted avg       0.41      0.64      0.50       244
+
+Z2 Classifier Results:
+[[  0  87] [  0 157]]
+              precision    recall  f1-score   support
+           0       0.00      0.00      0.00        87
+           1       0.64      1.00      0.78       157
+    accuracy                           0.64       244
+   macro avg       0.32      0.50      0.39       244
+weighted avg       0.41      0.64      0.50       244
+\end{verbatim}
+
+Identical performance between classifiers based on \( z_1 \) and \( z_2 \) suggests that both latent representations are not capturing distinct features of the data. Due to the latter, we could not used the features from the latent space z1 for comparison with CD-NOD as originally planned.
+
+\subsubsection{Potential Reasons:}
+
+1. **Model Architecture Limitations**: The current architecture may not effectively distinguish the features necessary for \( z_1 \) and \( z_2 \). Which means adding the conditioning on health/disease status is not enough to separate features significantly connected to disease.
+
+2. **Data Imbalance**: Our classifier had 811 samples total, where only 284 where control samples (healthy status). This could have lead to a partial learning which favorites disease over healthy inputs.
+
 
 \section{Discussion}
 
