@@ -14,7 +14,14 @@ transformation <- param$transformation
 
 data <- read.csv(sprintf("data/%s/filtered_otu_table_%s.csv", disease, transformation), check.names=F)
 X <- select(data, -c(1))
-Y <- read.csv(sprintf("data/%s/metadata.csv", disease))[disease_col]
+Y <- read.csv(sprintf("data/%s/metadata.csv", disease))# [disease_col]
+if (disease == 'sam-t2d') {
+  colnames(data)[1] <- 'sample.id'
+  data <- merge(Y, data, by='sample.id')
+  Y <- data[disease_col]
+  data <- select(data, -c(2, 3, 4))
+}
+X <- select(data, -c(1))
 data[disease_col] <- Y
 
 # balanced training set

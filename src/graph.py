@@ -67,7 +67,7 @@ def run_cdnod(data, disease, fp):
     cg = Meek.meek(cg_2)
     
     pyd = GraphUtils.to_pydot(cg.G, labels=list(data.columns))
-    # pyd.write_png(f"graphs/{fp}.png")
+    pyd.write_png(f"graphs/{fp}.png")
 
     # due to limited visibility on the graph, print the microbes that are directly linked to the cohort and covariate nodes
     adj_nodes = []

@@ -105,6 +105,60 @@ def clean_data_pcos(raw_fp):
     return otu_table, metadata
 
 
+def clean_data_sam_t2d(feature_table_fp, metadata_fp):
+    '''
+    Returns the otu table and metadata for the T2D meta-analyses studies.
+
+    :param: feature_table_fp: filepath to the feature table from qiime2
+    :param: metadata_fp: filepath to the metadata 
+
+    :return: pandas DataFrame of the otu table, pandas DataFrame of the metadata
+    '''
+    otu_table = pd.read_csv(feature_table_fp, sep="\t", header=1)
+    otu_table = otu_table.T
+    otu_table.columns = otu_table.iloc[0, :]
+    otu_table = otu_table.iloc[1:, :] * 100
+    # otu_table = otu_table.reset_index()
+    # otu_table = otu_table.rename(columns={'index': 'sample-id'})
+
+    metadata = pd.read_csv(metadata_fp, sep="\t").set_index('sample-id')
+
+    # remove china and india
+    metadata = metadata[~metadata['country'].isin(['China', 'India'])]
+    bioproj_map = dict()
+    for i, bioproj in enumerate(metadata['bioproject'].unique()):
+        bioproj_map[bioproj] = i+1
+    metadata['study'] = metadata['bioproject'].map(bioproj_map)
+
+    # africa: sudan
+    # east asia: japan, china
+    # south asia: pakistan, india
+    # south east asia: indonesia, vietnam
+    # europe: finland
+    region_map = {'Sudan': 'Africa',
+                  'Japan': 'East Asia',
+                  'China': 'East Asia',
+                  'Pakistan1': 'South Asia',
+                  'Pakistan2': 'South Asia',
+                  'India': 'South Asia',
+                  'Indonesia': 'Southeast Asia',
+                  'Vietnam': 'Southeast Asia',
+                  'Finland': 'Europe'
+                 }
+    region_num_map = {'Africa': 0,
+                      'East Asia': 1,
+                      'South Asia': 2,
+                      'Southeast Asia': 3,
+                      'Europe': 4
+                     }
+    metadata['region'] = metadata['country'].map(region_map)
+    metadata['region_num'] = metadata['region'].map(region_num_map)
+    metadata['t2d'] = metadata['t2d'].map({'No': 0, 'Yes': 1})
+    metadata = metadata.loc[:, ['t2d', 'study', 'region_num']]
+    
+    return otu_table, metadata
+
+
 def filter_rare_otus(data, k=1):
     '''
     Filters the dataset for rare OTUs based on a chosen threshold. 

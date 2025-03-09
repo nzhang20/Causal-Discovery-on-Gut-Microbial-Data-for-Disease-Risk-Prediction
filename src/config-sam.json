@@ -1,0 +1,14 @@
+{
+	"otu_table_fp": "data/sam-t2d/otu_table.csv",
+	"metadata_fp": "data/sam-t2d/metadata.csv",
+	"name": "sam-t2d",
+	"sparse_microbe_microbe": "graphical lasso",
+	"disease_column": "t2d",
+	"cohort_names": ["No", "Yes"],
+	"covariates_map": {
+		"region_num": ["Africa", "East Asia", "South Asia", "Southeast Asia", "Europe"],
+		"study": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	},
+	"rare_otu_threshold": 1,
+	"transformation": "norm"
+}
