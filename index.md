@@ -40,31 +40,31 @@ Class (MEC).
 ## Methods
 1. **Feature Selection**
    - Remove rare OTUs (<1% relative abundance).
-   - Use **SparCC** and **Graphical Lasso** to filter microbe-microbe interactions.
-   - Apply **Lasso Logistic Regression** to identify disease-relevant microbes.
+   - Use SparCC and Graphical Lasso to filter microbe-microbe interactions.
+   - Apply Lasso Logistic Regression to identify disease-relevant microbes.
 
 2. **Causal Discovery Algorithms**
-   - **PC-Stable** (max depth = 2) for microbe-microbe networks.
-   - **CD-NOD** to model heterogeneity in microbe-disease relationships.
+   - PC-Stable (max depth = 2) for microbe-microbe networks.
+   - CD-NOD to model heterogeneity in microbe-disease relationships.
 
 3. **Causal Effect Estimation**
-   - Use **do-calculus** and logistic regression to estimate individual microbial effects.
-   - Compare results with Bayesian Inferential Regression for Differential Microbiome Analysis (**BIRDMAn**).
+   - Use do-calculus and logistic regression to estimate individual microbial effects.
+   - Compare results with Bayesian Inferential Regression for Differential Microbiome Analysis (BIRDMAn).
 
 4. **Predictive Modeling**
-   - Train **variational autoencoders (VAEs)** to learn microbial feature representations.
-   - Compare **logistic regression** with VAE representations for disease prediction.
+   - Train variational autoencoders (VAEs) to learn microbial feature representations.
+   - Compare logistic regression with VAE representations for disease prediction.
 
-## Key Findings
+## Results
 ### Type 2 Diabetes (T2D)
-Our **microbe-disease network** identified five genera with causal effects on T2D:
+Our microbe-disease network identified five genera with causal effects on T2D:
 - **Butyricimonas, Clostridium XIVb, Odoribacter, Unclassified Bacteria, Unclassified Firmicutes**
 
-![T2D Microbe-Disease Network](graphs/t2d/cdnod_norm.png)
+![T2D Microbe-Disease Network](poster/t2d_network_colored.png)
 
 **Figure 1.** Microbe-Disease Network for T2D.
 
-Using **do-calculus**, we estimated their causal effects on T2D.
+Using do-calculus, we estimated their causal effects on T2D.
 
 | Genus                    | Model 1     | Model 2     | BIRDMAn    | Literature Agreement |
 |--------------------------|------------|------------|------------|----------------------|
@@ -82,14 +82,14 @@ Using **do-calculus**, we estimated their causal effects on T2D.
 - **BIRDMAn**: Bayesian inference with NegBinomial(μ, φ)
 
 ### Polycystic Ovary Syndrome (PCOS)
-Our **microbe-disease network** for PCOS identified nine causal genera:
+Our microbe-disease network for PCOS identified nine causal genera:
 - **Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus, Ruminococcus gnavus group**
 
-![PCOS Microbe-Disease Network](graphs/pcos/cdnod_norm.png)
+![PCOS Microbe-Disease Network](poster/pcos_network_colored.png)
 
 **Figure 2.** Microbe-Disease Network for PCOS.
 
-Using **do-calculus**, we estimated their causal effects on PCOS.
+Using do-calculus, we estimated their causal effects on PCOS.
 
 | Genus                           | Model 1     | Model 2     | BIRDMAn    | Literature Agreement |
 |---------------------------------|------------|------------|------------|----------------------|
@@ -105,18 +105,54 @@ Using **do-calculus**, we estimated their causal effects on PCOS.
 
 *Table 2. Log-Odds Ratios for Models 1 & 2, and Mean CLR from BIRDMAn for PCOS.*
 
+### Microbe-Microbe Interactions
+
+To further analyze microbial community structure, we constructed microbe-microbe interaction networks for both conditions. The Venn diagrams below illustrate shared and unique microbial interactions within T2D and PCOS:
+
+**T2D Microbe-Microbe Interactions**
+
+![T2D Microbe-Microbe Venn Diagram](poster/t2d_microbe_microbe_venn.png)
+
+*Figure 3. Venn diagram of microbe-microbe interactions in T2D.*
+
+**PCOS Microbe-Microbe Interactions**
+
+![PCOS Microbe-Microbe Venn Diagram](poster/pcos_microbe_microbe_venn.png)
+
+*Figure 4. Venn diagram of microbe-microbe interactions in PCOS.*
+
+These interactions highlight disease-specific microbial relationships and may provide insight into community-level effects that influence disease progression and microbial ecology.
+
+## Discussion  
+
+Our study highlights the potential **causal role of gut microbes** in metabolic diseases like **Type 2 Diabetes (T2D) and Polycystic Ovary Syndrome (PCOS)**. We identified **distinct microbial compositions** for each condition, with some genera overlapping between the two.  
+
+### **Key Microbial Findings**  
+
+#### **T2D**  
+- **Butyricimonas** and **Odoribacter** appear protective, reducing insulin resistance risk. Both are butyrate-producing bacteria, known for their positive effects on metabolism.  
+
+#### **PCOS**  
+- **Blautia** emerged as a beneficial microbe, linked to improved glucose and lipid metabolism.  
+- **Desulfovibrio** appears harmful, associated with chronic inflammation, which is a common feature in PCOS and inflammatory bowel disease (IBD).  
+- **Holdemanella** may have anti-inflammatory effects, potentially influencing gut microbial networks and GLP-1 hormone regulation (important for blood sugar control).  
+- **Ruminococcus gnavus group** was linked to gut dysbiosis and inflammation, which may contribute to PCOS-related metabolic disturbances.  
+
+### **Uncertain Microbes & Study Limitations**  
+For microbes like **Clostridium XIVb, Alistipes, Burkholderia, Knoellia, and Ruminococcus**, findings were inconclusive, as some species within these genera may have opposing effects. Since our analysis was at the genus level, we could not assess species-specific impacts, which is a key limitation.  
+
 
 ## Conclusion & Future Work
 1. **Microbe-Microbe Interactions**: Healthy and diseased participants share certain microbes but differ in their interactions. Microbes should be analyzed as communities rather than isolated entities.
-2. **Microbe-Disease Causality**: Using **CD-NOD** and **do-calculus**, we quantified microbial effects on disease status. Our findings align with differential abundance methods like **BIRDMAn** and existing literature.
+2. **Microbe-Disease Causality**: Using CD-NOD and do-calculus, we quantified microbial effects on disease status. Our findings align with differential abundance methods like **BIRDMAn** and existing literature.
 3. **Prediction**: Baseline models (e.g., logistic regression) outperform VAE-based models. Future work should explore longitudinal data to improve microbial feature representation.
 
 ### Future Directions
-- Adjust for **multiple testing** and **low statistical power**.
-- Apply **different causal discovery algorithms** for diverse data structures (e.g., longitudinal studies, meta-analyses).
-- Address **compositionality** and **rareness** in microbiome data.
+- Adjust for multiple testing and low statistical power.
+- Apply different causal discovery algorithms for diverse data structures (e.g., longitudinal studies, meta-analyses).
+- Address compositionality and rareness in microbiome data.
 
-We hope this project shows the potential of **causal discovery and causal inference methods** in
+We hope this project shows the potential of causal discovery and causal inference methods in
 human gut microbiome research, and can be generically applied to other diseases of interest. We
 would like to thank our mentors, Dr. Biwei Huang & Dr. Jelena Bradic, and Dr. Sam Degregori
 (Knight Lab) for guidance throughout this project
