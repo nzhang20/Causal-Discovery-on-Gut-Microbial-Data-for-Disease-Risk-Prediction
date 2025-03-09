@@ -20,7 +20,7 @@ def main():
     '''
     Main function for execution on command line
     '''
-    logger = create_logger('%s.log' % (args.name))
+    logger = create_logger('SparCC/%s.log' % (args.name))
     logger.info('============ Initialized logger ============')
     logger.info('\n'.join('%s: %s' % (k, str(v)) for k, v in sorted(dict(vars(args)).items(), key=lambda x: x[0])))
     logger.info('Start of Process')
