@@ -328,9 +328,11 @@ For T2D, the two networks (Figures \ref{fig:t2dglassoISnorm} and \ref{fig:t2dgla
 
 For PCOS, the two networks (Figures \ref{fig:pcosglassoHCnorm} and \ref{fig:pcosglassoPCOSnorm}) found that both HC and PCOS cohorts share 45 microbes (Figure \ref{fig:pcosglassovenn}). The HC cohort has 15 additional genera, which include \textit{Burkholderia} and \textit{Holdemanella}. The PCOS cohort has 17 additional genera, which include \textit{Knoellia} and \textit{Ruminococcus gnavus} group. 
 
+For the T2D-meta analysis data, the two networks found that both non-T2D and T2D cohorts share 27 microbes. The non-T2D cohort has 10 additional genera including \textit{Sutterella} and \textit{Succinivibrio}. The T2D cohort has 13 additional genera including \textit{Lactobacillus} and \textit{Veillonella}. Due to the length of the taxa names and the width of the graph, the figures for T2D meta analysis can be found on our Github repo in higher resolution. 
+
 \subsection{Microbe-Disease Interaction Network}
 
-For the microbe-disease interaction networks, we used logistic lasso regression for feature selection and applied the CD-NOD algorithm with the non-microbe covariates as the heterogeneity index variables. For T2D, these are “Gender” and “Ethnicity”; for PCOS, these are “study/site” and “region”. We generated one causal graph for T2D and one for PCOS and identified the main microbial genera directly linked to the disease status nodes. For T2D, there were five genera: \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria}, and \textit{unclassified Firmicutes}. For PCOS, there were nine genera: \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus}, and \textit{Ruminococcus gnavus group}.
+For the microbe-disease interaction networks, we used logistic lasso regression for feature selection and applied the CD-NOD algorithm with the non-microbe covariates as the heterogeneity index variables. For T2D, these are “Gender” and “Ethnicity”; for PCOS, these are “study/site” and “region”. We generated one causal graph for T2D and one for PCOS and identified the main microbial genera directly linked to the disease status nodes. For T2D, there were five genera: \textit{Butyricimonas, Clostridium XIVb, Odoribacter, unclassified Bacteria}, and \textit{unclassified Firmicutes}. For PCOS, there were nine genera: \textit{Alistipes, Blautia, Burkholderia, Desulfovibrio, Holdemanella, Knoellia, Prevotellaceae NK3B31 group, Ruminococcus}, and \textit{Ruminococcus gnavus group}. For the T2D meta analysis, there was one covariate (region), and there were eight genera directly linked to T2D: \textit{Alistipes\_A\_871400, Aphodomorpha, CAG-267, Collinsella, Faecalibacterium, Prevotella, Pseudobutyrivibrio,} and \textit{unclassified Monoglobaceae}. Due to the length of the taxa names and the width of the graph, the figures for T2D meta analysis can be found on our Github repo in higher resolution. 
 
 \begin{figure}[h!]
   \centering
@@ -399,8 +401,29 @@ Additionally, we utilized Bayesian inference through BIRDMAn, using a negative b
         \caption{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for PCOS.}
         \label{table:pcosresults}
       \end{table}
+      
+\begin{table}
+        \centering
+        \begin{tabular}{l r r r c}
+          \toprule
+          \textbf{Genus} & \textbf{Model 1} & \textbf{Model 2} & \textbf{BIRDMAn} & \textbf{Literature Agreement} \\
+          \midrule
+          \textit{Alistipes\_A\_871400} & -0.72608* & -0.87070* & -1.38028 & Inconclusive \\
+          \textit{Aphodomorpha} & -1.23747* & -2.36658* & -1.54138* & Inconclusive \\
+          \textit{CAG-267} & -19.68728 & -13.81186 & N/A & Inconclusive \\
+          \textit{Collinsella} & 0.10462* & 0.08761* & 1.14355* & Yes \\
+          \textit{Faecalibacterium} & -0.10471* & -0.07721* & -0.09936 & Yes \\
+          \textit{Prevotella} & -0.02734* & -0.01884* & -0.25227* & Yes \\
+          \textit{Pseudobutyrivibrio} & 1.80315* & 1.76850* & 2.80971* & Inconclusive \\
+          \textit{unclassified Monoglobaceae} & -9.38222* & -8.98766* & -4.07403* & N/A \\
+          \bottomrule
+        \end{tabular}
+        \caption{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D Meta-Analysis.}
+        \label{table:sam-t2dresults}
+      \end{table}
 
-Table \ref{table:t2dresults} shows the coefficients obtained in Model 1 and Model 2 for the five microbes, as well as their BIRDMAn mean CLR values. Significant values ($\alpha < 0.05$) are denoted by *. The most important part of the results is the sign of the values. For example, \textit{Butyricimonas, Odoribacter, unclassified Bacteria}, and \textit{unclassified Firmicutes} have negative values, which means that they are protective towards T2D. We consult with the literature on the biological mechanisms of these microbes that are available and currently known to check that our results make sense. Table \ref{table:pcosresults} show the same results for the PCOS dataset. 
+
+Table \ref{table:t2dresults} shows the coefficients obtained in Model 1 and Model 2 for the five microbes, as well as their BIRDMAn mean CLR values. Significant values ($\alpha < 0.05$) are denoted by *. The most important part of the results is the sign of the values. For example, \textit{Butyricimonas, Odoribacter, unclassified Bacteria}, and \textit{unclassified Firmicutes} have negative values, which means that they are protective towards T2D. We consult with the literature on the biological mechanisms of these microbes that are available and currently known to check that our results make sense. Table \ref{table:pcosresults} shows the same results for the PCOS dataset, and Table \ref{table:sam-t2dresults} shows the same results for the T2D meta-analysis. 
 
 \subsection{VAE Model}
 

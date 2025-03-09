@@ -12,15 +12,15 @@
 \contentsline {section}{\numberline {3}Results}{14}{section.3}%
 \contentsline {subsection}{\numberline {3.1}EDA}{14}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{15}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{16}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{17}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{18}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}VAE Model}{20}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Discussion}{20}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Limitations}{20}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Improvements and Future Directions}{21}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Conclusion}{21}{section.5}%
-\contentsline {section}{References}{22}{section*.15}%
-\contentsline {section}{Appendices}{A1}{section*.17}%
+\contentsline {subsection}{\numberline {3.5}VAE Model}{21}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Discussion}{21}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Limitations}{21}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Improvements and Future Directions}{22}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Conclusion}{22}{section.5}%
+\contentsline {section}{References}{23}{section*.16}%
+\contentsline {section}{Appendices}{A1}{section*.18}%
 \etoc@startlocaltoc {2}
 \contentsline {subsection}{\numberline {A.1}T2D Meta-Analysis Metadata}{A1}{subsection.A.1}%
 \contentsline {subsection}{\numberline {A.2}Algorithms}{A2}{subsection.A.2}%
