@@ -222,7 +222,7 @@ For the following sections, we illustrate the outputs of our pipeline on the T2D
 
 \subsection{EDA}
 
-First, we take a look at the distribution of the covariates for each respective dataset. The T2D dataset contains the ‘Gender’ and ‘Ethnicity’ covariates, which seem roughly equally balanced between the IR and IS cohorts (Figure \ref{fig:t2dcovariates}), except for the Asian and Black ethnicities. The PCOS dataset contains the ‘Region’ and ‘Study/site’ covariates, which are also for the most part equally balanced, but contain a few outliers: e.g. study 4 does not contain any HC, and studies 6 \& 9 have pretty unbalanced cohort sizes (Figure \ref{fig:pcoscovariates}). These covariates may end up confounding any causal effects. 
+First, we take a look at the distribution of the covariates for each respective dataset. The T2D dataset contains the ‘Gender’ and ‘Ethnicity’ covariates, which seem roughly equally balanced between the IR and IS cohorts (Figure \ref{fig:t2dcovariates}), except for the Asian and Black ethnicities. The PCOS dataset contains the ‘Region’ and ‘Study/site’ covariates, which are also for the most part equally balanced, but contain a few outliers: e.g. study 4 does not contain any HC, and studies 6 \& 9 have pretty unbalanced cohort sizes (Figure \ref{fig:pcoscovariates}). The T2D meta analysis dataset also contains `Region' and `Study' covariates, where there is more representation from East Asia and the T2D cohort (Figure \ref{fig:sam-t2dcovariates}). These covariates may end up confounding any causal effects. 
 
 \begin{figure}[h!]
 \begin{minipage}{0.34\linewidth}
@@ -248,6 +248,15 @@ First, we take a look at the distribution of the covariates for each respective 
 \end{minipage}
 \caption{PCOS Covariates Distribution}
 \label{fig:pcoscovariates}
+\end{figure}
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=\linewidth]{../plots/sam-t2d/region_num_bar_chart.png}
+   \medskip
+   \includegraphics[width=\linewidth]{../plots/sam-t2d/study_bar_chart.png}
+\caption{T2D Meta Analysis Covariates Distribution}
+\label{fig:sam-t2dcovariates}
 \end{figure}
 
 We also check for linearity with scatter plots, and we check for normality with qqplots. Figure \ref{fig:t2dscatterplots} is a sample of scatter plots of pairs of microbes from the T2D dataset. Figure \ref{fig:t2dqqplots} is a sample of qqplots of microbes from the T2D dataset. We find that most microbes are non-linear and non-Gaussian, which means we need to be careful in selecting which independence tests to run and which models to fit. 
@@ -431,7 +440,15 @@ xxx
 
 \section{Discussion}
 
-xxx
+Our study shows that specific gut microbes may play a direct role in metabolic diseases like T2D and PCOS. We found significant microbes that affect T2D and PCOS, and find that they agree between the two do-calculus results and BIRDMAn differential analysis. Now, we explain why these make sense in terms of their biological mechanisms in relation to T2D and PCOS. We also find different results for the T2D dataset from HMP2 vs the meta analysis because the study participants are from different regions. 
+
+In T2D, the first significant microbe in our table is \textit{Butycrimonas}. Our causal inference results suggest that it plays a protective role, with a $e^{-2.26645} = 0.10368 =$ 90\% decrease in the odds of insulin resistance for a one percent increase in its abundance whilst its neighbors remain constant, which aligns with current literature. \textit{Butyricimonas} is generally considered beneficial for metabolic health. It is a butyrate-producing bacterial genus, and butyrate is a short-chain fatty acid (SCFA) that has multiple positive effects on metabolism \citep{lee2022butyricimonas}. Additionally, \textit{Odoribacter}, also known for its butyrate-producing properties \citep{albataineh2023odoribacter}, was associated with an $e^{-3.05501} = 0.04712 =$ 95\% decrease in the odds of insulin resistance for a one percent increase in its abundance whilst its neighbors remain constant, reinforcing its potential protective effect.
+
+For PCOS, our results highlight \textit{Blautia} as a harmful microbe (its effect is negative). Unfortunately, this disagrees with literature: multiple studies have shown a decrease in \textit{Blautia} levels in individuals with PCOS, as well as in those with diabetes and obesity. This aligns with our findings and reinforces \textit{Blautia}’s role in metabolic health. The genus is also associated with lipid and glucose metabolism, and its ability to produce short-chain fatty acids (SCFAs) suggests a protective function against metabolic dysfunction \citep{li2023blautia}. Given that SCFAs influence insulin sensitivity and inflammation, \textit{Blautia} may be a key player in gut microbiome-driven metabolic regulation. In contrast, \textit{Desulfovibrio} appears to have a protective effect in PCOS from our results. This result also disagrees with literature: this genus belongs to a group of sulfate-reducing bacteria (SRB) that have been linked to chronic inflammation. Overgrowth of \textit{Desulfovibrio} has been observed in conditions like inflammatory bowel disease (IBD) and periodontitis, both of which involve gut dysbiosis and systemic inflammation \citep{singh2023desulfovibrio}. Another significant microbe is \textit{Holdemanella}, which we identified as beneficial. \textit{Holdemanella} has been shown to produce metabolites with strong anti-inflammatory properties. Some studies even suggest it plays a role in regulating GLP-1, a hormone crucial for blood sugar control and metabolic function \citep{romani2021holdemanella}. Additionally, our microbe-microbe network analysis revealed that \textit{Holdemanella} is linked to \textit{Collinsella} and \textit{Lactobacillus}, two genera with known roles in gut health and metabolism. This suggests that \textit{Holdemanella}’s effects may extend beyond its direct metabolic contributions, potentially influencing a broader microbial network that supports host health. On the other hand, the \textit{Ruminococcus gnavus group} was identified as harmful. This genus has been consistently associated with gut dysbiosis and inflammation in conditions such as IBD \citep{crost2023rgnavus}. Given the emerging evidence that PCOS and IBD share some common inflammatory pathways, the presence of \textit{Ruminococcus gnavus} may contribute to the chronic inflammation observed in PCOS. 
+
+The T2D meta analysis results (Table \ref{table:sam-t2dresults}) show that \textit{Collinsella, Faecalibacterium}, and \textit{Prevotella} had significant effects and agreement with literature. In particular, \textit{Collinsella} has been found to be positively correlated with producing insulin, and also has been found to be a result of low dietary fiber \citep{gomez2018collinsella}, in contrast with intaking high dietary fiber which produces more SCFA-producing bacteria such as \textit{Prevotella} and is overall beneficial to metabolism \citep{abdelsalam2023prevotella}. \textit{Faecalibacterium} has been found in many studies to be negatively associated with T2D, and is also a popular probiotic for colitis which is an inflammatory disease of the colon \citep{gurung2020faecalibacterium}. 
+
+For the other microbes in our results, such as \textit{Clostridium XIVb, Alistipes, Burkholderia}, and more, the evidence remains inconclusive. Studies on these genera report mixed findings, with some species and strains showing beneficial effects and others being harmful. Because our analysis operates at the genus level, we cannot distinguish between species with contrasting effects, making it difficult to classify them as definitively beneficial or harmful. This is a limitation of our study and the taxonomy classification step in general because strain-level differences within the same genus may play an important role in metabolic health. Additionally, the unclassified genera cannot be searched in literature because they may contain all kinds of genera and are just a category for the microbes that could not be classified. 
 
 \subsection{Limitations}
 

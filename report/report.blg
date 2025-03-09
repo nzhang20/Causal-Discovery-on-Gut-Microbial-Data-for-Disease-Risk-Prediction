@@ -1,0 +1,66 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: report.aux
+The style file: style/dsc180bibstyle.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: reference.bib
+Warning--entry type for "who2025pcos" isn't style-file defined
+--line 274 of file reference.bib
+Warning--entry type for "adat2d" isn't style-file defined
+--line 412 of file reference.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Warning--you've exceeded 500, the entry-string-size, for entry zhou2019t2d
+while executing--line 3295 of file style/dsc180bibstyle.bst
+*Please notify the bibstyle designer*
+Warning--you've exceeded 500, the entry-string-size, for entry qin2012mgwast2d
+while executing--line 3295 of file style/dsc180bibstyle.bst
+*Please notify the bibstyle designer*
+Warning--there is no volume, number, and pages in rahman2023birdman
+You've used 34 entries,
+            6528 wiz_defined-function locations,
+            1478 strings with 21556 characters,
+and the built_in function-call counts, 49465 in all, are:
+= -- 6758
+> -- 3866
+< -- 86
++ -- 1396
+- -- 1352
+* -- 4143
+:= -- 7164
+add.period$ -- 0
+call.type$ -- 34
+change.case$ -- 486
+chr.to.int$ -- 34
+cite$ -- 35
+duplicate$ -- 786
+empty$ -- 1647
+format.name$ -- 1398
+if$ -- 11626
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 111
+num.names$ -- 226
+pop$ -- 657
+preamble$ -- 1
+purify$ -- 486
+quote$ -- 0
+skip$ -- 2917
+stack$ -- 0
+substring$ -- 2700
+swap$ -- 182
+text.length$ -- 58
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 572
+warning$ -- 1
+while$ -- 204
+width$ -- 0
+write$ -- 539
+(There were 5 warnings)

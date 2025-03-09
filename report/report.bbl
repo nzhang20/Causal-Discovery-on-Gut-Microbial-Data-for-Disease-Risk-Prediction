@@ -16,6 +16,16 @@
   (Methodological)} 44\hspace{0.2ex}(2):  139--177.
   \href{http://www.jstor.org/stable/2345821}{[Link]}
 
+\harvarditem[Al~Bataineh et~al.]{Al~Bataineh, K{\"u}nstner, Dash, Alsafar,
+  Ragab, Schmelter, Sina, Busch and Ibrahim}{2023}{albataineh2023odoribacter}
+\textbf{Al~Bataineh, Mohammad~Tahseen, Axel K{\"u}nstner, Nihar~Ranjan Dash,
+  Habiba~S. Alsafar, Mohab Ragab, Franziska Schmelter, Christian Sina, Hauke
+  Busch, and Saleh~Mohamed Ibrahim.} 2023. ``Uncovering the relationship
+  between gut microbial dysbiosis, metabolomics, and dietary intake in type 2
+  diabetes mellitus and in healthy volunteers: a multi-omics analysis.'' {\it
+  Scientific Reports} 13\hspace{0.2ex}(1), p. 17943.
+  \href{http://dx.doi.org/10.1038/s41598-023-45066-7}{[Link]}
+
 \harvarditem[Allaband et~al.]{Allaband, McDonald, V{\'a}zquez-Baeza, Minich,
   Tripathi, Brenner, Loomba, Smarr, Sandborn, Schnabl, Dorrestein, Zarrinpar
   and Knight}{2019}{allaband2019microbiome101}
@@ -49,6 +59,13 @@
   Learning Research} 15\hspace{0.2ex}.
   \href{https://www.jmlr.org/papers/volume15/colombo14a/colombo14a.pdf}{[Link]}
 
+\harvarditem[Crost et~al.]{Crost, Coletto, Bell and
+  Juge}{2023}{crost2023rgnavus}
+\textbf{Crost, Emmanuelle~H, Erika Coletto, Andrew Bell, and Nathalie Juge.}
+  2023. ``Ruminococcus gnavus: friend or foe for human health.'' {\it FEMS
+  Microbiol Rev} 47\hspace{0.2ex}(2).
+  \href{http://dx.doi.org/https://doi.org/10.1093/femsre/fuad014}{[Link]}
+
 \harvarditem[Friedman, Hastie and Tibshirani]{Friedman, Hastie and
   Tibshirani}{2008}{friedman2008glasso}
 \textbf{Friedman, Jerome, Trevor Hastie, and Robert Tibshirani.} 2008. ``Sparse
@@ -67,6 +84,23 @@
 \textbf{Glymour, Clark, Kun Zhang, and Peter Spirtes.} 2019. ``Review of Causal
   Discovery Methods Based on Graphical Models.'' {\it Frontiers in Genetics}
   10\hspace{0.2ex}. \href{https://doi.org/10.3389/fgene.2019.00524}{[Link]}
+
+\harvarditem[Gomez-Arango et~al.]{Gomez-Arango, Barrett, Wilkinson, Callaway,
+  McIntyre, Morrison and Nitert}{2018}{gomez2018collinsella}
+\textbf{Gomez-Arango, Luisa~F., Helen~L. Barrett, Shelley~A. Wilkinson,
+  Leonie~K. Callaway, H.~David McIntyre, Mark Morrison, and Marloes~Dekker
+  Nitert.} 2018. ``Low dietary fiber intake increases Collinsella abundance in
+  the gut microbiota of overweight and obese pregnant women.'' {\it Gut
+  Microbes} 9\hspace{0.2ex}(3):  189--201.
+  \href{http://dx.doi.org/10.1080/19490976.2017.1406584}{[Link]}
+
+\harvarditem[Gurung et~al.]{Gurung, Li, You, Rodrigues, Jump, Morgun and
+  Shulzhenko}{2020}{gurung2020faecalibacterium}
+\textbf{Gurung, Manoj, Zhipeng Li, Hannah You, Richard Rodrigues, Donald~B
+  Jump, Andrey Morgun, and Natalia Shulzhenko.} 2020. ``Role of gut microbiota
+  in type 2 diabetes pathophysiology.'' {\it EBioMedicine} 51\hspace{0.2ex}, p.
+  102590.
+  \href{http://dx.doi.org/https://doi.org/10.1016/j.ebiom.2019.11.051}{[Link]}
 
 \harvarditem[Huang et~al.]{Huang, Zhang, Zhang, Ramsey, Sanchez-Romero, Glymour
   and Sch{\"o}lkopf}{2019}{huang2019cdnod}
@@ -95,6 +129,23 @@
   microbiomes.'' {\it Nature Reviews Microbiology} 16\hspace{0.2ex}(7):
   410--422. \href{http://dx.doi.org/10.1038/s41579-018-0029-9}{[Link]}
 
+\harvarditem[Lee et~al.]{Lee, An, Kim, Choi, Song, Lee, Kong, Kim and
+  Kim}{2022}{lee2022butyricimonas}
+\textbf{Lee, Heetae, Jinho An, Jiyeon Kim, Dohyun Choi, Youngcheon Song,
+  Chong-Kil Lee, Hyunseok Kong, Sang~Bum Kim, and Kyungjae Kim.} 2022. ``A
+  Novel Bacterium, Butyricimonas virosa, Preventing HFD-Induced Diabetes and
+  Metabolic Disorders in Mice via GLP-1 Receptor.'' {\it Frontiers in
+  Microbiology} 13\hspace{0.2ex}.
+  \href{http://dx.doi.org/10.3389/fmicb.2022.858192}{[Link]}
+
+\harvarditem[Li et~al.]{Li, Chen, Zhang, Zeng, Li, Xie, Luo and
+  Gao}{2023}{li2023blautia}
+\textbf{Li, Jing-wei, Yu-zhi Chen, Yu~Zhang, Li-hua Zeng, Kai-wei Li, Bao-zhen
+  Xie, Song-ping Luo, and Jie Gao.} 2023. ``Gut microbiota and risk of
+  polycystic ovary syndrome: Insights from Mendelian randomization.'' {\it
+  Heliyon} 9\hspace{0.2ex}(12).
+  \href{http://dx.doi.org/10.1016/j.heliyon.2023.e22155}{[Link]}
+
 \harvarditem[McDonald et~al.]{McDonald, Jiang, Balaban, Cantrell, Zhu,
   Gonzalez, Morton, Nicolaou, Parks, Karst, Albertsen, Hugenholtz, DeSantis,
   Song, Bartko, Havulinna, Jousilahti, Cheng, Inouye, Niiranen, Jain, Salomaa,
@@ -116,6 +167,13 @@
   Infection in the United States.'' {\it Annals of Internal Medicine}
   133\hspace{0.2ex}(8):  592--599.
   \href{http://dx.doi.org/10.7326/0003-4819-133-8-200010170-00009}{[Link]}
+
+\harvarditem[Nehal Adel~Abdelsalam and Aziz]{Nehal Adel~Abdelsalam and
+  Aziz}{2023}{abdelsalam2023prevotella}
+\textbf{Nehal Adel~Abdelsalam, Shaimaa M.~Hegazy, and Ramy~K. Aziz.} 2023.
+  ``The curious case of Prevotella copri.'' {\it Gut Microbes}
+  15\hspace{0.2ex}(2), p. 2249152.
+  \href{http://dx.doi.org/10.1080/19490976.2023.2249152}{[Link]}
 
 \harvarditem[Pearl, Glymour and Jewell]{Pearl, Glymour and
   Jewell}{2016}{pearl2016primer}
@@ -160,12 +218,30 @@
   associations.'' {\it bioRxiv}.
   \href{http://dx.doi.org/10.1101/2023.01.30.526328}{[Link]}
 
+\harvarditem[Roman{\'\i}-P{\'e}rez et~al.]{Roman{\'\i}-P{\'e}rez,
+  L{\'o}pez-Almela, Bullich-Vilarrubias, Rueda-Ruzafa, Pulgar,
+  Ben{\'\i}tez-P{\'a}ez, Liebisch, Lamas and
+  Sanz}{2021}{romani2021holdemanella}
+\textbf{Roman{\'\i}-P{\'e}rez, Marina, Inmaculada L{\'o}pez-Almela, Clara
+  Bullich-Vilarrubias, Lola Rueda-Ruzafa, Eva M G{\'o}mez~Del Pulgar, Alfonso
+  Ben{\'\i}tez-P{\'a}ez, Gerhard Liebisch, Jos{\'e}~Antonio Lamas, and Yolanda
+  Sanz.} 2021. ``Holdemanella biformis improves glucose tolerance and regulates
+  GLP-1 signaling in obese mice.'' {\it FASEB J} 35\hspace{0.2ex}(7).
+  \href{http://dx.doi.org/10.1096/fj.202100126R}{[Link]}
+
 \harvarditem[Sazal et~al.]{Sazal, Stebliankin, Mathee, Yoo and
   Narasimhan}{2021}{sazal2021causalgut}
 \textbf{Sazal, Musfiqur, Vitalii Stebliankin, Kalai Mathee, Changwon Yoo, and
   Giri Narasimhan.} 2021. ``Causal effects in microbiomes using interventional
   calculus.'' {\it Scientific Reports} 11\hspace{0.2ex}(1), p. 5724.
   \href{http://dx.doi.org/10.1038/s41598-021-84905-3}{[Link]}
+
+\harvarditem[Singh, Carroll-Portillo and Lin]{Singh, Carroll-Portillo and
+  Lin}{2023}{singh2023desulfovibrio}
+\textbf{Singh, Sudha~B., Amanda Carroll-Portillo, and Henry~C. Lin.} 2023.
+  ``Desulfovibrio in the Gut: The Enemy within?'' {\it Microorganisms}
+  11\hspace{0.2ex}(7).
+  \href{http://dx.doi.org/10.3390/microorganisms11071772}{[Link]}
 
 \harvarditem[Spirtes, Glymour and Scheines]{Spirtes, Glymour and
   Scheines}{2000}{spirtes2000causation}
