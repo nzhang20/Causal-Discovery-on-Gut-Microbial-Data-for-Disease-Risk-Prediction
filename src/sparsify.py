@@ -11,7 +11,7 @@ import ruamel.yaml
 ##### MICROBE-MICROBE NETWORK METHODS ######
 
 
-def run_sparcc(disease, group0, group1):
+def run_sparcc(disease, group0, group1, transformation):
     '''
     Run SparCC on pairs of microbes for each cohort. Dataframe must be in the format, microbes (rows) x samples (columns). 
 
@@ -23,8 +23,8 @@ def run_sparcc(disease, group0, group1):
     assert os.path.isdir('SparCC')
 
     sparcc_vars = ['data_input', 'n_iteractions', 'x_iteractions', 'save_corr_file', 'num_simulate_data', 'outpath', 'outfile_pvals']
-    sparcc_healthy_vals = [f'data/{disease}/{group0}.T.csv', 20, 10, f'data/{disease}/sparcc_{group0}.csv', 100, f'data/{disease}/pvals/', f'data/{disease}/sparcc_{group0}_pvals_one_sided.csv']
-    sparcc_diseased_vals = [f'data/{disease}/{group1}.T.csv', 20, 10, f'data/{disease}/sparcc_{group1}.csv', 100, f'data/{disease}/pvals/', f'data/{disease}/sparcc_{group1}_pvals_one_sided.csv']
+    sparcc_healthy_vals = [f'data/{disease}/{group0}_{transformation}.T.csv', 20, 10, f'data/{disease}/sparcc_{group0}_{transformation}.csv', 100, f'data/{disease}/pvals/', f'data/{disease}/sparcc_{group0}_{transformation}_pvals_one_sided.csv']
+    sparcc_diseased_vals = [f'data/{disease}/{group1}_{transformation}.T.csv', 20, 10, f'data/{disease}/sparcc_{group1}_{transformation}.csv', 100, f'data/{disease}/pvals/', f'data/{disease}/sparcc_{group1}_{transformation}_pvals_one_sided.csv']
 
     healthy_change = dict(zip(sparcc_vars, sparcc_healthy_vals))
     diseased_change = dict(zip(sparcc_vars, sparcc_diseased_vals))

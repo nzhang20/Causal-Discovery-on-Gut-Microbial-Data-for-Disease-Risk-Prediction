@@ -53,6 +53,13 @@ def main(targets):
                 'region': ['Europe', 'Asia'],
                 'study_site': list(range(1, 15))
             }
+        elif otu_table_fp == 'data/sam-t2d/otu_table.csv':
+            print('Generating otu table and metadata for T2D meta-analysis (Sam).')
+            otu_table, metadata = clean_data_sam_t2d('data/raw/feature-table-genus.tsv', 'data/raw/our-metadata.tsv')
+            covariates_map = {
+                'region_num': ['Africa', 'East Asia', 'South Asia', 'Southeast Asia', 'Europe'],
+                'study': list(range(1, 8))
+            }
         else:
             raise Exception('Please provide the otu table and metadata table!')
 
@@ -102,8 +109,11 @@ def main(targets):
             
         filtered_otu_table.to_csv(f'data/{disease}/filtered_otu_table_{transformation}.csv')
         metadata = pd.read_csv(metadata_fp, index_col=0)
-        
-        merged = pd.concat([metadata, filtered_otu_table], axis=1)
+
+        if disease == 'sam-t2d':
+            merged = metadata.merge(filtered_otu_table, how='inner', left_index=True, right_index=True)
+        else: 
+            merged = pd.concat([metadata, filtered_otu_table], axis=1)
         healthy = merged[merged[disease_col] == 0] #.drop(columns=[disease_col])
         diseased = merged[merged[disease_col] == 1] #.drop(columns=[disease_col])
 
@@ -113,18 +123,22 @@ def main(targets):
             # 1a) SparCC or Graphical LASSO + our algorithm
             if data_params['sparse_microbe_microbe'].lower() == 'sparcc':
                 # Set up files
-                healthy.T.to_csv(f'data/{disease}/{group0}.T.csv')
-                diseased.T.to_csv(f'data/{disease}/{group1}.T.csv')
+                healthy.drop(columns=list(metadata.columns)).to_csv(f'data/{disease}/{group0}_{transformation}.csv')
+                diseased.drop(columns=list(metadata.columns)).to_csv(f'data/{disease}/{group1}_{transformation}.csv')
+                healthy.drop(columns=list(metadata.columns)).T.to_csv(f'data/{disease}/{group0}_{transformation}.T.csv')
+                diseased.drop(columns=list(metadata.columns)).T.to_csv(f'data/{disease}/{group1}_{transformation}.T.csv')
                 
                 print('--- Step 1. Running SparCC ---')
-                run_sparcc(disease, group0, group1)
+                run_sparcc(disease, group0, group1, transformation)
                 print('--- Finished Step 1 ---')
 
                 print('--- Step 2. Obtain statistically significant pairs ---')
-                data_sparse_healthy = get_sig_cor_pairs_sparcc(f'data/{disease}/sparcc_{group0}.csv', f'data/{disease}/sparcc_{group0}_pvals_one_sided.csv', f'data/{disease}/{group0}.csv')
-                data_sparse_diseased = get_sig_cor_pairs_sparcc(f'data/{disease}/sparcc_{group1}.csv', f'data/{disease}/sparcc_{group1}_pvals_one_sided.csv', f'data/{disease}/{group1}.csv')
+                data_sparse_healthy = get_sig_cor_pairs_sparcc(f'data/{disease}/sparcc_{group0}_{transformation}.csv', f'data/{disease}/sparcc_{group0}_{transformation}_pvals_one_sided.csv', f'data/{disease}/{group0}_{transformation}.csv')
+                data_sparse_diseased = get_sig_cor_pairs_sparcc(f'data/{disease}/sparcc_{group1}_{transformation}.csv', f'data/{disease}/sparcc_{group1}_{transformation}_pvals_one_sided.csv', f'data/{disease}/{group1}_{transformation}.csv')
                 print('--- Finished Step 2 ---')
 
+                healthy = healthy.drop(columns=list(metadata.columns))
+                diseased = diseased.drop(columns=list(metadata.columns))
                 sparse_method = 'SparCC'
                 sparse_method_fp = 'sparcc'
 
