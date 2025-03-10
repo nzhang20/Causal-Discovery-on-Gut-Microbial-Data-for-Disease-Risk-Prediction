@@ -9,17 +9,23 @@
 \contentsline {subsection}{\numberline {2.3}Causal Discovery Algorithms}{10}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}BIRDMAn}{13}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Variational Autoencoder}{14}{subsection.2.5}%
-\contentsline {section}{\numberline {3}Results}{14}{section.3}%
-\contentsline {subsection}{\numberline {3.1}EDA}{14}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {2.5.1}Encoder}{14}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Decoder}{14}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}Reparameterization Trick}{14}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}Loss Function}{14}{subsubsection.2.5.4}%
+\contentsline {section}{\numberline {3}Results}{15}{section.3}%
+\contentsline {subsection}{\numberline {3.1}EDA}{15}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{16}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{18}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{19}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}VAE Model}{21}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Discussion}{21}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Limitations}{22}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Improvements and Future Directions}{24}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Conclusion}{24}{section.5}%
-\contentsline {section}{References}{25}{section*.17}%
+\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{17}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{18}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}VAE Model}{23}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Identical Classification Results for Both Latent Spaces}{23}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Potential Reasons:}{24}{subsubsection.3.6.1}%
+\contentsline {section}{\numberline {4}Discussion}{24}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Limitations}{25}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Improvements and Future Directions}{26}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Conclusion}{27}{section.5}%
+\contentsline {section}{References}{28}{section*.17}%
 \contentsline {section}{Appendices}{A1}{section*.19}%
 \etoc@startlocaltoc {2}
 \contentsline {subsection}{\numberline {A.1}T2D Meta-Analysis Metadata}{A1}{subsection.A.1}%

@@ -4,6 +4,7 @@
 \usepackage{style/dsc180reportstyle} % import dsc180reportstyle.sty
 \usepackage{wasysym}
 \usepackage{subcaption}
+\usepackage{tabularx}
 \newcommand{\ind}{\perp\!\!\!\!\perp}
 \SetKwComment{Comment}{/* }{ */}
 
@@ -557,9 +558,9 @@ Identical performance between classifiers based on \( z_1 \) and \( z_2 \) sugge
 
 \subsubsection{Potential Reasons:}
 
-1. **Model Architecture Limitations**: The current architecture may not effectively distinguish the features necessary for \( z_1 \) and \( z_2 \). Which means adding the conditioning on health/disease status is not enough to separate features significantly connected to disease.
+1. \textbf{Model Architecture Limitations}: The current architecture may not effectively distinguish the features necessary for \( z_1 \) and \( z_2 \). Which means adding the conditioning on health/disease status is not enough to separate features significantly connected to disease.
 
-2. **Data Imbalance**: Our classifier had 811 samples total, where only 284 where control samples (healthy status). This could have lead to a partial learning which favorites disease over healthy inputs.
+2. \textbf{Data Imbalance}: Our classifier had 811 samples total, where only 284 where control samples (healthy status). This could have lead to a partial learning which favorites disease over healthy inputs.
 
 
 \section{Discussion}
@@ -595,7 +596,7 @@ As we use BIRDMAn as a benchmark tool for differential analysis methods, we can 
 
 \section{Conclusion}
 
-xxx
+In this study, we attempt to model microbe to microbe interactions and microbe to disease relations using casual discovery methods. We build causal graphs to represent the potential underlying causal structure in the human gut microbiome, and use causal inference methods to estimate the effects of certain microbes to pathology of disease, specifically T2D and PCOS. Our results agree with differential analysis methods typically performed in gut microbiome analyses and indicate a promising use and application of causal discovery and causal inference methods to the gut microbiome. As more data and research are collected and conducted, these will help increase statistical power of our results, obtain more accurate results by leveraging the heterogeneity or temporality of diverse meta analyses and longitudinal studies, and bring us closer to inferring causality in the complex dynamics of the gut microbiome. These advances will enable more precise, personalized treatment strategies and lead to targeted interventions that effectively address dysbiosis-related metabolic disorders, ultimately improving patient outcomes in T2D and PCOS management. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Reference / Bibliography
@@ -619,7 +620,26 @@ Please see a copy of our \href{https://drive.google.com/file/d/1fEGpmoSULPbpG6bc
 
 \subsection{T2D Meta-Analysis Metadata}
 
-(Insert T2D Metadata)
+      \begin{table}[H]
+        \centering
+        \begin{tabularx}{\textwidth}{l X X X X X X} % {l l r r r l l l l l l}
+          \toprule
+          \textbf{Accession} & \textbf{Authors} & \textbf{T2D} & \textbf{Control} & \textbf{Country} & \textbf{Instrument} & \textbf{Layout} \\
+          \midrule
+          PRJDB9293 & Therdthata et al. & 25 & 23 & Indonesia & Illumina MiSeq & Paired \\
+          PRJNA766337 & Kondo et al. & 383 & 114 & Japan & Illumina MiSeq & Paired \\
+          PRJNA554535 & Ahmad et al. & 40 & 20 & Pakistan & Illumina MiSeq & Single \\
+          PRJEB53017 & Saleem et al. &  48 & 46 & Pakistan & Illumina MiSeq & Paired \\
+          PRJEB53018 & Saleem et al. & 0 & 50 & Finland & Illumina MiSeq & Paired \\
+          PRJNA588353 & Babiker et al. & 24 & 24 & Sudan & Ion Torrent S5 XL & Single \\
+          PRJNA668251 & Hoang et al. & 7 & 7 & Vietnam & Illumina HiSeq 2500 & Paired \\
+          \bottomrule
+        \end{tabularx}
+        \caption{Description of T2D Studies Included.}
+        \label{table:t2dmetameta}
+      \end{table}
+      
+      All seven studies use PCR and V3-V4 Primer Regions.
 
 \subsection{Algorithms}
 

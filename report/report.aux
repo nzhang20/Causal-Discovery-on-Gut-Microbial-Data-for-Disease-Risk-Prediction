@@ -67,107 +67,117 @@
 \citation{rahman2023birdman}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}BIRDMAn}{13}{subsection.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Variational Autoencoder}{14}{subsection.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{14}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}EDA}{14}{subsection.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces T2D Covariates Distribution\relax }}{14}{figure.caption.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.1}Encoder}{14}{subsubsection.2.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.2}Decoder}{14}{subsubsection.2.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.3}Reparameterization Trick}{14}{subsubsection.2.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.4}Loss Function}{14}{subsubsection.2.5.4}\protected@file@percent }
+\citation{optuna_2019}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{15}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}EDA}{15}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces T2D Covariates Distribution\relax }}{16}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:t2dcovariates}{{1}{14}{T2D Covariates Distribution\relax }{figure.caption.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces PCOS Covariates Distribution\relax }}{14}{figure.caption.2}\protected@file@percent }
-\newlabel{fig:pcoscovariates}{{2}{14}{PCOS Covariates Distribution\relax }{figure.caption.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces T2D Meta Analysis Covariates Distribution\relax }}{15}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:sam-t2dcovariates}{{3}{15}{T2D Meta Analysis Covariates Distribution\relax }{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces T2D Scatter Plots for \textit  {Akkermansia} vs. \textit  {Blautia} and \textit  {Clostridium IV} vs. \textit  {Dorea}\relax }}{15}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:t2dscatterplots}{{4}{15}{T2D Scatter Plots for \textit {Akkermansia} vs. \textit {Blautia} and \textit {Clostridium IV} vs. \textit {Dorea}\relax }{figure.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces T2D QQ Plots for \textit  {Blautia} and \textit  {Clostridium XIVb}\relax }}{16}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:t2dqqplots}{{5}{16}{T2D QQ Plots for \textit {Blautia} and \textit {Clostridium XIVb}\relax }{figure.caption.5}{}}
+\newlabel{fig:t2dcovariates}{{1}{16}{T2D Covariates Distribution\relax }{figure.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces PCOS Covariates Distribution\relax }}{16}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:pcoscovariates}{{2}{16}{PCOS Covariates Distribution\relax }{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Microbe-Microbe Interaction Network}{16}{subsection.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces T2D Microbe-Microbe Network for IS after Graphical Lasso\relax }}{16}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:t2dglassoISnorm}{{6}{16}{T2D Microbe-Microbe Network for IS after Graphical Lasso\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces T2D Microbe-Microbe Network for IR after Graphical Lasso\relax }}{16}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:t2dglassoIRnorm}{{7}{16}{T2D Microbe-Microbe Network for IR after Graphical Lasso\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces T2D Microbe-Microbe Network Venn Diagram\relax }}{17}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:t2dglassovenn}{{8}{17}{T2D Microbe-Microbe Network Venn Diagram\relax }{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces PCOS Microbe-Microbe Network for HC after graphical lasso\relax }}{17}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:pcosglassoHCnorm}{{9}{17}{PCOS Microbe-Microbe Network for HC after graphical lasso\relax }{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces PCOS Microbe-Microbe Network for PCOS after graphical lasso\relax }}{17}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:pcosglassoPCOSnorm}{{10}{17}{PCOS Microbe-Microbe Network for PCOS after graphical lasso\relax }{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces PCOS Microbe-Microbe Network Venn Diagram\relax }}{18}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:pcosglassovenn}{{11}{18}{PCOS Microbe-Microbe Network Venn Diagram\relax }{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{18}{subsection.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces T2D Microbe-Disease Network\relax }}{18}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:t2dcdnod}{{12}{18}{T2D Microbe-Disease Network\relax }{figure.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces PCOS Microbe-Disease Network\relax }}{19}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:pcoscdnod}{{13}{19}{PCOS Microbe-Disease Network\relax }{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{19}{subsection.3.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D.\relax }}{20}{table.caption.14}\protected@file@percent }
-\newlabel{table:t2dresults}{{1}{20}{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D.\relax }{table.caption.14}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for PCOS.\relax }}{20}{table.caption.15}\protected@file@percent }
-\newlabel{table:pcosresults}{{2}{20}{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for PCOS.\relax }{table.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces T2D Meta Analysis Covariates Distribution\relax }}{17}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:sam-t2dcovariates}{{3}{17}{T2D Meta Analysis Covariates Distribution\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces T2D Scatter Plots for \textit  {Akkermansia} vs. \textit  {Blautia} and \textit  {Clostridium IV} vs. \textit  {Dorea}\relax }}{17}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:t2dscatterplots}{{4}{17}{T2D Scatter Plots for \textit {Akkermansia} vs. \textit {Blautia} and \textit {Clostridium IV} vs. \textit {Dorea}\relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Microbe-Disease Interaction Network}{17}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces T2D QQ Plots for \textit  {Blautia} and \textit  {Clostridium XIVb}\relax }}{18}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:t2dqqplots}{{5}{18}{T2D QQ Plots for \textit {Blautia} and \textit {Clostridium XIVb}\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces T2D Microbe-Microbe Network for IS after Graphical Lasso\relax }}{18}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:t2dglassoISnorm}{{6}{18}{T2D Microbe-Microbe Network for IS after Graphical Lasso\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces T2D Microbe-Microbe Network for IR after Graphical Lasso\relax }}{18}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:t2dglassoIRnorm}{{7}{18}{T2D Microbe-Microbe Network for IR after Graphical Lasso\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Causal Inference and BIRDMAn}{18}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces T2D Microbe-Microbe Network Venn Diagram\relax }}{19}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:t2dglassovenn}{{8}{19}{T2D Microbe-Microbe Network Venn Diagram\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces PCOS Microbe-Microbe Network for HC after graphical lasso\relax }}{19}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:pcosglassoHCnorm}{{9}{19}{PCOS Microbe-Microbe Network for HC after graphical lasso\relax }{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces PCOS Microbe-Microbe Network for PCOS after graphical lasso\relax }}{19}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:pcosglassoPCOSnorm}{{10}{19}{PCOS Microbe-Microbe Network for PCOS after graphical lasso\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces PCOS Microbe-Microbe Network Venn Diagram\relax }}{20}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:pcosglassovenn}{{11}{20}{PCOS Microbe-Microbe Network Venn Diagram\relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces T2D Microbe-Disease Network\relax }}{20}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:t2dcdnod}{{12}{20}{T2D Microbe-Disease Network\relax }{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces PCOS Microbe-Disease Network\relax }}{20}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:pcoscdnod}{{13}{20}{PCOS Microbe-Disease Network\relax }{figure.caption.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D.\relax }}{21}{table.caption.14}\protected@file@percent }
+\newlabel{table:t2dresults}{{1}{21}{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D.\relax }{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for PCOS.\relax }}{22}{table.caption.15}\protected@file@percent }
+\newlabel{table:pcosresults}{{2}{22}{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for PCOS.\relax }{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D Meta-Analysis.\relax }}{22}{table.caption.16}\protected@file@percent }
+\newlabel{table:sam-t2dresults}{{3}{22}{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D Meta-Analysis.\relax }{table.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}VAE Model}{23}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Identical Classification Results for Both Latent Spaces}{23}{subsection.3.6}\protected@file@percent }
 \citation{lee2022butyricimonas}
 \citation{albataineh2023odoribacter}
 \citation{li2023blautia}
 \citation{singh2023desulfovibrio}
 \citation{romani2021holdemanella}
 \citation{crost2023rgnavus}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D Meta-Analysis.\relax }}{21}{table.caption.16}\protected@file@percent }
-\newlabel{table:sam-t2dresults}{{3}{21}{Log-Odds Ratios for Models 1 \& 2, and Mean CLR from BIRDMAn for T2D Meta-Analysis.\relax }{table.caption.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}VAE Model}{21}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{21}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1}Potential Reasons:}{24}{subsubsection.3.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{24}{section.4}\protected@file@percent }
 \citation{gomez2018collinsella}
 \citation{abdelsalam2023prevotella}
 \citation{gurung2020faecalibacterium}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Limitations}{22}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Improvements and Future Directions}{24}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{24}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Limitations}{25}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Improvements and Future Directions}{26}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{27}{section.5}\protected@file@percent }
 \bibdata{reference}
 \bibcite{adat2d}{{1}{2025}{{ADA}}{{ADA}}}
 \bibcite{aitchison1982compositional}{{2}{1982}{{Aitchison}}{{Aitchison}}}
-\bibcite{albataineh2023odoribacter}{{3}{2023}{{Al~Bataineh et~al.}}{{Al~Bataineh, K{\"u}nstner, Dash, Alsafar, Ragab, Schmelter, Sina, Busch and Ibrahim}}}
-\bibcite{allaband2019microbiome101}{{4}{2019}{{Allaband et~al.}}{{Allaband, McDonald, V{\'a}zquez-Baeza, Minich, Tripathi, Brenner, Loomba, Smarr, Sandborn, Schnabl, Dorrestein, Zarrinpar and Knight}}}
-\bibcite{baars2024gutt2d}{{5}{2024}{{Baars et~al.}}{{Baars, Fondevila, Meijnikman and Nieuwdorp}}}
-\bibcite{cole2014rdp}{{6}{2014}{{Cole et~al.}}{{Cole, Wang, Fish, Chai, McGarrell, Sun, Brown, Porras-Alfaro, Kuske and Tiedje}}}
-\bibcite{colombo2014pcstable}{{7}{2014}{{Colombo and Maathuis}}{{Colombo and Maathuis}}}
-\bibcite{crost2023rgnavus}{{8}{2023}{{Crost et~al.}}{{Crost, Coletto, Bell and Juge}}}
-\bibcite{friedman2008glasso}{{9}{2008}{{Friedman, Hastie and Tibshirani}}{{Friedman, Hastie and Tibshirani}}}
-\bibcite{friedman2012sparcc}{{10}{2012}{{Friedman and Alm}}{{Friedman and Alm}}}
-\bibcite{glymour2019review}{{11}{2019}{{Glymour, Zhang and Spirtes}}{{Glymour, Zhang and Spirtes}}}
-\bibcite{gomez2018collinsella}{{12}{2018}{{Gomez-Arango et~al.}}{{Gomez-Arango, Barrett, Wilkinson, Callaway, McIntyre, Morrison and Nitert}}}
-\bibcite{gurung2020faecalibacterium}{{13}{2020}{{Gurung et~al.}}{{Gurung, Li, You, Rodrigues, Jump, Morgun and Shulzhenko}}}
-\bibcite{huang2019cdnod}{{14}{2019}{{Huang et~al.}}{{Huang, Zhang, Zhang, Ramsey, Sanchez-Romero, Glymour and Sch{\"o}lkopf}}}
-\@writefile{toc}{\contentsline {section}{References}{25}{section*.17}\protected@file@percent }
-\bibcite{khemakhem2020vaenonlinearica}{{15}{2020}{{Khemakhem et~al.}}{{Khemakhem, Kingma, Monti and Hyv{\"a}rinen}}}
-\bibcite{knight2018bestpractices}{{16}{2018}{{Knight et~al.}}{{Knight, Vrbanac, Taylor, Aksenov, Callewaert, Debelius, Gonzalez, Kosciolek, McCall, McDonald, Melnik, Morton, Navas, Quinn, Sanders, Swafford, Thompson, Tripathi, Xu, Zaneveld, Zhu, Caporaso and Dorrestein}}}
-\bibcite{lee2022butyricimonas}{{17}{2022}{{Lee et~al.}}{{Lee, An, Kim, Choi, Song, Lee, Kong, Kim and Kim}}}
-\bibcite{li2023blautia}{{18}{2023}{{Li et~al.}}{{Li, Chen, Zhang, Zeng, Li, Xie, Luo and Gao}}}
-\bibcite{mcdonald2024greengenes2}{{19}{2024}{{McDonald et~al.}}{{McDonald, Jiang, Balaban, Cantrell, Zhu, Gonzalez, Morton, Nicolaou, Parks, Karst, Albertsen, Hugenholtz, DeSantis, Song, Bartko, Havulinna, Jousilahti, Cheng, Inouye, Niiranen, Jain, Salomaa, Lahti, Mirarab and Knight}}}
-\bibcite{mehta2000hcvt2d}{{20}{2000}{{Mehta et~al.}}{{Mehta, Brancati, Sulkowski, Strathdee, Szklo and Thomas}}}
-\bibcite{abdelsalam2023prevotella}{{21}{2023}{{Nehal Adel~Abdelsalam and Aziz}}{{Nehal Adel~Abdelsalam and Aziz}}}
-\bibcite{pearl2016primer}{{22}{2016}{{Pearl, Glymour and Jewell}}{{Pearl, Glymour and Jewell}}}
-\bibcite{pruesse2007silva}{{23}{2007}{{Pruesse et~al.}}{{Pruesse, Quast, Knittel, Fuchs, Ludwig, Peplies and Gl{\"o}ckner}}}
-\bibcite{qin2012mgwast2d}{{24}{2012}{{Qin et~al.}}{{Qin, Li, Cai, Li, Zhu, Zhang, Liang, Zhang, Guan, Shen, Peng, Zhang, Jie, Wu, Qin, Xue, Li, Han, Lu, Wu, Dai, Sun, Li, Tang, Zhong, Li, Chen, Xu, Wang, Feng, Gong, Yu, Zhang, Zhang, Hansen, Sanchez, Raes, Falony, Okuda, Almeida, LeChatelier, Renault, Pons, Batto, Zhang, Chen, Yang, Zheng, Li, Yang, Wang, Ehrlich, Nielsen, Pedersen, Kristiansen and Wang}}}
-\bibcite{rahman2023birdman}{{25}{2023}{{Rahman et~al.}}{{Rahman, Morton, Martino, Sepich-Poore, Allaband, Guccione, Chen, Hakim, Estaki and Knight}}}
-\bibcite{romani2021holdemanella}{{26}{2021}{{Roman{\'\i }-P{\'e}rez et~al.}}{{Roman{\'\i }-P{\'e}rez, L{\'o}pez-Almela, Bullich-Vilarrubias, Rueda-Ruzafa, Pulgar, Ben{\'\i }tez-P{\'a}ez, Liebisch, Lamas and Sanz}}}
-\bibcite{sazal2021causalgut}{{27}{2021}{{Sazal et~al.}}{{Sazal, Stebliankin, Mathee, Yoo and Narasimhan}}}
-\bibcite{singh2023desulfovibrio}{{28}{2023}{{Singh, Carroll-Portillo and Lin}}{{Singh, Carroll-Portillo and Lin}}}
-\bibcite{spirtes2000causation}{{29}{2000}{{Spirtes, Glymour and Scheines}}{{Spirtes, Glymour and Scheines}}}
-\bibcite{tabak2012prediabetes}{{30}{2012}{{Tab{\'a}k et~al.}}{{Tab{\'a}k, Herder, Rathmann, Brunner and Kivim{\"a}ki}}}
-\bibcite{weiss2016correlationbenchmark}{{31}{2016}{{Weiss et~al.}}{{Weiss, Treuren, Lozupone, Faust, Friedman, Deng, Xia, Xu, Ursell, Alm, Birmingham, Cram, Fuhrman, Raes, Sun, Zhou and Knight}}}
-\bibcite{who2025pcos}{{32}{2025}{{WHO}}{{WHO}}}
-\bibcite{yang2024pcos}{{33}{2024}{{Yang et~al.}}{{Yang, Cheng, Liu, Zhang, Ma, Zhou, Lu and Wu}}}
-\bibcite{zhou2019t2d}{{34}{2019}{{Zhou et~al.}}{{Zhou, Sailani, Contrepois, Zhou, Ahadi, Leopold, Zhang, Rao, Avina, Mishra, Johnson, Lee-McMullen, Chen, Metwally, Tran, Nguyen, Zhou, Albright, Hong, Petersen, Bautista, Hanson, Chen, Spakowicz, Bahmani, Salins, Leopold, Ashland, Dagan-Rosenfeld, Rego, Limcaoco, Colbert, Allister, Perelman, Craig, Wei, Chaib, Hornburg, Dunn, Liang, Rose, Kukurba, Piening, Rost, Tse, McLaughlin, Sodergren, Weinstock and Snyder}}}
+\bibcite{optuna_2019}{{3}{2019}{{Akiba et~al.}}{{Akiba, Sano, Yanase, Ohta and Koyama}}}
+\bibcite{albataineh2023odoribacter}{{4}{2023}{{Al~Bataineh et~al.}}{{Al~Bataineh, K{\"u}nstner, Dash, Alsafar, Ragab, Schmelter, Sina, Busch and Ibrahim}}}
+\bibcite{allaband2019microbiome101}{{5}{2019}{{Allaband et~al.}}{{Allaband, McDonald, V{\'a}zquez-Baeza, Minich, Tripathi, Brenner, Loomba, Smarr, Sandborn, Schnabl, Dorrestein, Zarrinpar and Knight}}}
+\bibcite{baars2024gutt2d}{{6}{2024}{{Baars et~al.}}{{Baars, Fondevila, Meijnikman and Nieuwdorp}}}
+\bibcite{cole2014rdp}{{7}{2014}{{Cole et~al.}}{{Cole, Wang, Fish, Chai, McGarrell, Sun, Brown, Porras-Alfaro, Kuske and Tiedje}}}
+\bibcite{colombo2014pcstable}{{8}{2014}{{Colombo and Maathuis}}{{Colombo and Maathuis}}}
+\bibcite{crost2023rgnavus}{{9}{2023}{{Crost et~al.}}{{Crost, Coletto, Bell and Juge}}}
+\bibcite{friedman2008glasso}{{10}{2008}{{Friedman, Hastie and Tibshirani}}{{Friedman, Hastie and Tibshirani}}}
+\bibcite{friedman2012sparcc}{{11}{2012}{{Friedman and Alm}}{{Friedman and Alm}}}
+\bibcite{glymour2019review}{{12}{2019}{{Glymour, Zhang and Spirtes}}{{Glymour, Zhang and Spirtes}}}
+\bibcite{gomez2018collinsella}{{13}{2018}{{Gomez-Arango et~al.}}{{Gomez-Arango, Barrett, Wilkinson, Callaway, McIntyre, Morrison and Nitert}}}
+\bibcite{gurung2020faecalibacterium}{{14}{2020}{{Gurung et~al.}}{{Gurung, Li, You, Rodrigues, Jump, Morgun and Shulzhenko}}}
+\bibcite{huang2019cdnod}{{15}{2019}{{Huang et~al.}}{{Huang, Zhang, Zhang, Ramsey, Sanchez-Romero, Glymour and Sch{\"o}lkopf}}}
+\@writefile{toc}{\contentsline {section}{References}{28}{section*.17}\protected@file@percent }
+\bibcite{khemakhem2020vaenonlinearica}{{16}{2020}{{Khemakhem et~al.}}{{Khemakhem, Kingma, Monti and Hyv{\"a}rinen}}}
+\bibcite{knight2018bestpractices}{{17}{2018}{{Knight et~al.}}{{Knight, Vrbanac, Taylor, Aksenov, Callewaert, Debelius, Gonzalez, Kosciolek, McCall, McDonald, Melnik, Morton, Navas, Quinn, Sanders, Swafford, Thompson, Tripathi, Xu, Zaneveld, Zhu, Caporaso and Dorrestein}}}
+\bibcite{lee2022butyricimonas}{{18}{2022}{{Lee et~al.}}{{Lee, An, Kim, Choi, Song, Lee, Kong, Kim and Kim}}}
+\bibcite{li2023blautia}{{19}{2023}{{Li et~al.}}{{Li, Chen, Zhang, Zeng, Li, Xie, Luo and Gao}}}
+\bibcite{mcdonald2024greengenes2}{{20}{2024}{{McDonald et~al.}}{{McDonald, Jiang, Balaban, Cantrell, Zhu, Gonzalez, Morton, Nicolaou, Parks, Karst, Albertsen, Hugenholtz, DeSantis, Song, Bartko, Havulinna, Jousilahti, Cheng, Inouye, Niiranen, Jain, Salomaa, Lahti, Mirarab and Knight}}}
+\bibcite{mehta2000hcvt2d}{{21}{2000}{{Mehta et~al.}}{{Mehta, Brancati, Sulkowski, Strathdee, Szklo and Thomas}}}
+\bibcite{abdelsalam2023prevotella}{{22}{2023}{{Nehal Adel~Abdelsalam and Aziz}}{{Nehal Adel~Abdelsalam and Aziz}}}
+\bibcite{pearl2016primer}{{23}{2016}{{Pearl, Glymour and Jewell}}{{Pearl, Glymour and Jewell}}}
+\bibcite{pruesse2007silva}{{24}{2007}{{Pruesse et~al.}}{{Pruesse, Quast, Knittel, Fuchs, Ludwig, Peplies and Gl{\"o}ckner}}}
+\bibcite{qin2012mgwast2d}{{25}{2012}{{Qin et~al.}}{{Qin, Li, Cai, Li, Zhu, Zhang, Liang, Zhang, Guan, Shen, Peng, Zhang, Jie, Wu, Qin, Xue, Li, Han, Lu, Wu, Dai, Sun, Li, Tang, Zhong, Li, Chen, Xu, Wang, Feng, Gong, Yu, Zhang, Zhang, Hansen, Sanchez, Raes, Falony, Okuda, Almeida, LeChatelier, Renault, Pons, Batto, Zhang, Chen, Yang, Zheng, Li, Yang, Wang, Ehrlich, Nielsen, Pedersen, Kristiansen and Wang}}}
+\bibcite{rahman2023birdman}{{26}{2023}{{Rahman et~al.}}{{Rahman, Morton, Martino, Sepich-Poore, Allaband, Guccione, Chen, Hakim, Estaki and Knight}}}
+\bibcite{romani2021holdemanella}{{27}{2021}{{Roman{\'\i }-P{\'e}rez et~al.}}{{Roman{\'\i }-P{\'e}rez, L{\'o}pez-Almela, Bullich-Vilarrubias, Rueda-Ruzafa, Pulgar, Ben{\'\i }tez-P{\'a}ez, Liebisch, Lamas and Sanz}}}
+\bibcite{sazal2021causalgut}{{28}{2021}{{Sazal et~al.}}{{Sazal, Stebliankin, Mathee, Yoo and Narasimhan}}}
+\bibcite{singh2023desulfovibrio}{{29}{2023}{{Singh, Carroll-Portillo and Lin}}{{Singh, Carroll-Portillo and Lin}}}
+\bibcite{spirtes2000causation}{{30}{2000}{{Spirtes, Glymour and Scheines}}{{Spirtes, Glymour and Scheines}}}
+\bibcite{tabak2012prediabetes}{{31}{2012}{{Tab{\'a}k et~al.}}{{Tab{\'a}k, Herder, Rathmann, Brunner and Kivim{\"a}ki}}}
+\bibcite{weiss2016correlationbenchmark}{{32}{2016}{{Weiss et~al.}}{{Weiss, Treuren, Lozupone, Faust, Friedman, Deng, Xia, Xu, Ursell, Alm, Birmingham, Cram, Fuhrman, Raes, Sun, Zhou and Knight}}}
+\bibcite{who2025pcos}{{33}{2025}{{WHO}}{{WHO}}}
+\bibcite{yang2024pcos}{{34}{2024}{{Yang et~al.}}{{Yang, Cheng, Liu, Zhang, Ma, Zhou, Lu and Wu}}}
+\bibcite{zhou2019t2d}{{35}{2019}{{Zhou et~al.}}{{Zhou, Sailani, Contrepois, Zhou, Ahadi, Leopold, Zhang, Rao, Avina, Mishra, Johnson, Lee-McMullen, Chen, Metwally, Tran, Nguyen, Zhou, Albright, Hong, Petersen, Bautista, Hanson, Chen, Spakowicz, Bahmani, Salins, Leopold, Ashland, Dagan-Rosenfeld, Rego, Limcaoco, Colbert, Allister, Perelman, Craig, Wei, Chaib, Hornburg, Dunn, Liang, Rose, Kukurba, Piening, Rost, Tse, McLaughlin, Sodergren, Weinstock and Snyder}}}
 \bibstyle{style/dsc180bibstyle}
-\HyPL@Entry{28<</P(\376\377\000A)/S/D>>}
+\HyPL@Entry{31<</P(\376\377\000A)/S/D>>}
 \@writefile{toc}{\contentsline {section}{Appendices}{A1}{section*.19}\protected@file@percent }
 \@writefile{toc}{\etoc@startlocaltoc{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.1}T2D Meta-Analysis Metadata}{A1}{subsection.A.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {A\nobreakspace {}1}{\ignorespaces Description of T2D Studies Included.\relax }}{A1}{table.caption.20}\protected@file@percent }
+\newlabel{table:t2dmetameta}{{A\nobreakspace {}1}{A1}{Description of T2D Studies Included.\relax }{table.caption.20}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Algorithms}{A2}{subsection.A.2}\protected@file@percent }
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces PC\relax }}{A2}{algocf.1}\protected@file@percent }
 \newlabel{alg:pc}{{1}{A2}{Algorithms}{algocf.1}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces CD-NOD\relax }}{A3}{algocf.2}\protected@file@percent }
 \newlabel{alg:cdnod}{{2}{A3}{Algorithms}{algocf.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.3}SparCC Microbe-Microbe Interaction Networks}{A4}{subsection.A.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {A\nobreakspace {}1}{\ignorespaces T2D Microbe-Microbe Network for IS after SparCC\relax }}{A4}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:t2dsparccISnorm}{{A\nobreakspace {}1}{A4}{T2D Microbe-Microbe Network for IS after SparCC\relax }{figure.caption.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {A\nobreakspace {}2}{\ignorespaces T2D Microbe-Microbe Network for IR after SparCC\relax }}{A4}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:t2dsparccIRnorm}{{A\nobreakspace {}2}{A4}{T2D Microbe-Microbe Network for IR after SparCC\relax }{figure.caption.21}{}}
-\gdef \@abspage@last{33}
+\@writefile{lof}{\contentsline {figure}{\numberline {A\nobreakspace {}1}{\ignorespaces T2D Microbe-Microbe Network for IS after SparCC\relax }}{A4}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:t2dsparccISnorm}{{A\nobreakspace {}1}{A4}{T2D Microbe-Microbe Network for IS after SparCC\relax }{figure.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {A\nobreakspace {}2}{\ignorespaces T2D Microbe-Microbe Network for IR after SparCC\relax }}{A4}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:t2dsparccIRnorm}{{A\nobreakspace {}2}{A4}{T2D Microbe-Microbe Network for IR after SparCC\relax }{figure.caption.22}{}}
+\gdef \@abspage@last{36}
