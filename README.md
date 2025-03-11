@@ -13,8 +13,8 @@ The difficult thing about doing research on the gut microbiome is that every hea
 ### Data
 We have two data files corresponding to T2D and PCOS, respectively. In order to use BIRDMAn and be aligned with typical gut microbiome analysis where one has a table of the OTU counts, and a separate table for the metadata, each dataset is cleaned such that their OTU relative abundance values can be found in `data/{disease}/otu_table.csv` and the metadata file can be found in `data/{disease}/metadata.csv`, where `{disease}` is the disease of interest (T2D or PCOS).
 
-- `data/t2d` comes from the NIH HMP2 dataset, available at:
-- `data/pcos` comes from a meta-analysis of 14 PCOS studies conducted in Asia and Europe, available at: 
+- `data/t2d` comes from the NIH HMP2 dataset, available at: https://www.nature.com/articles/s41586-019-1236-x
+- `data/pcos` comes from a meta-analysis of 14 PCOS studies conducted in Asia and Europe, available at: https://www.thelancet.com/journals/eclinm/article/PIIS2589-5370(24)00463-2/fulltext
 - `data/sam-t2d` comes from a meta-analysis of T2D studies which include studies from Dr. Sam Degregori's Global Human Gut Microbiome Project and was created from raw sequencing files using QIIME2
 
 ### Causal Discovery Algorithms & Graphs
