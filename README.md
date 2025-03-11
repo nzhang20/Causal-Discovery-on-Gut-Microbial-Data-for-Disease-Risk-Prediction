@@ -15,7 +15,7 @@ We have two data files corresponding to T2D and PCOS, respectively. In order to 
 
 - `data/t2d` comes from the NIH HMP2 dataset, available at: https://www.nature.com/articles/s41586-019-1236-x
 - `data/pcos` comes from a meta-analysis of 14 PCOS studies conducted in Asia and Europe, available at: https://www.thelancet.com/journals/eclinm/article/PIIS2589-5370(24)00463-2/fulltext
-- `data/sam-t2d` comes from a meta-analysis of T2D studies which include studies from Dr. Sam Degregori's Global Human Gut Microbiome Project and was created from raw sequencing files using QIIME2
+- `data/sam-t2d` comes from a meta-analysis of T2D studies which include studies from Dr. Sam Degregori's Global Human Gut Microbiome Project and was created from raw sequencing files using QIIME2, available at: https://github.com/mpm2022/T2D-Causal-Analysis
 
 ### Causal Discovery Algorithms & Graphs
 To address research question 1), we develop our own causal discovery algorithm to reduce the number of conditional independence tests conducted, which can inflate our false discovery rate. 
