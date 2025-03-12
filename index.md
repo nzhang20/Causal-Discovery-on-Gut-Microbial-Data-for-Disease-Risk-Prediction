@@ -70,7 +70,7 @@ Using do-calculus, we estimated their causal effects on T2D.
 |--------------------------|------------|------------|------------|----------------------|
 | *Butyricimonas*         | -2.0070    | -2.2664   | -5.19385  | Yes                  |
 | *Clostridium XIVb*      | 1.54212   | 1.88022   | 2.15788   | Inconclusive         |
-| *Odoribacter*           | -1.46989  | -3.055047 | -2.43796  | N/A                |
+| *Odoribacter*           | -1.46989  | -3.055047 | -2.43796  | Yes                |
 | *unclassified Bacteria* | -0.12991  | -0.12284  | 0.12409   | N/A                |
 | *unclassified Firmicutes* | -0.69477 | -0.933718 | -1.47437  | N/A                |
 
